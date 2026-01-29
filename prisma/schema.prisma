@@ -1,0 +1,236 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                    Int                    @id @default(autoincrement())
+  email                 String                 @unique
+  name                  String?
+  phone                 String?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  quotes                Quote[]
+  whatsappConversations WhatsAppConversation[]
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  slug        String    @unique
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Decimal?
+  imageUrl    String?
+  categoryId  Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  category    Category @relation(fields: [categoryId], references: [id])
+}
+
+model Service {
+  id          Int            @id @default(autoincrement())
+  name        String
+  description String?
+  basePrice   Decimal?
+  imageUrl    String?
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  quotes      QuoteService[]
+}
+
+model Quote {
+  id          Int            @id @default(autoincrement())
+  userId      Int?
+  name        String
+  email       String
+  phone       String?
+  address     String?
+  description String?
+  status      QuoteStatus    @default(PENDING)
+  totalAmount Decimal?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  user        User?          @relation(fields: [userId], references: [id])
+  services    QuoteService[]
+}
+
+model QuoteService {
+  id        Int      @id @default(autoincrement())
+  quoteId   Int
+  serviceId Int
+  quantity  Int      @default(1)
+  price     Decimal?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quote     Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  service   Service  @relation(fields: [serviceId], references: [id])
+}
+
+model Project {
+  id            Int            @id @default(autoincrement())
+  title         String
+  description   String?
+  imageUrls     String[] // Deprecated: will be replaced by galleryImages relation
+  location      String?
+  category      String?
+  completedAt   DateTime?
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  galleryImages GalleryImage[]
+}
+
+model GalleryImage {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String?
+  location     String?
+  imageUrl     String // This will now store both image and video URLs
+  publicId     String
+  category     String?
+  projectId    Int
+  fileType     String   @default("image") // "image" or "video"
+  mimeType     String?  // Store original MIME type
+  displayOrder Int      @default(0) // Order of images within a project
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model WhatsAppConversation {
+  id            String             @id @default(cuid())
+  phoneNumber   String             @unique
+  customerName  String?
+  lastMessageAt DateTime
+  status        ConversationStatus @default(ACTIVE)
+  userId        Int?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  state         ChatbotState?
+  user          User?              @relation(fields: [userId], references: [id])
+  messages      WhatsAppMessage[]
+}
+
+model WhatsAppMessage {
+  id             String               @id @default(cuid())
+  conversationId String
+  messageId      String               @unique
+  direction      MessageDirection
+  content        String
+  mediaUrl       String?
+  mediaType      String?
+  status         String?
+  createdAt      DateTime             @default(now())
+  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id])
+}
+
+model ChatbotState {
+  id             String               @id @default(cuid())
+  conversationId String               @unique
+  currentStep    String
+  collectedData  Json
+  updatedAt      DateTime             @updatedAt
+  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id])
+}
+
+model UserSession {
+  id               String         @id @default(cuid())
+  sessionId        String         @unique
+  ipAddress        String?
+  userAgent        String?
+  referrer         String?
+  landingPage      String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  browser          String?
+  city             String?
+  country          String?
+  device           String?
+  headers          Json?
+  language         String?
+  os               String?
+  region           String?
+  colorDepth       Int?
+  screenResolution String?
+  timezone         String?
+  viewport         String?
+  pageViews        PageView[]
+  activities       UserActivity[]
+}
+
+model PageView {
+  id        String      @id @default(cuid())
+  sessionId String
+  page      String
+  title     String?
+  timeSpent Int?
+  createdAt DateTime    @default(now())
+  session   UserSession @relation(fields: [sessionId], references: [sessionId])
+}
+
+model UserActivity {
+  id          String      @id @default(cuid())
+  sessionId   String
+  page        String
+  elementId   String?
+  elementText String?
+  elementType String?
+  createdAt   DateTime    @default(now())
+  session     UserSession @relation(fields: [sessionId], references: [sessionId])
+}
+
+enum QuoteStatus {
+  PENDING
+  REVIEWED
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+enum ConversationStatus {
+  ACTIVE
+  COMPLETED
+  HANDED_OFF
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+model AiInstructions {
+  id                  String   @id @default(cuid())
+  prompt              String   @db.Text
+  evolutionInstanceId String?  // Evolution API instance ID
+  isActive            Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model AiSetup {
+  id                  String   @id @default(cuid())
+  evolutionApiUrl     String?  // Evolution API base URL
+  evolutionApiKey     String?  // Evolution API key
+  webhookUrl          String?  // WhatsApp webhook URL
+  isActive            Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}

@@ -1,0 +1,51 @@
+{
+  "name": "pisos-pro",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:migrate": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:reset": "prisma migrate reset --force",
+    "build:production": "npm run db:generate && next build",
+    "deploy:vercel": "vercel --prod",
+    "postbuild": "prisma generate"
+  },
+  "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
+    "@prisma/client": "^6.13.0",
+    "@types/bull": "^3.15.9",
+    "@types/node-cron": "^3.0.11",
+    "@vercel/blob": "^2.0.1",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.11.0",
+    "bull": "^4.16.5",
+    "cloudinary": "^2.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.539.0",
+    "next": "^15.5.11",
+    "node-cron": "^4.2.1",
+    "openai": "^5.11.0",
+    "prisma": "^6.13.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-intersection-observer": "^9.16.0",
+    "redis": "^5.7.0",
+    "sharp": "^0.34.3",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^9.32.0",
+    "eslint-config-next": "^15.4.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

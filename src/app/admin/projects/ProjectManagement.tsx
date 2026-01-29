@@ -1,0 +1,506 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Select } from '@/components/ui/select'
+import { Card } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Separator } from '@/components/ui/separator'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { 
+  Plus, 
+  Search, 
+  Filter, 
+  RefreshCw, 
+  FolderOpen, 
+  AlertCircle,
+  CheckCircle2,
+  Clock,
+  BarChart3
+} from 'lucide-react'
+
+import ProjectForm, { ProjectFormData } from './ProjectForm'
+import ProjectCard from './ProjectCard'
+import ProjectImageManager from './ProjectImageManager'
+
+interface Category {
+  id: number
+  name: string
+  description: string | null
+  slug: string
+  imageUrl: string | null
+}
+
+interface GalleryImage {
+  id: number
+  title: string
+  description: string | null
+  imageUrl: string
+  category: string | null
+  fileType: string
+  displayOrder: number
+  isActive: boolean
+  createdAt: string
+}
+
+interface Project {
+  id: number
+  title: string
+  description: string | null
+  location: string | null
+  category: string | null
+  imageUrls: string[]
+  completedAt: string | null
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+  galleryImages?: GalleryImage[]
+}
+
+type ViewMode = 'grid' | 'list'
+type FormMode = 'hidden' | 'create' | 'edit'
+
+export default function ProjectManagement() {
+  // Data state
+  const [projects, setProjects] = useState<Project[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
+  const [loading, setLoading] = useState(true)
+  
+  // Filter state - Admin should see all projects by default
+  const [selectedStatus, setSelectedStatus] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [searchTerm, setSearchTerm] = useState('')
+  
+  // UI state
+  const [viewMode] = useState<ViewMode>('grid')
+  const [formMode, setFormMode] = useState<FormMode>('hidden')
+  const [editingProject, setEditingProject] = useState<Project | null>(null)
+  const [managingImagesProject, setManagingImagesProject] = useState<Project | null>(null)
+  const [formLoading, setFormLoading] = useState(false)
+  const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null)
+
+  // Data fetching
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories')
+      const data = await response.json()
+      setCategories(data.categories || [])
+    } catch (error) {
+      console.error('Error fetching categories:', error)
+      showNotification('error', 'Erro ao carregar categorias')
+    }
+  }
+
+  const fetchProjects = async () => {
+    try {
+      const params = new URLSearchParams()
+      if (selectedStatus !== 'all') params.append('status', selectedStatus)
+      if (selectedCategory !== 'all') params.append('category', selectedCategory)
+      if (searchTerm.trim()) params.append('search', searchTerm.trim())
+      
+      const response = await fetch(`/api/projects?${params.toString()}`)
+      const data = await response.json()
+      setProjects(data.projects || [])
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+      showNotification('error', 'Erro ao carregar projetos')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Effects
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  useEffect(() => {
+    fetchProjects()
+  }, [selectedStatus, selectedCategory, searchTerm])
+
+  // Utility functions
+  const showNotification = (type: 'success' | 'error', message: string) => {
+    setNotification({ type, message })
+    setTimeout(() => setNotification(null), 5000)
+  }
+
+  const refreshData = async () => {
+    setLoading(true)
+    await Promise.all([fetchCategories(), fetchProjects()])
+    setLoading(false)
+  }
+
+  // Form handlers
+  const handleCreateProject = () => {
+    setEditingProject(null)
+    setFormMode('create')
+  }
+
+  const handleEditProject = (project: Project) => {
+    setEditingProject(project)
+    setFormMode('edit')
+  }
+
+  const handleFormCancel = () => {
+    setFormMode('hidden')
+    setEditingProject(null)
+    setFormLoading(false)
+  }
+
+  const handleFormSubmit = async (data: ProjectFormData) => {
+    setFormLoading(true)
+    try {
+      const url = formMode === 'create' 
+        ? '/api/projects' 
+        : `/api/projects/${editingProject!.id}`
+      
+      const method = formMode === 'create' ? 'POST' : 'PUT'
+      
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        const message = formMode === 'create' 
+          ? 'Projeto criado com sucesso!' 
+          : 'Projeto atualizado com sucesso!'
+        
+        showNotification('success', message)
+        await fetchProjects()
+        setFormMode('hidden')
+        setEditingProject(null)
+      } else {
+        const error = await response.json()
+        showNotification('error', error.error || 'Erro ao salvar projeto')
+      }
+    } catch (error) {
+      console.error('Error saving project:', error)
+      showNotification('error', 'Erro ao salvar projeto')
+    } finally {
+      setFormLoading(false)
+    }
+  }
+
+  // Project actions
+  const handleDeleteProject = async (id: number) => {
+    try {
+      const response = await fetch(`/api/projects?id=${id}`, {
+        method: 'DELETE'
+      })
+
+      if (response.ok) {
+        showNotification('success', 'Projeto removido com sucesso!')
+        await fetchProjects()
+      } else {
+        showNotification('error', 'Erro ao remover projeto')
+      }
+    } catch (error) {
+      console.error('Error deleting project:', error)
+      showNotification('error', 'Erro ao remover projeto')
+    }
+  }
+
+  const handleToggleProjectActive = async (id: number, isActive: boolean) => {
+    try {
+      const response = await fetch(`/api/projects/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isActive })
+      })
+
+      if (response.ok) {
+        const message = isActive 
+          ? 'Projeto ativado com sucesso!' 
+          : 'Projeto desativado com sucesso!'
+        showNotification('success', message)
+        await fetchProjects()
+      } else {
+        showNotification('error', 'Erro ao alterar status do projeto')
+      }
+    } catch (error) {
+      console.error('Error toggling project status:', error)
+      showNotification('error', 'Erro ao alterar status do projeto')
+    }
+  }
+
+  const handleManageImages = (project: Project) => {
+    setManagingImagesProject(project)
+  }
+
+  const handleImageManagerClose = () => {
+    setManagingImagesProject(null)
+    fetchProjects() // Refresh to get updated image counts
+  }
+
+  // Stats calculations
+  const stats = {
+    total: projects.length,
+    active: projects.filter(p => p.isActive).length,
+    inactive: projects.filter(p => !p.isActive).length,
+    withImages: projects.filter(p => 
+      (p.galleryImages && p.galleryImages.length > 0) || p.imageUrls.length > 0
+    ).length
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center py-12">
+            <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="ml-3 text-lg text-gray-600">Carregando projetos...</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Notification */}
+      {notification && (
+        <div className="fixed top-4 right-4 z-50 max-w-sm">
+          <Alert variant={notification.type === 'error' ? 'destructive' : 'default'}>
+            {notification.type === 'success' ? 
+              <CheckCircle2 className="h-4 w-4" /> : 
+              <AlertCircle className="h-4 w-4" />
+            }
+            <AlertDescription>{notification.message}</AlertDescription>
+          </Alert>
+        </div>
+      )}
+
+      <div className="max-w-7xl mx-auto p-6">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Gerenciar Projetos</h1>
+              <p className="text-gray-600 mt-1">
+                Gerencie o portfólio da empresa com imagens e detalhes dos projetos
+              </p>
+            </div>
+            <Button onClick={handleCreateProject} size="lg">
+              <Plus className="h-5 w-5 mr-2" />
+              Novo Projeto
+            </Button>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <Card className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <FolderOpen className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+                  <p className="text-sm text-gray-500">Total</p>
+                </div>
+              </div>
+            </Card>
+            <Card className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{stats.active}</p>
+                  <p className="text-sm text-gray-500">Ativos</p>
+                </div>
+              </div>
+            </Card>
+            <Card className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-gray-100 rounded-lg">
+                  <Clock className="h-5 w-5 text-gray-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{stats.inactive}</p>
+                  <p className="text-sm text-gray-500">Inativos</p>
+                </div>
+              </div>
+            </Card>
+            <Card className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <BarChart3 className="h-5 w-5 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{stats.withImages}</p>
+                  <p className="text-sm text-gray-500">Com Imagens</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Filters */}
+          <Card className="p-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                <Filter className="h-4 w-4" />
+                Filtros:
+              </div>
+              
+              <div className="flex flex-wrap gap-4 flex-1">
+                <div className="flex items-center gap-2">
+                  <Select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    className="w-40"
+                  >
+                    <option value="all">Todos os Status</option>
+                    <option value="active">Apenas Ativos</option>
+                    <option value="inactive">Apenas Inativos</option>
+                  </Select>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-48"
+                  >
+                    <option value="all">Todas as Categorias</option>
+                    {categories.map((cat) => (
+                      <option key={cat.id} value={cat.slug}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+                
+                <div className="flex items-center gap-2 flex-1 min-w-64">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Input
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      placeholder="Buscar por título, descrição ou localização..."
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <Button variant="outline" onClick={refreshData} size="sm">
+                <RefreshCw className="h-4 w-4" />
+              </Button>
+            </div>
+          </Card>
+        </div>
+
+        {/* Results */}
+        {projects.length === 0 ? (
+          <Card className="p-12">
+            <div className="text-center">
+              <FolderOpen className="mx-auto h-16 w-16 text-gray-300 mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {searchTerm || selectedStatus !== 'all' || selectedCategory !== 'all'
+                  ? 'Nenhum projeto encontrado'
+                  : 'Nenhum projeto cadastrado'
+                }
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                {searchTerm || selectedStatus !== 'all' || selectedCategory !== 'all'
+                  ? 'Tente ajustar os filtros de busca para encontrar projetos.'
+                  : 'Comece criando seu primeiro projeto para construir o portfólio da empresa.'
+                }
+              </p>
+              {(!searchTerm && selectedStatus === 'all' && selectedCategory === 'all') && (
+                <Button onClick={handleCreateProject} size="lg">
+                  <Plus className="h-5 w-5 mr-2" />
+                  Criar Primeiro Projeto
+                </Button>
+              )}
+            </div>
+          </Card>
+        ) : (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Projetos ({projects.length})
+                </h2>
+                {(searchTerm || selectedStatus !== 'all' || selectedCategory !== 'all') && (
+                  <Badge variant="outline">
+                    {searchTerm && `"${searchTerm}"`}
+                    {selectedStatus !== 'all' && ` ${selectedStatus === 'active' ? 'Ativos' : 'Inativos'}`}
+                    {selectedCategory !== 'all' && ` ${categories.find(c => c.slug === selectedCategory)?.name}`}
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            {viewMode === 'grid' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    categories={categories}
+                    onEdit={handleEditProject}
+                    onDelete={handleDeleteProject}
+                    onManageImages={handleManageImages}
+                    onToggleActive={handleToggleProjectActive}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {/* List view would go here if implemented */}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Form Dialog */}
+        <Dialog open={formMode !== 'hidden'} onOpenChange={(open) => !open && handleFormCancel()}>
+          <DialogContent className="max-w-4xl p-0">
+            <div className="max-h-[85vh] overflow-y-auto">
+              <ProjectForm
+                mode={formMode === 'create' ? 'create' : 'edit'}
+                initialData={editingProject ? {
+                  title: editingProject.title,
+                  description: editingProject.description,
+                  location: editingProject.location,
+                  category: editingProject.category,
+                  completedAt: editingProject.completedAt,
+                  isActive: editingProject.isActive
+                } : undefined}
+                categories={categories}
+                onSubmit={handleFormSubmit}
+                onCancel={handleFormCancel}
+                loading={formLoading}
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Image Manager Dialog */}
+        <Dialog 
+          open={!!managingImagesProject} 
+          onOpenChange={(open) => !open && handleImageManagerClose()}
+        >
+          <DialogContent className="max-w-7xl p-0">
+            <div className="max-h-[90vh] overflow-y-auto p-6">
+              {managingImagesProject && (
+                <ProjectImageManager
+                  projectId={managingImagesProject.id}
+                  projectTitle={managingImagesProject.title}
+                  images={managingImagesProject.galleryImages || []}
+                  onUpdate={fetchProjects}
+                  onClose={handleImageManagerClose}
+                />
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </div>
+  )
+}

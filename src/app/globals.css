@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* WhatsApp button fade-in/fade-out animation */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-pulse {
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+.animate-fade-pulse:hover {
+  animation: none;
+  opacity: 1;
+  transform: scale(1);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+/* Mobile-first responsive typography */
+@layer base {
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight;
+  }
+  
+  h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold leading-tight;
+  }
+  
+  h3 {
+    @apply text-xl sm:text-2xl font-semibold leading-tight;
+  }
+  
+  p {
+    @apply text-base sm:text-lg leading-relaxed;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Mobile-optimized touch targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  /* Improved focus states for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+  
+  /* Container with proper mobile padding */
+  .container-mobile {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Responsive grid that works well on mobile */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  /* Mobile-friendly card spacing */
+  .card-mobile {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved mobile tap targets */
+button, a, input, select, textarea {
+  @apply touch-target;
+}
+
+/* Hide scrollbar while maintaining functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Hero video background styles */
+@layer utilities {
+  /* Hero video container */
+  .hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  /* Optimize video performance */
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    will-change: opacity;
+    transform: scale(1.1); /* Slight scale to prevent edge gaps */
+  }
+  
+  /* Hero video fade effect */
+  @keyframes heroVideoFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .hero-video-fade {
+    animation: heroVideoFade 1.5s ease-out;
+  }
+}
+
+/* Parallax and Glass Morphism Effects */
+@layer utilities {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/20 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-md border border-white/10;
+  }
+  
+  /* Enhanced glass effect */
+  .glass-enhanced {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  /* Wood grain overlay */
+  .wood-grain {
+    position: relative;
+  }
+  
+  .wood-grain::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(90deg, transparent 79px, rgba(205, 133, 63, 0.03) 79px, rgba(205, 133, 63, 0.03) 81px, transparent 81px),
+      linear-gradient(rgba(205, 133, 63, 0.02) 0.5px, transparent 0.5px);
+    background-size: 81px 1px, 1px 1px;
+    pointer-events: none;
+  }
+  
+  /* Parallax container */
+  .parallax-container {
+    perspective: 1px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .parallax-element {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .parallax-back {
+    transform: translateZ(-1px) scale(2);
+  }
+  
+  .parallax-base {
+    transform: translateZ(0);
+  }
+  
+  /* Smooth reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, #CD853F 0%, #8B4513 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Parallax scroll effects */
+.parallax-scroll {
+  will-change: transform;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CD853F;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B4513;
+}
