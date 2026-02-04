@@ -135,7 +135,7 @@ export class EvolutionApiService {
     try {
       const requestPayload = {
         instanceName: params.instanceName,
-        token: params.token || 'pisospro-token',
+        token: params.token || 'jrcambio-token',
         qrcode: params.qrcode !== false,
         integration: params.integration || 'WHATSAPP-BAILEYS',
         webhook: params.webhookUrl ? {

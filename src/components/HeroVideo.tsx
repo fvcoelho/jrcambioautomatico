@@ -94,11 +94,9 @@ export default function HeroVideo({ src, className = '', onVideoReady }: HeroVid
         loop
         playsInline
         preload="metadata"
-        style={{ opacity: canPlay ? 1 : 0 }}
+        style={{ opacity: canPlay ? 1 : 0, backgroundColor: '#fff' }}
       >
-        <source src="/intro-optimized.mp4" type="video/mp4" />
         <source src={src} type="video/mp4" />
-        <source src="/intro.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
       

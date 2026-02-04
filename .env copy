@@ -1,0 +1,68 @@
+# Production Environment Variables
+# This file contains production-specific configuration for Pisos Pro
+
+# Application Environment
+NODE_ENV="development"
+NEXT_PUBLIC_ENV="development"
+
+# Application Configuration
+APP_URL="https://pisospro.com.br"
+NEXT_PUBLIC_APP_URL="https://pisospro.com.br"
+
+# Database Configuration
+DATABASE_URL="postgresql://neondb_owner:npg_z47KvsMGJaib@ep-rough-cherry-acc3gita-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+# NextAuth Configuration (if using authentication)
+# NEXTAUTH_URL="https://pisospro.com.br"
+# NEXTAUTH_SECRET="your-production-nextauth-secret-here"
+
+# WhatsApp Configuration
+NEXT_PUBLIC_WHATSAPP_NUMBER="5511940147157"
+
+# Analytics Configuration
+NEXT_PUBLIC_ANALYTICS_ENABLED="true"
+
+# Security Headers
+NEXT_PUBLIC_CSP_ENABLED="true"
+
+# Performance Optimization
+NEXT_PUBLIC_OPTIMIZE_IMAGES="true"
+NEXT_PUBLIC_ENABLE_SW="true"
+
+# Error Reporting (Optional - add your service)
+# SENTRY_DSN="your-sentry-dsn-here"
+# SENTRY_ORG="your-org"
+# SENTRY_PROJECT="pisospro"
+
+# Monitoring (Optional)
+# VERCEL_ANALYTICS_ID="your-vercel-analytics-id"
+
+# Email Configuration (if needed)
+# SMTP_HOST="your-smtp-host"
+# SMTP_PORT="587"
+# SMTP_USER="your-smtp-user"
+# SMTP_PASS="your-smtp-password"
+# FROM_EMAIL="contato@pisospro.com.br"
+
+# Social Media Links
+NEXT_PUBLIC_INSTAGRAM_URL="https://instagram.com/pisospro"
+NEXT_PUBLIC_FACEBOOK_URL="https://facebook.com/pisospro"
+
+# Business Information
+NEXT_PUBLIC_COMPANY_NAME="Pisos Pró"
+NEXT_PUBLIC_COMPANY_PHONE="(11) 94014-7157"
+NEXT_PUBLIC_COMPANY_EMAIL="contato@pisospro.com.br"
+NEXT_PUBLIC_COMPANY_ADDRESS="São Paulo, SP"
+
+# Cloudinary Setup for Gallery Upload
+CLOUDINARY_CLOUD_NAME=dlayq4t4o
+CLOUDINARY_API_KEY=265148356775211
+CLOUDINARY_API_SECRET=Z8ll-msH_Xo1bziUBlZpjAHZOpw
+
+
+# ============================================================================
+# VERCEL BLOB STORAGE
+# ============================================================================
+BLOB_READ_WRITE_TOKEN="vercel_blob_rw_yTPpLZynbzU5yzkx_5Vg6YpapSrs8rN8u5IKmPFDnkVDTQi"
+BLOB_STORE_ID="store_yTPpLZynbzU5yzkx"
+BLOB_BASE_URL="https://ytpplzynbzu5yzkx.public.blob.vercel-storage.com"

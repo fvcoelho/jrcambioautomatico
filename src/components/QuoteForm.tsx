@@ -40,10 +40,10 @@ export default function QuoteForm() {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
         <div className="text-6xl mb-4">✅</div>
-        <h3 className="text-2xl font-bold text-green-800 mb-4">Solicitação de Orçamento Enviada!</h3>
+        <h3 className="text-2xl font-bold text-green-800 mb-4">Solicitação Enviada!</h3>
         <p className="text-green-700 mb-6">
-          Obrigado pelo seu interesse na Pisos Pró. Analisaremos sua solicitação e entraremos em contato em até 24 horas 
-          para agendar uma consulta gratuita.
+          Obrigado pelo seu interesse na JR Câmbio Automático. Analisaremos sua solicitação e entraremos em contato em até 24 horas
+          para agendar um diagnóstico gratuito.
         </p>
         <button 
           onClick={() => {
@@ -116,7 +116,7 @@ export default function QuoteForm() {
         
         <div>
           <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
-            Tipo de Projeto *
+            Tipo de Serviço *
           </label>
           <select
             id="projectType"
@@ -126,22 +126,21 @@ export default function QuoteForm() {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="">Selecione o tipo de projeto</option>
-            <option value="madeira">Instalação de Pisos de Madeira</option>
-            <option value="acabamento">Acabamento</option>
-            <option value="laminado">Piso Laminado</option>
-            <option value="vinílico">Vinílico e LVT</option>
+            <option value="">Selecione o serviço</option>
+            <option value="diagnostico">Diagnóstico Computadorizado</option>
+            <option value="conserto">Conserto de Câmbio</option>
+            <option value="retifica">Retífica Completa</option>
+            <option value="troca-oleo">Troca de Óleo ATF</option>
+            <option value="revisao">Revisão de Câmbio</option>
+            <option value="manutencao">Manutenção Preventiva</option>
             <option value="other">Outros Serviços</option>
-            <option value="reacabamentoing">Restauração de Pisos</option>
-            <option value="reparo">Reparo de Pisos</option>
-            <option value="multiple">Vários Serviços</option>
           </select>
         </div>
       </div>
 
       <div>
         <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-          Endereço do Projeto
+          Veículo (Marca/Modelo/Ano)
         </label>
         <input
           type="text"
@@ -150,14 +149,14 @@ export default function QuoteForm() {
           value={formData.address}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Endereço, cidade, estado"
+          placeholder="Ex: Honda Civic 2020"
         />
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
         <div>
           <label htmlFor="roomSize" className="block text-sm font-medium text-gray-700 mb-2">
-            Tamanho Aproximado
+            Quilometragem
           </label>
           <input
             type="text"
@@ -166,7 +165,7 @@ export default function QuoteForm() {
             value={formData.roomSize}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="ex: 20 m²"
+            placeholder="Ex: 80.000 km"
           />
         </div>
         
@@ -213,7 +212,7 @@ export default function QuoteForm() {
 
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-          Descrição do Projeto
+          Descrição do Problema
         </label>
         <textarea
           id="description"
@@ -222,14 +221,14 @@ export default function QuoteForm() {
           value={formData.description}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Conte-nos mais sobre seu projeto, requisitos específicos ou qualquer dúvida que tenha..."
+          placeholder="Descreva os sintomas ou problemas que você está enfrentando com o câmbio..."
         />
       </div>
 
       <div className="bg-blue-50 p-4 rounded-lg">
         <p className="text-sm text-blue-800">
-          <strong>O que acontece agora?</strong> Analisaremos sua solicitação e entraremos em contato em até 24 horas 
-          para agendar uma consulta gratuita, sem compromisso, e fornecer um orçamento detalhado.
+          <strong>O que acontece agora?</strong> Analisaremos sua solicitação e entraremos em contato em até 24 horas
+          para agendar um diagnóstico gratuito, sem compromisso.
         </p>
       </div>
 

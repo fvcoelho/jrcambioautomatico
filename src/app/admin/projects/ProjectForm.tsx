@@ -164,7 +164,7 @@ export default function ProjectForm({
                 id="title"
                 value={formData.title}
                 onChange={(e) => updateField('title', e.target.value)}
-                placeholder="Ex: Instalação de piso laminado em residência"
+                placeholder="Ex: Reparo de câmbio automático Honda Civic"
                 className={errors.title ? 'border-red-500' : ''}
                 disabled={loading}
               />

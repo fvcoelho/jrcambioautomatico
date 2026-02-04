@@ -248,11 +248,11 @@ export default function ProjectManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
+      <div className="p-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center py-12">
-            <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
-            <span className="ml-3 text-lg text-gray-600">Carregando projetos...</span>
+            <RefreshCw className="h-8 w-8 animate-spin text-accent-400" />
+            <span className="ml-3 text-lg text-steel-400">Carregando projetos...</span>
           </div>
         </div>
       </div>
@@ -260,7 +260,7 @@ export default function ProjectManagement() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="p-6">
       {/* Notification */}
       {notification && (
         <div className="fixed top-4 right-4 z-50 max-w-sm">
@@ -279,12 +279,12 @@ export default function ProjectManagement() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Gerenciar Projetos</h1>
-              <p className="text-gray-600 mt-1">
-                Gerencie o portfólio da empresa com imagens e detalhes dos projetos
+              <h1 className="text-3xl font-bold text-white">Gerenciar Projetos</h1>
+              <p className="text-steel-400 mt-1">
+                Gerencie o portfólio com imagens e detalhes dos serviços realizados
               </p>
             </div>
-            <Button onClick={handleCreateProject} size="lg">
+            <Button onClick={handleCreateProject} size="lg" className="bg-accent-500 hover:bg-accent-600 text-white">
               <Plus className="h-5 w-5 mr-2" />
               Novo Projeto
             </Button>
@@ -292,56 +292,56 @@ export default function ProjectManagement() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <Card className="p-4">
+            <div className="bg-steel-800/50 backdrop-blur-sm p-4 rounded-xl border border-steel-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <FolderOpen className="h-5 w-5 text-blue-600" />
+                <div className="p-2 bg-steel-700/50 rounded-lg">
+                  <FolderOpen className="h-5 w-5 text-steel-300" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-                  <p className="text-sm text-gray-500">Total</p>
+                  <p className="text-2xl font-bold text-white">{stats.total}</p>
+                  <p className="text-sm text-steel-400">Total</p>
                 </div>
               </div>
-            </Card>
-            <Card className="p-4">
+            </div>
+            <div className="bg-steel-800/50 backdrop-blur-sm p-4 rounded-xl border border-steel-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <div className="p-2 bg-emerald-500/20 rounded-lg">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.active}</p>
-                  <p className="text-sm text-gray-500">Ativos</p>
+                  <p className="text-2xl font-bold text-white">{stats.active}</p>
+                  <p className="text-sm text-steel-400">Ativos</p>
                 </div>
               </div>
-            </Card>
-            <Card className="p-4">
+            </div>
+            <div className="bg-steel-800/50 backdrop-blur-sm p-4 rounded-xl border border-steel-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <Clock className="h-5 w-5 text-gray-600" />
+                <div className="p-2 bg-steel-700/50 rounded-lg">
+                  <Clock className="h-5 w-5 text-steel-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.inactive}</p>
-                  <p className="text-sm text-gray-500">Inativos</p>
+                  <p className="text-2xl font-bold text-white">{stats.inactive}</p>
+                  <p className="text-sm text-steel-400">Inativos</p>
                 </div>
               </div>
-            </Card>
-            <Card className="p-4">
+            </div>
+            <div className="bg-steel-800/50 backdrop-blur-sm p-4 rounded-xl border border-steel-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <BarChart3 className="h-5 w-5 text-purple-600" />
+                <div className="p-2 bg-accent-500/20 rounded-lg">
+                  <BarChart3 className="h-5 w-5 text-accent-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.withImages}</p>
-                  <p className="text-sm text-gray-500">Com Imagens</p>
+                  <p className="text-2xl font-bold text-white">{stats.withImages}</p>
+                  <p className="text-sm text-steel-400">Com Imagens</p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
 
           {/* Filters */}
-          <Card className="p-4">
+          <div className="bg-steel-800/50 backdrop-blur-sm p-4 rounded-xl border border-steel-700">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+              <div className="flex items-center gap-2 text-sm font-medium text-steel-300">
                 <Filter className="h-4 w-4" />
                 Filtros:
               </div>
@@ -387,43 +387,43 @@ export default function ProjectManagement() {
                 </div>
               </div>
               
-              <Button variant="outline" onClick={refreshData} size="sm">
+              <Button variant="outline" onClick={refreshData} size="sm" className="border-steel-600 text-steel-300 hover:bg-steel-700 hover:text-white">
                 <RefreshCw className="h-4 w-4" />
               </Button>
             </div>
-          </Card>
+          </div>
         </div>
 
         {/* Results */}
         {projects.length === 0 ? (
-          <Card className="p-12">
+          <div className="bg-steel-800/50 backdrop-blur-sm p-12 rounded-xl border border-steel-700">
             <div className="text-center">
-              <FolderOpen className="mx-auto h-16 w-16 text-gray-300 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <FolderOpen className="mx-auto h-16 w-16 text-steel-500 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">
                 {searchTerm || selectedStatus !== 'all' || selectedCategory !== 'all'
                   ? 'Nenhum projeto encontrado'
                   : 'Nenhum projeto cadastrado'
                 }
               </h3>
-              <p className="text-gray-600 mb-6 max-w-md mx-auto">
+              <p className="text-steel-400 mb-6 max-w-md mx-auto">
                 {searchTerm || selectedStatus !== 'all' || selectedCategory !== 'all'
                   ? 'Tente ajustar os filtros de busca para encontrar projetos.'
-                  : 'Comece criando seu primeiro projeto para construir o portfólio da empresa.'
+                  : 'Comece criando seu primeiro projeto para o portfólio.'
                 }
               </p>
               {(!searchTerm && selectedStatus === 'all' && selectedCategory === 'all') && (
-                <Button onClick={handleCreateProject} size="lg">
+                <Button onClick={handleCreateProject} size="lg" className="bg-accent-500 hover:bg-accent-600 text-white">
                   <Plus className="h-5 w-5 mr-2" />
                   Criar Primeiro Projeto
                 </Button>
               )}
             </div>
-          </Card>
+          </div>
         ) : (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-white">
                   Projetos ({projects.length})
                 </h2>
                 {(searchTerm || selectedStatus !== 'all' || selectedCategory !== 'all') && (

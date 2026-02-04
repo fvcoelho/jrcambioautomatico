@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function WhatsAppButton() {
   const phoneNumber = '5511940147157' // Format: country code + area code + number (no spaces)
-  const message = 'Olá! Gostaria de solicitar um orçamento para pisos.'
+  const message = 'Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.'
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {

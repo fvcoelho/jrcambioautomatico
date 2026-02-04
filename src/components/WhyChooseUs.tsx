@@ -3,61 +3,61 @@
 const features = [
   {
     title: '15+ Anos de Experiência',
-    description: 'Décadas de expertise em instalação e restauração de pisos de madeira com técnicas tradicionais e modernas.',
+    description: 'Décadas de expertise em diagnóstico e reparo de câmbios automáticos de todas as marcas e modelos.',
     stats: '15+ Anos',
-    color: 'gold'
+    color: 'accent'
   },
   {
-    title: 'Certificado e Licenciado',
-    description: 'Profissionais qualificados com todas as licenças necessárias e seguro completo para sua proteção.',
-    stats: '100% Legal',
-    color: 'wood'
+    title: '1000+ Câmbios Reparados',
+    description: 'Milhares de transmissões reparadas com sucesso, devolvendo a confiança aos nossos clientes.',
+    stats: '1000+ Reparos',
+    color: 'steel'
   },
   {
-    title: 'Madeira Premium',
-    description: 'Trabalhamos exclusivamente com madeiras de alta qualidade de fornecedores certificados e sustentáveis.',
-    stats: 'Qualidade A+',
-    color: 'gold'
+    title: 'Peças Originais',
+    description: 'Trabalhamos exclusivamente com peças originais e de alta qualidade para garantir durabilidade.',
+    stats: 'Peças OEM',
+    color: 'accent'
   },
   {
-    title: 'Orçamento Transparente',
-    description: 'Avaliação gratuita com preços claros, sem taxas ocultas ou surpresas no final do projeto.',
-    stats: 'Sem Taxas Ocultas',
-    color: 'wood'
+    title: 'Diagnóstico Gratuito',
+    description: 'Avaliação gratuita do seu câmbio com equipamentos de última geração, sem compromisso.',
+    stats: 'Grátis',
+    color: 'steel'
   },
   {
-    title: 'Garantia Total',
-    description: 'Todos os nossos trabalhos incluem garantia abrangente de instalação e acabamento.',
-    stats: 'Garantia Vitalícia',
-    color: 'gold'
+    title: '6 Meses de Garantia',
+    description: 'Todos os nossos serviços incluem garantia de 6 meses para sua total tranquilidade.',
+    stats: '6 Meses',
+    color: 'accent'
   },
   {
     title: 'Atendimento Especializado',
-    description: 'Suporte técnico completo desde a escolha do material até a manutenção pós-instalação.',
+    description: 'Equipe técnica qualificada para orientar você desde o diagnóstico até a entrega do veículo.',
     stats: 'Suporte Total',
-    color: 'wood'
+    color: 'steel'
   }
 ]
 
 export default function WhyChooseUs() {
 
   return (
-    <section className="py-20 relative bg-gradient-to-br from-wood-900 via-wood-800 to-wood-700">
+    <section className="py-20 relative bg-gradient-to-br from-steel-900 via-steel-800 to-steel-700">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
-            <span className="text-gold-400 font-semibold text-sm uppercase tracking-wider bg-gold-400/10 px-4 py-2 rounded-full">
+            <span className="text-accent-400 font-semibold text-sm uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full">
               Nossa Diferença
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Por Que Escolher a
-            <span className="block text-gradient-gold mt-2">Pisos Pró?</span>
+            <span className="block text-gradient-accent mt-2">JR Câmbio Automático?</span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Combinamos tradição artesanal com técnicas modernas para entregar 
-            pisos de madeira excepcionais que resistem ao tempo.
+            Combinamos experiência técnica com equipamentos modernos para entregar
+            serviços de qualidade que prolongam a vida útil do seu câmbio.
           </p>
         </div>
         
@@ -71,15 +71,15 @@ export default function WhyChooseUs() {
                 {/* Stats badge */}
                 <div className="mb-6">
                   <span className={`inline-block px-4 py-2 rounded-full text-sm font-bold ${
-                    feature.color === 'gold' 
-                      ? 'bg-gradient-gold text-wood-900' 
-                      : 'bg-gradient-wood text-white'
+                    feature.color === 'accent'
+                      ? 'bg-gradient-accent text-white'
+                      : 'bg-gradient-steel text-white'
                   }`}>
                     {feature.stats}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-gold-300 transition-colors">
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-accent-300 transition-colors">
                   {feature.title}
                 </h3>
                 <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors">
@@ -89,7 +89,7 @@ export default function WhyChooseUs() {
                 {/* Decorative line */}
                 <div className="mt-6 pt-4 border-t border-white/10">
                   <div className={`w-12 h-1 mx-auto rounded-full ${
-                    feature.color === 'gold' ? 'bg-gradient-gold' : 'bg-gradient-wood'
+                    feature.color === 'accent' ? 'bg-gradient-accent' : 'bg-gradient-steel'
                   }`} />
                 </div>
               </div>
@@ -101,32 +101,32 @@ export default function WhyChooseUs() {
         <div className="mt-20 text-center">
           <div className="glass-enhanced p-12 rounded-3xl max-w-4xl mx-auto">
             <h3 className="text-3xl font-bold text-white mb-6">
-              Pronto Para Transformar Seu Espaço?
+              Problemas com seu Câmbio Automático?
             </h3>
             <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Junte-se a milhares de clientes satisfeitos que confiaram na Pisos Pró 
-              para criar ambientes únicos e duradouros.
+              Junte-se a milhares de clientes satisfeitos que confiaram na JR Câmbio Automático
+              para resolver seus problemas de transmissão.
             </p>
             
             {/* Trust indicators */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-gold-400">5000+</div>
-                <div className="text-white/70">Projetos Concluídos</div>
+                <div className="text-3xl font-bold text-accent-400">1000+</div>
+                <div className="text-white/70">Câmbios Reparados</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-gold-400">98%</div>
+                <div className="text-3xl font-bold text-accent-400">98%</div>
                 <div className="text-white/70">Satisfação do Cliente</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-gold-400">15+</div>
+                <div className="text-3xl font-bold text-accent-400">15+</div>
                 <div className="text-white/70">Anos de Experiência</div>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-gold text-wood-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity duration-300 shadow-elegant">
-                Solicitar Orçamento Grátis
+              <button className="bg-gradient-accent text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity duration-300 shadow-elegant">
+                Agendar Diagnóstico Grátis
               </button>
               <button className="glass-enhanced text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-colors duration-300 border-2 border-white/20">
                 Falar com Especialista

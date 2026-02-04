@@ -2,36 +2,36 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-wood-900 via-wood-800 to-wood-900 text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-charcoal-950 via-steel-900 to-charcoal-950 text-white overflow-hidden">
       {/* Background texture */}
-      <div className="absolute inset-0 bg-wood-texture opacity-5"></div>
+      <div className="absolute inset-0 bg-metal-texture opacity-5"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <h3 className="text-3xl font-bold text-gradient-gold mb-2">Pisos Pró</h3>
-              <div className="w-20 h-1 bg-gradient-gold rounded-full mb-4"></div>
+              <h3 className="text-3xl font-bold text-gradient-accent mb-2">JR Câmbio Automático</h3>
+              <div className="w-20 h-1 bg-gradient-accent rounded-full mb-4"></div>
             </div>
             <p className="text-white/80 mb-6 leading-relaxed text-lg">
-              Especialistas em pisos de madeira com mais de 15 anos de experiência. 
-              Transformamos espaços com artesanato de excelência e atendimento personalizado 
+              Especialistas em câmbio automático com mais de 15 anos de experiência.
+              Diagnóstico, manutenção e reparo com qualidade e garantia
               em toda região metropolitana de São Paulo.
             </p>
             
             {/* Trust indicators */}
             {/* <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center glass-enhanced p-3 rounded-lg">
-                <div className="text-2xl font-bold text-gold-400">15+</div>
+                <div className="text-2xl font-bold text-accent-400">15+</div>
                 <div className="text-xs text-white/70">Anos</div>
               </div>
               <div className="text-center glass-enhanced p-3 rounded-lg">
-                <div className="text-2xl font-bold text-gold-400">5K+</div>
+                <div className="text-2xl font-bold text-accent-400">5K+</div>
                 <div className="text-xs text-white/70">Projetos</div>
               </div>
               <div className="text-center glass-enhanced p-3 rounded-lg">
-                <div className="text-2xl font-bold text-gold-400">98%</div>
+                <div className="text-2xl font-bold text-accent-400">98%</div>
                 <div className="text-xs text-white/70">Satisfação</div>
               </div>
             </div> */}
@@ -39,7 +39,7 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex space-x-4">
               <a 
-                href="https://www.facebook.com/pisosprobrasil" 
+                href="https://www.facebook.com/jrcambioautomatico" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600/20 transition-all duration-300 hover:scale-110"
@@ -50,7 +50,7 @@ export default function Footer() {
                 </svg>
               </a>
               {/* <a 
-                href="https://instagram.com/pisospro" 
+                href="https://instagram.com/jrcambioautomatico" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
@@ -59,7 +59,7 @@ export default function Footer() {
                 📷
               </a>
               <a 
-                href="https://linkedin.com/company/pisospro" 
+                href="https://linkedin.com/company/jrcambioautomatico" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
@@ -88,16 +88,16 @@ export default function Footer() {
             <h4 className="text-xl font-bold mb-6 text-white">Contato</h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
-                  <span className="text-wood-900">📞</span>
+                <div className="bg-gradient-accent p-2 rounded-lg mt-1">
+                  <span className="text-charcoal-900">📞</span>
                 </div>
                 <div>
                   <a 
-                    href="https://wa.me/5511940147157?text=Olá! Gostaria de solicitar um orçamento para pisos de madeira."
+                    href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
                     target="_blank"
                     rel="noopener noreferrer"
                     data-track-id="footer-whatsapp-link"
-                    className="text-gold-300 hover:text-gold-200 font-semibold transition-colors block"
+                    className="text-accent-400 hover:text-accent-300 font-semibold transition-colors block"
                   >
                     (11) 94014-7157
                   </a>
@@ -106,22 +106,22 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
-                  <span className="text-wood-900">✉️</span>
+                <div className="bg-gradient-accent p-2 rounded-lg mt-1">
+                  <span className="text-charcoal-900">✉️</span>
                 </div>
                 <div>
                   <a 
-                    href="mailto:contato@pisospro.com.br"
+                    href="mailto:contato@jrcambioautomatico.com.br"
                     className="text-white/80 hover:text-white transition-colors"
                   >
-                    contato@pisospro.com.br
+                    contato@jrcambioautomatico.com.br
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
-                  <span className="text-wood-900">📍</span>
+                <div className="bg-gradient-accent p-2 rounded-lg mt-1">
+                  <span className="text-charcoal-900">📍</span>
                 </div>
                 <div className="text-white/80">
                   <p>São Paulo, SP</p>
@@ -130,8 +130,8 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
-                  <span className="text-wood-900">🕒</span>
+                <div className="bg-gradient-accent p-2 rounded-lg mt-1">
+                  <span className="text-charcoal-900">🕒</span>
                 </div>
                 <div className="text-white/80 text-sm">
                   <p>Seg-Sex: 8h às 18h</p>
@@ -147,10 +147,10 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <div className="text-center lg:text-left">
               <p className="text-white/70">
-                © {new Date().getFullYear()} Pisos Pró. Todos os direitos reservados.
+                © {new Date().getFullYear()} JR Câmbio Automático. Todos os direitos reservados.
               </p>
               <p className="text-white/50 text-sm mt-1">
-                Especialistas em pisos de madeira desde 1998
+                Especialistas em câmbio automático
               </p>
             </div>
             
@@ -170,15 +170,15 @@ export default function Footer() {
           {/* Certificate badges */}
           {/* <div className="flex justify-center space-x-6 mt-8 pt-6 border-t border-white/10">
             <div className="flex items-center space-x-2 text-white/60">
-              <span className="text-gold-500">🏅</span>
+              <span className="text-accent-400">🏅</span>
               <span className="text-xs">Licenciado CREA</span>
             </div>
             <div className="flex items-center space-x-2 text-white/60">
-              <span className="text-gold-500">🛡️</span>
+              <span className="text-accent-400">🛡️</span>
               <span className="text-xs">Totalmente Segurado</span>
             </div>
             <div className="flex items-center space-x-2 text-white/60">
-              <span className="text-gold-500">🌱</span>
+              <span className="text-accent-400">🌱</span>
               <span className="text-xs">Madeira Sustentável</span>
             </div>
           </div> */}
@@ -186,12 +186,12 @@ export default function Footer() {
           {/* Developer credit */}
           <div className="flex justify-center mt-6 pt-4 border-t border-white/10">
             <p className="text-white/50 text-xl text-center">
-              Desenvolvido com ❤️ por{' '}
+              Desenvolvido por{' '}
               <a 
                 href="https://pegue.app" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gold-400 hover:text-gold-300 transition-colors font-medium"
+                className="text-accent-400 hover:text-accent-400 transition-colors font-medium"
               >
                 pegue.app
               </a>
@@ -208,7 +208,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <Link 
       href={href} 
-      className="text-white/70 hover:text-gold-300 transition-all duration-300 hover:translate-x-1 inline-block"
+      className="text-white/70 hover:text-accent-400 transition-all duration-300 hover:translate-x-1 inline-block"
     >
       {children}
     </Link>

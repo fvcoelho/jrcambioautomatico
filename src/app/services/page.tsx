@@ -2,87 +2,87 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Serviços Profissionais de Pisos - Instalação e Reforma | Pisos Pró',
-  description: 'Serviços especializados de instalação de pisos incluindo madeira, cerâmica, laminado, vinílico e carpete. Profissionais licenciados com mais de 15 anos de experiência. Orçamentos gratuitos disponíveis.',
-  keywords: 'instalação de pisos, instalação madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
+  title: 'Serviços de Câmbio Automático - Diagnóstico, Reparo e Manutenção | JR Câmbio',
+  description: 'Serviços especializados em câmbio automático: diagnóstico computadorizado, conserto, retífica completa, troca de óleo ATF e manutenção preventiva. 15+ anos de experiência.',
+  keywords: 'cambio automatico, conserto cambio, retifica cambio, troca oleo atf, diagnostico cambio, manutencao preventiva, reparo transmissao',
   openGraph: {
-    title: 'Serviços Profissionais de Pisos | Pisos Pró',
-    description: 'Transforme seu espaço com nossos serviços especializados de instalação e reforma de pisos.',
+    title: 'Serviços de Câmbio Automático | JR Câmbio Automático',
+    description: 'Diagnóstico gratuito, reparo especializado e manutenção de câmbios automáticos de todas as marcas.',
     type: 'website',
   },
 }
 
 const services = [
   {
-    id: 'madeira',
-    title: 'Instalação de Pisos de Madeira',
-    description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
-    features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
-    price: 'Sob consulta',
-    gradient: 'from-wood-400 to-wood-600',
-    popular: true
-  },
-  // {
-  //   id: 'tile',
-  //   title: 'Instalação de Cerâmica e Pedra',
-  //   description: 'Bela instalação de cerâmica, porcelanato e pedra natural para cozinhas, banheiros e áreas de estar.',
-  //   features: ['Cerâmica e Porcelanato', 'Pedra Natural', 'Padrões de Mosaico', 'Instalação Impermeável'],
-  //   price: 'A partir de R$ 80/m²',
-  //   image: '🏛️',
-  //   popular: false
-  // },
-  {
-    id: 'laminado',
-    title: 'Piso Laminado',
-    description: 'Piso laminado acessível e durável que imita a aparência da madeira e cerâmica por uma fração do custo.',
-    features: ['Instalação Click', 'Opções Resistentes à Água', 'Múltiplos Acabamentos', 'Instalação Rápida'],
-    price: 'Sob consulta',
-    gradient: 'from-wood-300 to-wood-500',
-    popular: false
-  },
-  {
-    id: 'vinílico',
-    title: 'Vinílico e LVT',
-    description: 'Piso vinílico de luxo em régua e manta perfeito para áreas de alta umidade e tráfego intenso.',
-    features: ['100% À Prova d’Água', 'Vinílico de Luxo em Régua', 'Vinílico em Manta', 'Grau Comercial'],
-    price: 'Sob consulta',
+    id: 'diagnostico',
+    title: 'Diagnóstico Computadorizado',
+    description: 'Identificamos o problema com precisão usando equipamentos de última geração. Análise completa do sistema de transmissão para identificar falhas.',
+    features: ['Scanner Automotivo Profissional', 'Teste de Pressão Hidráulica', 'Análise de Fluido de Transmissão', 'Relatório Detalhado'],
+    price: 'Gratuito',
     gradient: 'from-blue-400 to-blue-600',
     popular: true
   },
   {
-    id: 'outros',
-    title: 'Outros Serviços',
-    description: 'Soluções especializadas em pisos para atender suas necessidades específicas.',
-    features: ['Consulta Personalizada', 'Projetos Especiais', 'Soluções Sob Medida', 'Acabamento Premium'],
+    id: 'conserto',
+    title: 'Conserto de Câmbio',
+    description: 'Reparos especializados em câmbios automáticos de todas as marcas e modelos. Solucionamos problemas como patinação, trancos e falhas de engate.',
+    features: ['Peças Originais e de Qualidade', 'Garantia de 6 Meses', 'Todas as Marcas e Modelos', 'Mão de Obra Especializada'],
     price: 'Sob consulta',
-    gradient: 'from-neutral-400 to-neutral-600',
+    gradient: 'from-steel-400 to-steel-600',
+    popular: true
+  },
+  {
+    id: 'retifica',
+    title: 'Retífica Completa',
+    description: 'Reconstrução total do câmbio automático com qualidade de fábrica. Ideal para transmissões com desgaste avançado ou múltiplos problemas.',
+    features: ['Desmontagem e Inspeção Completa', 'Troca de Todos os Componentes Desgastados', 'Teste de Bancada', 'Garantia Estendida'],
+    price: 'Sob consulta',
+    gradient: 'from-accent-400 to-accent-600',
+    popular: true
+  },
+  {
+    id: 'troca-oleo',
+    title: 'Troca de Óleo ATF',
+    description: 'Substituição do fluido de transmissão automática (ATF) para garantir melhor performance, trocas suaves e maior vida útil do câmbio.',
+    features: ['Óleo ATF Original ou Equivalente', 'Filtro de Transmissão Novo', 'Limpeza do Sistema', 'Performance Otimizada'],
+    price: 'A partir de R$ 350',
+    gradient: 'from-steel-500 to-steel-700',
     popular: false
   },
   {
-    id: 'reacabamentoing',
-    title: 'Restauração de Pisos',
-    description: 'Restaure a beleza dos seus pisos de madeira existentes com lixamento, tingimento e acabamento profissionais.',
-    features: ['Lixamento Completo', 'Tingimento Personalizado', 'Acabamento Poliuretano', 'Processo Sem Poeira'],
+    id: 'revisao',
+    title: 'Revisão de Câmbio',
+    description: 'Manutenção preventiva completa para estender a vida útil da transmissão automática e evitar problemas futuros.',
+    features: ['Inspeção Visual Completa', 'Verificação de Vazamentos', 'Ajustes Necessários', 'Teste de Funcionamento'],
+    price: 'A partir de R$ 200',
+    gradient: 'from-steel-300 to-steel-500',
+    popular: false
+  },
+  {
+    id: 'manutencao',
+    title: 'Manutenção Preventiva',
+    description: 'Inspeções periódicas para identificar e prevenir problemas antes que se tornem graves. Recomendado a cada 40.000 km.',
+    features: ['Checklist Completo', 'Identificação de Desgastes', 'Prevenção de Problemas', 'Orientação ao Cliente'],
     price: 'Sob consulta',
-    gradient: 'from-gold-400 to-gold-600',
-    popular: true
+    gradient: 'from-neutral-400 to-neutral-600',
+    popular: false
   }
 ]
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-steel-950 via-charcoal-900 to-steel-950">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white">
+      <section className="relative py-20 bg-gradient-to-br from-charcoal-950 via-steel-900 to-charcoal-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-cinzel text-5xl md:text-6xl lg:text-7xl mb-6 tracking-wider font-light">
-            <span className="text-gradient-gold">
+            <span className="text-gradient-accent">
               Nossos Serviços
             </span>
           </h1>
           <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
-            Serviços especializados de instalação e reforma de pisos com mais de 15 anos de experiência 
-            em projetos residenciais e comerciais
+            Serviços especializados em câmbio automático com mais de 15 anos de experiência.
+            Diagnóstico gratuito, peças originais e garantia de 6 meses.
           </p>
         </div>
       </section>
@@ -92,95 +92,62 @@ export default function ServicesPage() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {services.map((service) => (
-            <div key={service.id} className="bg-white rounded-2xl shadow-xl overflow-hidden relative group hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <div key={service.id} className="bg-steel-800 rounded-2xl shadow-xl overflow-hidden relative group hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
               {service.popular && (
-                <div className="absolute top-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-10">
-                  Mais Popular
+                <div className="absolute top-6 right-6 bg-gradient-to-r from-accent-500 to-accent-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-10">
+                  Destaque
                 </div>
               )}
-              
+
               {/* Gradient Header */}
               <div className={`h-24 bg-gradient-to-r ${service.gradient} relative overflow-hidden`}>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-              
+
               <div className="p-8 -mt-6 relative">
-                <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <div className="bg-steel-800 rounded-2xl p-6 shadow-lg mb-6">
                   <div className="mb-4">
-                    <h3 className="font-cinzel text-3xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                    <p className="text-green-600 font-bold text-xl">{service.price}</p>
+                    <h3 className="font-cinzel text-3xl font-bold text-white mb-2">{service.title}</h3>
+                    <p className="text-accent-400 font-bold text-xl">{service.price}</p>
                   </div>
                 </div>
-                
-                <p className="font-montserrat text-gray-600 mb-8 leading-relaxed">{service.description}</p>
-                
+
+                <p className="font-montserrat text-steel-300 mb-8 leading-relaxed">{service.description}</p>
+
                 <div className="mb-8">
-                  <h4 className="font-cinzel text-lg font-bold text-gray-900 mb-4">O que está incluído:</h4>
+                  <h4 className="font-cinzel text-lg font-bold text-white mb-4">O que está incluído:</h4>
                   <ul className="space-y-3">
                     {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-gray-600 font-montserrat">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                      <li key={index} className="flex items-center text-steel-300 font-montserrat">
+                        <div className="w-2 h-2 bg-accent-500 rounded-full mr-3 flex-shrink-0"></div>
                         {feature}
                       </li>
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a 
-                    href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Gostaria de solicitar um orçamento para o serviço: ${service.title}`)}`}
+                  <a
+                    href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço: ${service.title}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg group-hover:shadow-xl flex items-center justify-center gap-3"
+                    className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg group-hover:shadow-xl flex items-center justify-center gap-3"
                   >
-                    <svg 
-                      className="w-6 h-6 fill-current" 
-                      viewBox="0 0 24 24" 
+                    <svg
+                      className="w-6 h-6 fill-current"
+                      viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                     </svg>
-                    Solicitar Orçamento
+                    Agendar Serviço
                   </a>
-                  <Link 
-                    href={`/services/${service.id}`}
-                    className="border-2 border-green-600 text-green-600 px-8 py-4 rounded-xl font-semibold hover:bg-green-50 transition-all duration-300 font-montserrat text-center"
-                  >
-                    Saiba Mais
-                  </Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* CTA Section */}
-        {/* <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
-          <h2 className="font-cinzel text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient-gold">
-              Pronto para Transformar seu Espaço?
-            </span>
-          </h2>
-          <p className="font-montserrat text-xl md:text-2xl mb-8 font-light text-white/90 max-w-3xl mx-auto">
-            Obtenha um orçamento gratuito e sem compromisso para seu projeto de piso. 
-            Experimente a diferença da qualidade profissional
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              href="/contact"
-              className="group relative px-12 py-4 overflow-hidden bg-green-600 hover:bg-green-700 transition-colors duration-300 rounded font-montserrat font-semibold text-lg"
-            >
-              <span className="relative z-10">Orçamento Grátis</span>
-            </Link>
-            <Link 
-              href="tel:11-94014-7157"
-              className="group relative px-12 py-4 border-2 border-white text-white hover:bg-white hover:text-green-900 transition-all duration-300 rounded font-montserrat font-semibold text-lg"
-            >
-              <span className="relative z-10">Ligue (11) 94014-7157</span>
-            </Link>
-          </div>
-        </div> */}
       </div>
     </div>
   )

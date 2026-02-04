@@ -1,115 +1,100 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { useInView } from 'react-intersection-observer'
 import Hero from '@/components/Hero'
 import ServicesOverview from '@/components/ServicesOverview'
 import ProductsShowcase from '@/components/ProductsShowcase'
-import VinylSection from '@/components/VinylSection'
-import SpecialtySection from '@/components/SpecialtySection'
-import FinishingsSection from '@/components/FinishingsSection'
-import SafetyFlooringSection from '@/components/SafetyFlooringSection'
-import SwisskronoSection from '@/components/SwisskronoSection'
+import MapSection from '@/components/MapSection'
 import Link from 'next/link'
 import Image from 'next/image'
 
 // Services data from services page
 const services = [
   {
-    id: 'madeira',
-    title: 'Instalação de Pisos de Madeira',
-    description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
-    features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
-    price: 'A partir de R$ 120/m²',
-    gradient: 'from-wood-400 to-wood-600',
-    popular: true
-  },
-  {
-    id: 'laminado',
-    title: 'Piso Laminado',
-    description: 'Piso laminado acessível e durável que imita a aparência da madeira e cerâmica por uma fração do custo.',
-    features: ['Instalação Click', 'Opções Resistentes à Água', 'Múltiplos Acabamentos', 'Instalação Rápida'],
-    price: 'A partir de R$ 50/m²',
-    gradient: 'from-wood-300 to-wood-500',
-    popular: false
-  },
-  {
-    id: 'vinílico',
-    title: 'Vinílico e LVT',
-    description: 'Piso vinílico de luxo em régua e manta perfeito para áreas de alta umidade e tráfego intenso.',
-    features: ["100% À Prova d'Água", 'Vinílico de Luxo em Régua', 'Vinílico em Manta', 'Grau Comercial'],
-    price: 'A partir de R$ 65/m²',
+    id: 'diagnostico',
+    title: 'Diagnóstico Computadorizado',
+    description: 'Identificamos o problema com precisão usando equipamentos de última geração para análise completa do câmbio.',
+    features: ['Scanner Automotivo', 'Teste de Pressão', 'Análise de Fluido', 'Relatório Detalhado'],
+    price: 'Gratuito',
     gradient: 'from-blue-400 to-blue-600',
     popular: true
   },
   {
-    id: 'outros',
-    title: 'Outros Serviços',
-    description: 'Soluções especializadas em pisos para atender suas necessidades específicas.',
-    features: ['Consulta Personalizada', 'Projetos Especiais', 'Soluções Sob Medida', 'Acabamento Premium'],
+    id: 'conserto',
+    title: 'Conserto de Câmbio',
+    description: 'Reparos especializados com peças originais e garantia. Solucionamos todos os tipos de problemas.',
+    features: ['Peças Originais', 'Garantia de 6 Meses', 'Todas as Marcas', 'Mão de Obra Especializada'],
     price: 'Sob consulta',
-    gradient: 'from-neutral-400 to-neutral-600',
+    gradient: 'from-steel-400 to-steel-600',
+    popular: true
+  },
+  {
+    id: 'retifica',
+    title: 'Retífica Completa',
+    description: 'Reconstrução total do câmbio automático com qualidade de fábrica e garantia estendida.',
+    features: ['Desmontagem Completa', 'Troca de Componentes', 'Teste de Bancada', 'Garantia Estendida'],
+    price: 'Sob consulta',
+    gradient: 'from-accent-400 to-accent-600',
+    popular: true
+  },
+  {
+    id: 'troca-oleo',
+    title: 'Troca de Óleo ATF',
+    description: 'Substituição de fluido de transmissão para melhor performance e maior vida útil do câmbio.',
+    features: ['Óleo Original', 'Filtro Novo', 'Limpeza do Sistema', 'Performance Otimizada'],
+    price: 'A partir de R$ 350',
+    gradient: 'from-steel-500 to-steel-700',
     popular: false
   },
   {
-    id: 'reacabamentoing',
-    title: 'Restauração de Pisos',
-    description: 'Restaure a beleza dos seus pisos de madeira existentes com lixamento, tingimento e acabamento profissionais.',
-    features: ['Lixamento Completo', 'Tingimento Personalizado', 'Acabamento Poliuretano', 'Processo Sem Poeira'],
-    price: 'A partir de R$ 45/m²',
-    gradient: 'from-gold-400 to-gold-600',
-    popular: true
+    id: 'revisao',
+    title: 'Revisão de Câmbio',
+    description: 'Manutenção preventiva completa para estender a vida útil da transmissão automática.',
+    features: ['Inspeção Completa', 'Ajustes Necessários', 'Verificação de Vazamentos', 'Teste de Funcionamento'],
+    price: 'A partir de R$ 200',
+    gradient: 'from-steel-300 to-steel-500',
+    popular: false
   }
 ]
 
 // Product categories data from products page
 const productCategories = [
   {
-    id: 'madeira',
-    name: 'Piso de Madeira',
-    description: 'Madeira maciça e engenheirada premium dos principais fabricantes',
-    gradient: 'from-wood-400 to-wood-600',
-    products: [
-      { name: 'Carvalho Maciço', price: 'R$ 120-180/m²', description: 'Carvalho americano clássico em vários tons' },
-      { name: 'Maple Engenheirado', price: 'R$ 90-150/m²', description: 'Réguas de maple engenheirado duráveis' },
-      { name: 'Madeira de Cerejeira', price: 'R$ 150-225/m²', description: 'Madeira de cerejeira rica com veios naturais' },
-      { name: 'Madeiras Exóticas', price: 'R$ 180-300/m²', description: 'Opções em cerejeira brasileira, teca e bambu' }
-    ]
-  },
-  {
-    id: 'laminado',
-    name: 'Piso Laminado',
-    description: 'Laminado de alta qualidade com aparência de madeira e pedra verdadeiras',
-    gradient: 'from-wood-300 to-wood-500',
-    products: [
-      { name: 'Laminado Efeito Madeira', price: 'R$ 30-75/m²', description: 'Padrões e texturas realistas de veios de madeira' },
-      { name: 'Laminado Efeito Pedra', price: 'R$ 45-90/m²', description: 'Laminado com aparência de azulejo e pedra' },
-      { name: 'Laminado Resistente à Água', price: 'R$ 60-105/m²', description: 'Perfeito para cozinhas e banheiros' },
-      { name: 'Grau Comercial', price: 'R$ 45-120/m²', description: 'Laminado pesado para áreas de alto tráfego' }
-    ]
-  },
-  {
-    id: 'vinílico',
-    name: 'Vinílico e LVT',
-    description: 'Piso vinílico de luxo em régua e manta com durabilidade superior',
+    id: 'fluidos',
+    name: 'Fluidos de Transmissão',
+    description: 'Óleos ATF de alta qualidade para todos os tipos de câmbio automático',
     gradient: 'from-blue-400 to-blue-600',
     products: [
-      { name: 'Vinílico de Luxo em Régua', price: 'R$ 45-105/m²', description: 'LVP impermeável com aparência realista de madeira' },
-      { name: 'Vinílico em Manta', price: 'R$ 30-60/m²', description: 'Piso vinílico contínuo para grandes áreas' },
-      { name: 'Vinílico em Placa', price: 'R$ 30-75/m²', description: 'Placas vinílicas individuais em vários padrões' },
-      { name: 'LVT Comercial', price: 'R$ 60-120/m²', description: 'Vinílico de luxo pesado para uso comercial' }
+      { name: 'ATF Dexron VI', price: 'Sob consulta', description: 'Fluido sintético de alta performance' },
+      { name: 'ATF Multi-Vehicle', price: 'Sob consulta', description: 'Compatível com múltiplas marcas' },
+      { name: 'CVT Fluid', price: 'Sob consulta', description: 'Específico para transmissões CVT' },
+      { name: 'ATF Original', price: 'Sob consulta', description: 'Fluidos originais de cada montadora' }
     ]
   },
   {
-    id: 'outros',
-    name: 'Outros',
-    description: 'Soluções especializadas e produtos sob medida',
-    gradient: 'from-neutral-400 to-neutral-600',
+    id: 'pecas',
+    name: 'Peças e Componentes',
+    description: 'Peças originais e de reposição para câmbios automáticos',
+    gradient: 'from-steel-400 to-steel-600',
     products: [
-      { name: 'Piso Elevado', price: 'Sob consulta', description: 'Sistema modular para escritórios e data centers' },
-      { name: 'Piso Esportivo', price: 'Sob consulta', description: 'Pisos especiais para quadras e academias' },
-      { name: 'Revestimento Acústico', price: 'Sob consulta', description: 'Soluções para isolamento acústico' },
-      { name: 'Projetos Especiais', price: 'Sob consulta', description: 'Soluções personalizadas para projetos únicos' }
+      { name: 'Kit de Embreagens', price: 'Sob consulta', description: 'Discos e bandas de fricção' },
+      { name: 'Válvulas Solenoides', price: 'Sob consulta', description: 'Solenoides originais e remanufaturados' },
+      { name: 'Conversor de Torque', price: 'Sob consulta', description: 'Conversores novos e recondicionados' },
+      { name: 'Filtros de Transmissão', price: 'Sob consulta', description: 'Filtros para todas as marcas' }
+    ]
+  },
+  {
+    id: 'kits',
+    name: 'Kits de Reparo',
+    description: 'Kits completos para revisão e reparo de câmbios automáticos',
+    gradient: 'from-accent-400 to-accent-600',
+    products: [
+      { name: 'Kit Master', price: 'Sob consulta', description: 'Kit completo para revisão total' },
+      { name: 'Kit de Vedação', price: 'Sob consulta', description: 'Juntas e retentores' },
+      { name: 'Kit de Embreagens', price: 'Sob consulta', description: 'Pacote completo de fricção' },
+      { name: 'Kit Corpo de Válvulas', price: 'Sob consulta', description: 'Componentes do corpo de válvulas' }
     ]
   }
 ]
@@ -118,64 +103,71 @@ const productCategories = [
 const portfolioProjects = [
   {
     id: 1,
-    title: 'Residência Moderna',
-    type: 'Residencial',
-    flooring: 'Piso de Madeira',
-    area: '250m²',
-    gradient: 'from-wood-400 to-wood-600'
+    title: 'Honda Civic',
+    type: 'Automático',
+    service: 'Retífica Completa',
+    transmission: 'CVT',
+    gradient: 'from-steel-400 to-steel-600'
   },
   {
     id: 2,
-    title: 'Escritório Corporativo',
-    type: 'Comercial',
-    flooring: 'Vinílico LVT',
-    area: '500m²',
+    title: 'Toyota Corolla',
+    type: 'Automático',
+    service: 'Conserto',
+    transmission: 'CVT',
     gradient: 'from-blue-400 to-blue-600'
   },
   {
     id: 3,
-    title: 'Loja de Varejo',
-    type: 'Comercial',
-    flooring: 'Laminado',
-    area: '180m²',
-    gradient: 'from-wood-300 to-wood-500'
+    title: 'Volkswagen Jetta',
+    type: 'DSG',
+    service: 'Revisão',
+    transmission: '6 Marchas',
+    gradient: 'from-steel-300 to-steel-500'
   },
   {
     id: 4,
-    title: 'Casa de Praia',
-    type: 'Residencial',
-    flooring: 'Madeira Tratada',
-    area: '320m²',
-    gradient: 'from-gold-400 to-gold-600'
+    title: 'BMW 320i',
+    type: 'Automático',
+    service: 'Troca de Óleo',
+    transmission: 'ZF 8HP',
+    gradient: 'from-accent-400 to-accent-600'
   }
 ]
 
 // Stats data from about page
 const stats = [
-  { number: '15+', label: 'Anos de Mercado' },
-  { number: '5000+', label: 'Projetos Concluídos' },
+  { number: '15+', label: 'Anos de Experiência' },
+  { number: '1000+', label: 'Câmbios Reparados' },
   { number: '98%', label: 'Satisfação do Cliente' },
-  { number: '50+', label: 'Membros da Equipe' }
+  { number: '6', label: 'Meses de Garantia' }
 ]
 
 export default function Home() {
+  const router = useRouter()
   const [visibleSections, setVisibleSections] = useState<number[]>([0])
   const [isLoading, setIsLoading] = useState(false)
+  const [checkingIntro, setCheckingIntro] = useState(true)
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
-  
+
+  // Check if user needs to see intro
+  useEffect(() => {
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro')
+    if (!hasSeenIntro) {
+      router.replace('/intro')
+    } else {
+      setCheckingIntro(false)
+    }
+  }, [router])
+
   // Define all sections
   const sections = [
     { id: 'hero', component: Hero },
-    // { id: 'swisskrono-section', component: SwisskronoSection },
     { id: 'portfolio', component: PortfolioSection },
     { id: 'services-overview', component: ServicesOverview },
     { id: 'products-showcase', component: ProductsShowcase },
-    { id: 'vinyl-section', component: VinylSection },
-    { id: 'specialty-section', component: SpecialtySection },
-    { id: 'finishings-section', component: FinishingsSection },
-    { id: 'safety-flooring', component: SafetyFlooringSection },
-
     { id: 'about', component: AboutSection },
+    { id: 'map', component: MapSection },
     //{ id: 'contact', component: ContactSection }
   ]
 
@@ -237,6 +229,15 @@ export default function Home() {
     return () => document.removeEventListener('click', handleNavClick)
   }, [])
 
+  // Show nothing while checking intro status
+  if (checkingIntro) {
+    return (
+      <div className="fixed inset-0 bg-gradient-to-br from-charcoal-950 via-steel-900 to-charcoal-900 flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin" />
+      </div>
+    )
+  }
+
   return (
     <div className="relative">
       {/* Render visible sections */}
@@ -258,13 +259,13 @@ export default function Home() {
       {/* Loading indicator */}
       {isLoading && (
         <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-500"></div>
         </div>
       )}
       
       {/* End of content message */}
       {/* {visibleSections.length === sections.length && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-steel-400">
           <p className="font-montserrat">Você chegou ao fim do conteúdo</p>
         </div>
       )} */}
@@ -275,22 +276,22 @@ export default function Home() {
 // Services Section Component
 function ServicesSection() {
   return (
-    <div className="py-20 bg-gradient-to-br from-green-50 via-white to-green-50">
+    <div className="py-20 bg-gradient-to-br from-steel-950 via-charcoal-900 to-steel-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            <span className="text-gradient-gold">Nossos Serviços</span>
+          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-gradient-accent">Nossos Serviços</span>
           </h2>
-          <p className="font-montserrat text-xl text-gray-600 max-w-3xl mx-auto">
-            Serviços especializados de instalação e reforma de pisos com mais de 15 anos de experiência
+          <p className="font-montserrat text-xl text-steel-300 max-w-3xl mx-auto">
+            Serviços especializados em diagnóstico, reparo e manutenção de câmbio automático
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {services.map((service) => (
-            <div key={service.id} className="bg-white rounded-2xl shadow-xl overflow-hidden relative group hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <div key={service.id} className="bg-steel-800 rounded-2xl shadow-xl overflow-hidden relative group hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
               {service.popular && (
-                <div className="absolute top-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-10">
+                <div className="absolute top-6 right-6 bg-gradient-to-r from-accent-500 to-accent-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-10">
                   Mais Popular
                 </div>
               )}
@@ -301,21 +302,21 @@ function ServicesSection() {
               </div>
               
               <div className="p-8 -mt-6 relative">
-                <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <div className="bg-steel-800 rounded-2xl p-6 shadow-lg mb-6">
                   <div className="mb-4">
-                    <h3 className="font-cinzel text-3xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                    <p className="text-green-600 font-bold text-xl">{service.price}</p>
+                    <h3 className="font-cinzel text-3xl font-bold text-white mb-2">{service.title}</h3>
+                    <p className="text-accent-400 font-bold text-xl">{service.price}</p>
                   </div>
                 </div>
                 
-                <p className="font-montserrat text-gray-600 mb-8 leading-relaxed">{service.description}</p>
+                <p className="font-montserrat text-steel-300 mb-8 leading-relaxed">{service.description}</p>
                 
                 <div className="mb-8">
-                  <h4 className="font-cinzel text-lg font-bold text-gray-900 mb-4">O que está incluído:</h4>
+                  <h4 className="font-cinzel text-lg font-bold text-white mb-4">O que está incluído:</h4>
                   <ul className="space-y-3">
                     {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-gray-600 font-montserrat">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                      <li key={index} className="flex items-center text-steel-300 font-montserrat">
+                        <div className="w-2 h-2 bg-steel-8000 rounded-full mr-3 flex-shrink-0"></div>
                         {feature}
                       </li>
                     ))}
@@ -324,7 +325,7 @@ function ServicesSection() {
                 
                 <Link 
                   href="/contact"
-                  className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 text-center font-montserrat shadow-lg group-hover:shadow-xl block"
+                  className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 text-center font-montserrat shadow-lg group-hover:shadow-xl block"
                 >
                   Solicitar Orçamento
                 </Link>
@@ -340,37 +341,37 @@ function ServicesSection() {
 // Products Section Component
 function ProductsSection() {
   return (
-    <div className="py-20 bg-white">
+    <div className="py-20 bg-steel-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            <span className="text-gradient-gold">Nossos Produtos</span>
+          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-gradient-accent">Nossos Produtos</span>
           </h2>
-          <p className="font-montserrat text-xl text-gray-600 max-w-3xl mx-auto">
-            Trabalhamos com produtos premium de pisos dos fabricantes mais confiáveis do setor
+          <p className="font-montserrat text-xl text-steel-300 max-w-3xl mx-auto">
+            Trabalhamos com peças originais e fluidos de alta qualidade das melhores marcas
           </p>
         </div>
 
         <div className="space-y-16">
           {productCategories.slice(0, 3).map((category) => (
-            <div key={category.id} className="bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
+            <div key={category.id} className="bg-steel-800 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
               <div className={`h-32 bg-gradient-to-r ${category.gradient} relative overflow-hidden`}>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
               
               <div className="p-8 -mt-8 relative">
-                <div className="bg-white rounded-2xl p-8 shadow-lg mb-8">
-                  <h3 className="font-cinzel text-4xl font-bold text-gray-900 mb-4">{category.name}</h3>
-                  <p className="font-montserrat text-gray-600 text-lg leading-relaxed">{category.description}</p>
+                <div className="bg-steel-800 rounded-2xl p-8 shadow-lg mb-8">
+                  <h3 className="font-cinzel text-4xl font-bold text-white mb-4">{category.name}</h3>
+                  <p className="font-montserrat text-steel-300 text-lg leading-relaxed">{category.description}</p>
                 </div>
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {category.products.map((product, index) => (
-                    <div key={index} className="bg-gradient-to-br from-green-50 to-white rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 border border-green-100 group">
-                      <h4 className="font-cinzel text-xl font-bold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">{product.name}</h4>
-                      <p className="text-green-600 font-bold text-lg mb-3">{product.price}</p>
-                      <p className="font-montserrat text-gray-600 text-sm leading-relaxed">{product.description}</p>
+                    <div key={index} className="bg-gradient-to-br from-steel-800 to-steel-900 rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 border border-steel-700 group">
+                      <h4 className="font-cinzel text-xl font-bold text-white mb-3 group-hover:text-accent-400 transition-colors">{product.name}</h4>
+                      <p className="text-accent-400 font-bold text-lg mb-3">{product.price}</p>
+                      <p className="font-montserrat text-steel-300 text-sm leading-relaxed">{product.description}</p>
                     </div>
                   ))}
                 </div>
@@ -382,7 +383,7 @@ function ProductsSection() {
         <div className="mt-12 text-center">
           <Link 
             href="/products"
-            className="inline-block bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
+            className="inline-block bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
           >
             Ver Todos os Produtos
           </Link>
@@ -433,38 +434,38 @@ function PortfolioSection() {
       })
 
   const categoryGradients = [
-    'from-wood-400 to-wood-600',
-    'from-gold-400 to-gold-600', 
+    'from-steel-400 to-steel-600',
+    'from-accent-400 to-accent-600', 
     'from-blue-400 to-blue-600',
-    'from-wood-300 to-wood-500',
+    'from-steel-300 to-steel-500',
     'from-neutral-300 to-neutral-500'
   ]
 
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
-      case 'madeira': return 'from-wood-400 to-wood-600'
-      case 'vinílico': return 'from-blue-400 to-blue-600'
-      case 'laminado': return 'from-wood-300 to-wood-500'
-      case 'acabamento': return 'from-gold-400 to-gold-600'
+      case 'diagnostico': return 'from-steel-400 to-steel-600'
+      case 'reparo': return 'from-zinc-400 to-zinc-600'
+      case 'retifica': return 'from-steel-300 to-steel-500'
+      case 'manutencao': return 'from-accent-400 to-accent-600'
       case 'outros': return 'from-neutral-300 to-neutral-500'
-      default: return 'from-green-400 to-green-600'
+      default: return 'from-steel-500 to-steel-700'
     }
   }
 
   if (loading) {
     return (
-      <div className="py-20 bg-gradient-to-br from-green-50 via-white to-green-50">
+      <div className="py-20 bg-gradient-to-br from-steel-950 via-charcoal-900 to-steel-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              <span className="text-gradient-gold">Nosso Portfólio</span>
+            <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-4">
+              <span className="text-gradient-accent">Nosso Portfólio</span>
             </h2>
-            <p className="font-montserrat text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="font-montserrat text-xl text-steel-300 max-w-3xl mx-auto">
               Carregando nossos projetos...
             </p>
           </div>
           <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-500"></div>
           </div>
         </div>
       </div>
@@ -472,15 +473,15 @@ function PortfolioSection() {
   }
 
   return (
-    <div className="py-20 bg-gradient-to-br from-green-50 via-white to-green-50">
+    <div className="py-20 bg-gradient-to-br from-steel-950 via-charcoal-900 to-steel-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            <span className="text-gradient-gold">Nosso Portfólio</span>
+          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-gradient-accent">Nosso Portfólio</span>
           </h2>
-          <p className="font-montserrat text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
-            Pisos Pró a escolha confiável para soluções em pisos premium
+          <p className="font-montserrat text-xl text-steel-300 max-w-3xl mx-auto">
+            Explore nossos trabalhos recentes e veja a qualidade que fez da
+            JR Câmbio Automático a escolha confiável para reparo de transmissões
           </p>
         </div>
 
@@ -491,8 +492,8 @@ function PortfolioSection() {
             onClick={() => setSelectedCategory('all')}
             className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
               selectedCategory === 'all'
-                ? `bg-gradient-to-r from-green-400 to-green-600 text-white shadow-lg`
-                : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
+                ? `bg-gradient-to-r from-steel-500 to-steel-700 text-white shadow-lg`
+                : 'bg-steel-800 text-steel-200 hover:bg-steel-800 hover:text-accent-400 shadow-md hover:shadow-lg'
             }`}
           >
             <span className="relative z-10">Todos os Projetos</span>
@@ -507,7 +508,7 @@ function PortfolioSection() {
                 className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
                   selectedCategory === category.slug
                     ? `bg-gradient-to-r ${gradient} text-white shadow-lg`
-                    : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
+                    : 'bg-steel-800 text-steel-200 hover:bg-steel-800 hover:text-accent-400 shadow-md hover:shadow-lg'
                 }`}
               >
                 <span className="relative z-10">{category.name}</span>
@@ -529,7 +530,7 @@ function PortfolioSection() {
             return (
               <div 
                 key={project.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
+                className="bg-steel-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
                 onClick={() => setSelectedProject(project)}
               >
                 <div className={`h-56 bg-gradient-to-br ${gradient} flex items-center justify-center relative overflow-hidden`}>
@@ -554,35 +555,35 @@ function PortfolioSection() {
                       )}
                       {images.length > 1 && (
                         <div className="absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded">
-                          +{images.length - 1} imagens
+                          +{images.length - 1} fotos
                         </div>
                       )}
                     </div>
                   ) : (
                     <div className="flex items-center justify-center text-white/70">
                       <div className="text-center">
-                        <div className="text-6xl mb-2">🏗️</div>
-                        <p className="text-lg">Imagens em breve</p>
+                        <div className="text-6xl mb-2">🔧</div>
+                        <p className="text-lg">Fotos em breve</p>
                       </div>
                     </div>
                   )}
                   
                   {/* Status Badge */}
                   <div className="absolute top-3 left-3">
-                    <span className="bg-green-500 text-white px-2 py-1 rounded text-xs font-semibold">
+                    <span className="bg-steel-8000 text-white px-2 py-1 rounded text-xs font-semibold">
                       Ativo
                     </span>
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
+                  <h3 className="font-cinzel text-xl font-bold text-white mb-3">{project.title}</h3>
                   {project.description && (
-                    <p className="font-montserrat text-gray-600 text-sm mb-4 line-clamp-2">{project.description}</p>
+                    <p className="font-montserrat text-steel-300 text-sm mb-4 line-clamp-2">{project.description}</p>
                   )}
                   
                   {/* Metadata */}
-                  <div className="space-y-2 text-sm text-gray-500">
+                  <div className="space-y-2 text-sm text-steel-400">
                     {project.location && (
                       <div className="flex items-center gap-2">
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -619,7 +620,7 @@ function PortfolioSection() {
 
         {/* Stats Section */}
         {/* <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl shadow-xl p-12 mb-12">
-          <h3 className="font-cinzel text-3xl font-bold text-center text-gray-900 mb-8">
+          <h3 className="font-cinzel text-3xl font-bold text-center text-white mb-8">
             Nossa Experiência em Números
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -627,25 +628,25 @@ function PortfolioSection() {
               <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
                 5,000+
               </div>
-              <div className="font-montserrat text-gray-700 font-medium">Projetos Concluídos</div>
+              <div className="font-montserrat text-steel-200 font-medium">Projetos Concluídos</div>
             </div>
             <div className="text-center group">
               <div className="text-4xl font-bold bg-gradient-to-r from-wood-500 to-wood-700 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
                 200k+
               </div>
-              <div className="font-montserrat text-gray-700 font-medium">Metros Quadrados</div>
+              <div className="font-montserrat text-steel-200 font-medium">Metros Quadrados</div>
             </div>
             <div className="text-center group">
-              <div className="text-4xl font-bold bg-gradient-to-r from-gold-500 to-gold-700 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl font-bold bg-gradient-to-r from-accent-500 to-accent-700 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
                 98%
               </div>
-              <div className="font-montserrat text-gray-700 font-medium">Satisfação do Cliente</div>
+              <div className="font-montserrat text-steel-200 font-medium">Satisfação do Cliente</div>
             </div>
             <div className="text-center group">
               <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
                 15+
               </div>
-              <div className="font-montserrat text-gray-700 font-medium">Anos de Experiência</div>
+              <div className="font-montserrat text-steel-200 font-medium">Anos de Experiência</div>
             </div>
           </div>
         </div> */}
@@ -653,7 +654,7 @@ function PortfolioSection() {
         <div className="text-center">
           <Link 
             href="/portfolio"
-            className="inline-block bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
+            className="inline-block bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
           >
             Ver Portfólio Completo
           </Link>
@@ -679,12 +680,12 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
   
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
-      case 'madeira': return 'from-wood-400 to-wood-600'
-      case 'vinílico': return 'from-blue-400 to-blue-600'
-      case 'laminado': return 'from-wood-300 to-wood-500'
-      case 'acabamento': return 'from-gold-400 to-gold-600'
+      case 'diagnostico': return 'from-steel-400 to-steel-600'
+      case 'reparo': return 'from-zinc-400 to-zinc-600'
+      case 'retifica': return 'from-steel-300 to-steel-500'
+      case 'manutencao': return 'from-accent-400 to-accent-600'
       case 'outros': return 'from-neutral-300 to-neutral-500'
-      default: return 'from-green-400 to-green-600'
+      default: return 'from-steel-500 to-steel-700'
     }
   }
 
@@ -730,13 +731,13 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div className="bg-steel-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
         <div className="p-8">
           <div className="flex justify-between items-start mb-6">
-            <h2 className="font-cinzel text-3xl font-bold text-gray-900">{project.title}</h2>
+            <h2 className="font-cinzel text-3xl font-bold text-white">{project.title}</h2>
             <button 
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-3xl transition-colors p-2"
+              className="text-gray-400 hover:text-steel-300 text-3xl transition-colors p-2"
             >
               ✕
             </button>
@@ -787,7 +788,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                         <button
                           key={index}
                           className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                            index === currentIndex ? 'bg-white w-8' : 'bg-white/50'
+                            index === currentIndex ? 'bg-steel-800 w-8' : 'bg-steel-800/50'
                           }`}
                           onClick={() => setCurrentIndex(index)}
                         />
@@ -808,25 +809,25 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
 
           <div className="space-y-4 mb-6">
             {project.description && (
-              <p className="font-montserrat text-gray-600 leading-relaxed">{project.description}</p>
+              <p className="font-montserrat text-steel-300 leading-relaxed">{project.description}</p>
             )}
             <div className="grid grid-cols-2 gap-4 text-sm">
               {project.location && (
                 <div>
-                  <span className="font-semibold text-gray-700">Local:</span>
-                  <span className="ml-2 text-gray-600">{project.location}</span>
+                  <span className="font-semibold text-steel-200">Local:</span>
+                  <span className="ml-2 text-steel-300">{project.location}</span>
                 </div>
               )}
               {/* {project.category && (
                 <div>
-                  <span className="font-semibold text-gray-700">Categoria:</span>
-                  <span className="ml-2 text-gray-600">{project.category}</span>
+                  <span className="font-semibold text-steel-200">Categoria:</span>
+                  <span className="ml-2 text-steel-300">{project.category}</span>
                 </div>
               )} */}
               {project.completedAt && (
                 <div>
-                  <span className="font-semibold text-gray-700">Concluído em:</span>
-                  <span className="ml-2 text-gray-600">
+                  <span className="font-semibold text-steel-200">Concluído em:</span>
+                  <span className="ml-2 text-steel-300">
                     {new Date(project.completedAt).toLocaleDateString('pt-BR')}
                   </span>
                 </div>
@@ -836,10 +837,10 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
           
           <div className="flex gap-4">
             <a 
-              href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Vi um projeto no portfólio e gostaria de fazer algo semelhante: ${project.title}`)}`}
+              href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Vi um trabalho no portfólio e gostaria de saber mais sobre o serviço: ${project.title}`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg flex items-center justify-center gap-3"
+              className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg flex items-center justify-center gap-3"
             >
               <svg 
                 className="w-6 h-6 fill-current" 
@@ -848,11 +849,11 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
               >
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
               </svg>
-              Iniciar Projeto Semelhante
+              Agendar Diagnóstico
             </a>
             <button 
               onClick={onClose}
-              className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors font-montserrat"
+              className="border-2 border-steel-600 text-steel-200 px-8 py-4 rounded-xl font-semibold hover:bg-steel-700 transition-colors font-montserrat"
             >
               Fechar
             </button>
@@ -866,63 +867,63 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
 // About Section Component
 function AboutSection() {
   return (
-    <div className="py-20 bg-white">
+    <div className="py-20 bg-steel-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            <span className="text-gradient-gold">Sobre a Pisos Pró</span>
+          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-gradient-accent">Sobre a JR Câmbio Automático</span>
           </h2>
-          <p className="font-montserrat text-xl text-gray-600 max-w-3xl mx-auto">
-            Há mais de 15 anos transformando casas e empresas com soluções premium em pisos
+          <p className="font-montserrat text-xl text-steel-300 max-w-3xl mx-auto">
+            Há mais de 15 anos cuidando do seu câmbio automático com qualidade e garantia
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-gradient-to-br from-green-50 to-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-green-100">
-              <div className="font-cinzel text-4xl font-bold text-green-600 mb-3">{stat.number}</div>
-              <div className="font-montserrat text-gray-700 font-medium">{stat.label}</div>
+            <div key={index} className="bg-gradient-to-br from-steel-800 to-steel-900 rounded-xl shadow-lg p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-steel-700">
+              <div className="font-cinzel text-4xl font-bold text-accent-400 mb-3">{stat.number}</div>
+              <div className="font-montserrat text-steel-200 font-medium">{stat.label}</div>
             </div>
           ))}
         </div>
 
         {/* Company Story */}
-        <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl shadow-xl p-12">
+        <div className="bg-gradient-to-br from-steel-800 to-steel-900 rounded-2xl shadow-xl p-12">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="font-cinzel text-3xl font-bold text-gray-900 mb-6">Nossa História</h3>
-              <div className="space-y-4 text-gray-600">
+              <h3 className="font-cinzel text-3xl font-bold text-white mb-6">Nossa História</h3>
+              <div className="space-y-4 text-steel-300">
                 <p className="font-montserrat text-lg leading-relaxed">
-                  Fundada em 2008, a Pisos Pró começou como uma pequena empresa familiar com uma missão simples: 
-                  fornecer instalação de pisos da mais alta qualidade e atendimento ao cliente na região.
+                  A JR Câmbio Automático nasceu da paixão por mecânica automotiva e do compromisso
+                  em oferecer serviços de qualidade em transmissões automáticas na região de São Paulo.
                 </p>
                 <p className="font-montserrat text-lg leading-relaxed">
-                  Hoje, somos reconhecidos como a principal empresa de pisos da nossa região, conhecida pela 
-                  atenção aos detalhes, uso de materiais premium e compromisso em superar as expectativas dos 
-                  clientes em cada projeto.
+                  Hoje, somos referência no mercado de câmbios automáticos, conhecidos pela
+                  excelência técnica, uso de peças originais e compromisso em superar as expectativas
+                  dos clientes em cada serviço realizado.
                 </p>
               </div>
             </div>
             <div>
-              <div className="bg-gradient-to-br from-gold-400 to-gold-600 rounded-2xl p-8 shadow-lg text-white">
+              <div className="bg-gradient-to-br from-accent-400 to-accent-600 rounded-2xl p-8 shadow-lg text-white">
                 <h4 className="font-cinzel text-2xl font-bold mb-4">Por que nos escolher?</h4>
                 <ul className="space-y-3 font-montserrat">
                   <li className="flex items-start">
-                    <div className="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-steel-800 rounded-full mr-3 mt-2 flex-shrink-0"></div>
                     <span>Mais de 15 anos de experiência comprovada</span>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                    <span>Equipe de profissionais certificados</span>
+                    <div className="w-2 h-2 bg-steel-800 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    <span>Diagnóstico computadorizado gratuito</span>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                    <span>Garantia de qualidade em todos os projetos</span>
+                    <div className="w-2 h-2 bg-steel-800 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    <span>Garantia de 6 meses em todos os serviços</span>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-2 h-2 bg-white rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                    <span>Atendimento personalizado do início ao fim</span>
+                    <div className="w-2 h-2 bg-steel-800 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    <span>Peças originais e atendimento especializado</span>
                   </li>
                 </ul>
               </div>
@@ -931,11 +932,11 @@ function AboutSection() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link 
+          <Link
             href="/about"
-            className="inline-block bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
+            className="inline-block bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
           >
-            Conheça Nossa Equipe
+            Conheça Nossa Empresa
           </Link>
         </div>
       </div>
@@ -946,11 +947,11 @@ function AboutSection() {
 // Contact Section Component
 function ContactSection() {
   return (
-    <div className="py-20 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white">
+    <div className="py-20 bg-gradient-to-br from-charcoal-950 via-steel-900 to-charcoal-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="font-cinzel text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-gradient-gold">Pronto para Transformar seu Espaço?</span>
+            <span className="text-gradient-accent">Pronto para Transformar seu Espaço?</span>
           </h2>
           <p className="font-montserrat text-xl text-white/90 max-w-3xl mx-auto">
             Entre em contato hoje para um orçamento gratuito e descubra como podemos ajudar em seu projeto
@@ -959,9 +960,9 @@ function ContactSection() {
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <div className="text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all duration-300">
-              <div className="bg-gradient-to-br from-gold-400 to-gold-600 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                <div className="w-8 h-8 bg-white/20 rounded-full" />
+            <div className="bg-steel-800/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-steel-800/20 transition-all duration-300">
+              <div className="bg-gradient-to-br from-accent-400 to-accent-600 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                <div className="w-8 h-8 bg-steel-800/20 rounded-full" />
               </div>
               <h3 className="font-cinzel text-xl font-bold mb-2">Telefone</h3>
               <p className="font-montserrat text-white/90">(11) 3113-7934</p>
@@ -969,18 +970,18 @@ function ContactSection() {
             </div>
           </div>
           <div className="text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all duration-300">
-              <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                <div className="w-8 h-8 bg-white/20 rounded-full" />
+            <div className="bg-steel-800/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-steel-800/20 transition-all duration-300">
+              <div className="bg-gradient-to-br from-steel-500 to-steel-700 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                <div className="w-8 h-8 bg-steel-800/20 rounded-full" />
               </div>
               <h3 className="font-cinzel text-xl font-bold mb-2">WhatsApp</h3>
               <p className="font-montserrat text-white/90">(11) 94014-7157</p>
             </div>
           </div>
           <div className="text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all duration-300">
+            <div className="bg-steel-800/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-steel-800/20 transition-all duration-300">
               <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                <div className="w-8 h-8 bg-white/20 rounded-full" />
+                <div className="w-8 h-8 bg-steel-800/20 rounded-full" />
               </div>
               <h3 className="font-cinzel text-xl font-bold mb-2">Horário</h3>
               <p className="font-montserrat text-white/90">Seg-Sex: 8h-18h</p>
@@ -991,7 +992,7 @@ function ContactSection() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Link 
             href="/contact"
-            className="bg-gradient-to-r from-gold-400 to-gold-500 text-black px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-gold-300 hover:to-gold-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
+            className="bg-gradient-to-r from-accent-400 to-accent-500 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-accent-300 hover:to-accent-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
           >
             Solicitar Orçamento Grátis
           </Link>
@@ -999,13 +1000,13 @@ function ContactSection() {
             href="https://wa.me/5511940147157"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-2 border-white text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:bg-white hover:text-green-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
+            className="border-2 border-white text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:bg-steel-800 hover:text-green-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
           >
             WhatsApp
           </Link>
           <a 
             href="tel:+551131137934"
-            className="bg-gradient-to-r from-wood-400 to-wood-600 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-wood-500 hover:to-wood-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
+            className="bg-gradient-to-r from-steel-400 to-steel-600 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-wood-500 hover:to-wood-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
           >
             Ligar Agora
           </a>

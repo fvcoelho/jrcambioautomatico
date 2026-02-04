@@ -4,11 +4,11 @@ export default function StructuredData() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://pisospro.com.br",
-    "name": "Pisos Pró",
-    "description": "Especialistas em instalação, reforma e manutenção de pisos de madeira, laminados, vinílicos e Swisskrono com mais de 15 anos de experiência em São Paulo.",
-    "url": "https://pisospro.com.br",
-    "telephone": "+55-11-3113-7934",
+    "@id": "https://jrcambioautomatico.com.br",
+    "name": "JR Câmbio Automático",
+    "description": "Especialistas em diagnóstico, reparo e manutenção de câmbio automático. Diagnóstico gratuito, peças originais e garantia de 6 meses em São Paulo.",
+    "url": "https://jrcambioautomatico.com.br",
+    "telephone": "+55-11-94014-7157",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
@@ -21,8 +21,8 @@ export default function StructuredData() {
       "latitude": "-23.550520",
       "longitude": "-46.633308"
     },
-    "image": "https://pisospro.com.br/logo_full.svg",
-    "logo": "https://pisospro.com.br/logo_full.svg",
+    "image": "https://jrcambioautomatico.com.br/logo_full.svg",
+    "logo": "https://jrcambioautomatico.com.br/logo_full.svg",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -35,16 +35,21 @@ export default function StructuredData() {
         ],
         "opens": "08:00",
         "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "09:00",
+        "closes": "14:00"
       }
     ],
     "sameAs": [
-      "https://www.facebook.com/pisospro",
-      "https://www.instagram.com/pisospro"
+      "https://www.facebook.com/jrcambioautomatico"
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "150"
+      "ratingValue": "4.9",
+      "reviewCount": "200"
     },
     "areaServed": {
       "@type": "City",
@@ -58,58 +63,58 @@ export default function StructuredData() {
     "itemListElement": [
       {
         "@type": "Service",
-        "name": "Instalação de Pisos de Madeira",
-        "description": "Instalação premium de piso de madeira com artesanato especializado",
+        "name": "Diagnóstico Computadorizado",
+        "description": "Identificamos o problema com precisão usando equipamentos de última geração",
         "provider": {
           "@type": "LocalBusiness",
-          "name": "Pisos Pró"
+          "name": "JR Câmbio Automático"
         },
         "areaServed": "São Paulo, SP",
-        "serviceType": "Instalação de Pisos"
+        "serviceType": "Diagnóstico Automotivo"
       },
       {
         "@type": "Service",
-        "name": "Instalação de Piso Laminado",
-        "description": "Piso laminado acessível e durável com instalação profissional",
+        "name": "Conserto de Câmbio Automático",
+        "description": "Reparos especializados com peças originais e garantia de 6 meses",
         "provider": {
           "@type": "LocalBusiness",
-          "name": "Pisos Pró"
+          "name": "JR Câmbio Automático"
         },
         "areaServed": "São Paulo, SP",
-        "serviceType": "Instalação de Pisos"
+        "serviceType": "Reparo de Transmissão"
       },
       {
         "@type": "Service",
-        "name": "Instalação de Piso Vinílico e LVT",
-        "description": "Piso vinílico de luxo em régua e manta perfeito para áreas de alta umidade",
+        "name": "Retífica de Câmbio",
+        "description": "Reconstrução total do câmbio automático com qualidade de fábrica",
         "provider": {
           "@type": "LocalBusiness",
-          "name": "Pisos Pró"
+          "name": "JR Câmbio Automático"
         },
         "areaServed": "São Paulo, SP",
-        "serviceType": "Instalação de Pisos"
+        "serviceType": "Retífica de Transmissão"
       },
       {
         "@type": "Service",
-        "name": "Instalação de Pisos Swisskrono",
-        "description": "Pisos laminados Swisskrono com tecnologia Hydro EVO 100% impermeável",
+        "name": "Troca de Óleo ATF",
+        "description": "Substituição de fluido de transmissão para melhor performance",
         "provider": {
           "@type": "LocalBusiness",
-          "name": "Pisos Pró"
+          "name": "JR Câmbio Automático"
         },
         "areaServed": "São Paulo, SP",
-        "serviceType": "Instalação de Pisos"
+        "serviceType": "Manutenção Automotiva"
       },
       {
         "@type": "Service",
-        "name": "Restauração de Pisos",
-        "description": "Restaure a beleza dos seus pisos de madeira existentes com lixamento e acabamento profissional",
+        "name": "Manutenção Preventiva",
+        "description": "Inspeções periódicas para identificar e prevenir problemas futuros",
         "provider": {
           "@type": "LocalBusiness",
-          "name": "Pisos Pró"
+          "name": "JR Câmbio Automático"
         },
         "areaServed": "São Paulo, SP",
-        "serviceType": "Reforma de Pisos"
+        "serviceType": "Manutenção Preventiva"
       }
     ]
   }
@@ -122,25 +127,25 @@ export default function StructuredData() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://pisospro.com.br"
+        "item": "https://jrcambioautomatico.com.br"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Serviços",
-        "item": "https://pisospro.com.br/services"
+        "item": "https://jrcambioautomatico.com.br/services"
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Produtos",
-        "item": "https://pisospro.com.br/products"
+        "name": "Portfólio",
+        "item": "https://jrcambioautomatico.com.br/portfolio"
       },
       {
         "@type": "ListItem",
         "position": 4,
-        "name": "Portfólio",
-        "item": "https://pisospro.com.br/portfolio"
+        "name": "Contato",
+        "item": "https://jrcambioautomatico.com.br/contact"
       }
     ]
   }

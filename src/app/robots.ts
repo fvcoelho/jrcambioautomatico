@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://pisospro.com.br/sitemap.xml',
+    sitemap: 'https://jrcambioautomatico.com.br/sitemap.xml',
   }
 }

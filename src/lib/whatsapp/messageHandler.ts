@@ -180,7 +180,7 @@ async function handleMainMenuResponse(message: IncomingMessage, conversationId: 
     await sendMessage(conversationId, { ...MAIN_MENU_BUTTONS, to: message.from })
   }
   else if (message.text === 'view_portfolio' || input?.includes('portfolio') || input?.includes('portfólio')) {
-    await sendTextMessage(message.from, '📸 *Nosso Portfólio*\n\nVeja alguns dos nossos trabalhos mais recentes no nosso site: https://pisospro.com.br/portfolio\n\nOu solicite um orçamento para começarmos seu projeto!', conversationId)
+    await sendTextMessage(message.from, '📸 *Nosso Portfólio*\n\nVeja alguns dos nossos trabalhos mais recentes no nosso site: https://jrcambioautomatico.com.br/portfolio\n\nOu agende um diagnóstico gratuito!', conversationId)
     await sendMessage(conversationId, { ...MAIN_MENU_BUTTONS, to: message.from })
   }
   else if (message.text === 'talk_human' || input?.includes('atendente') || input?.includes('humano')) {
@@ -198,14 +198,14 @@ async function handleMainMenuResponse(message: IncomingMessage, conversationId: 
 }
 
 async function handleProjectTypeResponse(message: IncomingMessage, conversationId: string, state: any) {
-  const projectTypes = ['madeira', 'acabamento', 'laminado', 'vinílico', 'reacabamentoing', 'reparo', 'multiple']
-  
+  const projectTypes = ['diagnostico', 'conserto', 'retifica', 'troca-oleo', 'revisao', 'multiple']
+
   if (projectTypes.includes(message.text || '')) {
     const collectedData = { ...state.collectedData, projectType: message.text }
     const description = getProjectTypeDescription(message.text!)
-    
-    await sendTextMessage(message.from, `Excelente escolha! 👍\n\n*${description}*\n\nAgora, qual é aproximadamente o tamanho da área?\n\nPor favor, me informe em metros quadrados (ex: "20 m²" ou "45 metros quadrados"):`, conversationId)
-    
+
+    await sendTextMessage(message.from, `Perfeito! 👍\n\n*${description}*\n\nPara que eu possa preparar o atendimento, me informe o *modelo e ano do veículo*:\n\n(Ex: "Honda Civic 2019" ou "Toyota Corolla 2020"):`, conversationId)
+
     await updateChatbotState(conversationId, ChatState.QUOTE_ROOM_SIZE, collectedData)
   } else {
     await sendTextMessage(message.from, 'Por favor, selecione uma opção do menu:', conversationId)
@@ -215,21 +215,18 @@ async function handleProjectTypeResponse(message: IncomingMessage, conversationI
 
 async function handleRoomSizeResponse(message: IncomingMessage, conversationId: string, state: any) {
   const text = message.text || ''
-  
-  // Extract numbers from the text (simple regex for m², metros, etc.)
-  const sizeMatch = text.match(/(\d+(?:\.\d+)?)\s*(?:m²|metros?|m2)/i) || text.match(/(\d+(?:\.\d+)?)/i)
-  
-  if (sizeMatch) {
-    const size = sizeMatch[1]
-    const collectedData = { ...state.collectedData, roomSize: `${size} m²` }
-    
-    await sendTextMessage(message.from, `Perfeito! ${size} m² 📐\n\nAgora sobre o cronograma:`, conversationId)
+
+  // Accept any text as vehicle info
+  if (text.length > 2) {
+    const collectedData = { ...state.collectedData, vehicleInfo: text }
+
+    await sendTextMessage(message.from, `Perfeito! *${text}* 🚗\n\nAgora sobre o agendamento:`, conversationId)
     await sendMessage(conversationId, { ...TIMELINE_MENU, to: message.from })
     await sendMessage(conversationId, { ...TIMELINE_EXTENDED_MENU, to: message.from })
-    
+
     await updateChatbotState(conversationId, ChatState.QUOTE_TIMELINE, collectedData)
   } else {
-    await sendTextMessage(message.from, 'Por favor, me informe o tamanho em metros quadrados (ex: "20 m²", "45 metros quadrados" ou apenas "30"):', conversationId)
+    await sendTextMessage(message.from, 'Por favor, me informe o modelo e ano do veículo (ex: "Honda Civic 2019"):', conversationId)
   }
 }
 
@@ -257,7 +254,7 @@ async function handleBudgetResponse(message: IncomingMessage, conversationId: st
     const collectedData = { ...state.collectedData, budget: message.text }
     const description = getBudgetDescription(message.text!)
     
-    await sendTextMessage(message.from, `Perfeito! Orçamento: *${description}* 💰\n\nAgora, se possível, envie algumas fotos do ambiente atual. Isso me ajudará a preparar um orçamento mais preciso! 📸\n\nVocê pode enviar:\n• Fotos gerais do ambiente\n• Detalhes do piso atual\n• Medidas específicas\n\nOu digite "pular" se preferir não enviar fotos agora.`, conversationId)
+    await sendTextMessage(message.from, `Perfeito! Orçamento: *${description}* 💰\n\nSe possível, envie um vídeo ou fotos mostrando o problema. Isso ajuda muito no diagnóstico! 📸\n\nVocê pode enviar:\n• Vídeo do painel (luzes acesas)\n• Vídeo do comportamento do câmbio\n• Fotos de vazamentos (se houver)\n\nOu digite "pular" se preferir não enviar agora.`, conversationId)
     
     await updateChatbotState(conversationId, ChatState.QUOTE_PHOTOS, collectedData)
   } else {
@@ -315,17 +312,17 @@ async function generateQuote(phoneNumber: string, conversationId: string, data: 
         name: data.name,
         email: data.email,
         phone: phoneNumber,
-        description: `Projeto: ${getProjectTypeDescription(data.projectType)}\nTamanho: ${data.roomSize}\nCronograma: ${getTimelineDescription(data.timeline)}\nOrçamento: ${getBudgetDescription(data.budget)}`,
+        description: `Serviço: ${getProjectTypeDescription(data.projectType)}\nVeículo: ${data.vehicleInfo || 'Não informado'}\nAgendamento: ${getTimelineDescription(data.timeline)}\nOrçamento: ${getBudgetDescription(data.budget)}`,
         status: 'PENDING'
       }
     })
 
-    const summary = `🎉 *Orçamento Solicitado com Sucesso!*
+    const summary = `🎉 *Diagnóstico Agendado com Sucesso!*
 
-📋 *Resumo do seu projeto:*
-• *Tipo:* ${getProjectTypeDescription(data.projectType)}
-• *Área:* ${data.roomSize}
-• *Cronograma:* ${getTimelineDescription(data.timeline)}
+📋 *Resumo do seu atendimento:*
+• *Serviço:* ${getProjectTypeDescription(data.projectType)}
+• *Veículo:* ${data.vehicleInfo || 'Não informado'}
+• *Agendamento:* ${getTimelineDescription(data.timeline)}
 • *Orçamento:* ${getBudgetDescription(data.budget)}
 
 👤 *Dados de contato:*
@@ -335,13 +332,13 @@ async function generateQuote(phoneNumber: string, conversationId: string, data: 
 
 ✅ *Próximos passos:*
 1. Nossa equipe analisará sua solicitação
-2. Entraremos em contato em até 24 horas
-3. Agendaremos uma visita técnica gratuita
+2. Entraremos em contato para confirmar o horário
+3. Realizaremos o diagnóstico gratuito
 4. Apresentaremos um orçamento detalhado
 
 💬 Em breve você receberá uma ligação ou mensagem da nossa equipe!
 
-*Pisos Pró - Transformando espaços há mais de 15 anos!* 🏠✨`
+*JR Câmbio Automático - Especialistas em transmissão há mais de 15 anos!* 🔧✨`
 
     await sendTextMessage(phoneNumber, summary, conversationId)
     
@@ -370,11 +367,11 @@ Em alguns minutos um de nossos especialistas entrará em contato com você.
 *(11) 94014-7157*
 
 📧 *Ou enviar um email:*
-*contato@pisospro.com.br*
+*contato@jrcambioautomatico.com.br*
 
 *Horário de atendimento:*
 • Segunda a Sexta: 8h às 18h
-• Sábado: 9h às 16h
+• Sábado: 9h às 14h
 
 Obrigado pela preferência! 🙏`, conversationId)
 

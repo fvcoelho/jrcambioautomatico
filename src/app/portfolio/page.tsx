@@ -2,12 +2,12 @@ import { Metadata } from 'next'
 import PortfolioClient from './PortfolioClient'
 
 export const metadata: Metadata = {
-  title: 'Portfólio de Pisos - 5000+ Projetos Concluídos | Pisos Pró',
-  description: 'View our portfolio of completed flooring projects. madeira, tile, laminado, vinílico, and carpet installations for residential and commercial clients.',
-  keywords: 'flooring portfolio, flooring projects, completed projects, flooring gallery, before and after, flooring examples',
+  title: 'Portfólio - Trabalhos Realizados | JR Câmbio Automático',
+  description: 'Veja nosso portfólio de câmbios automáticos reparados. Trabalhos realizados em diversas marcas e modelos com garantia de qualidade.',
+  keywords: 'portfolio cambio automatico, trabalhos realizados, reparos cambio, consertos transmissao, antes e depois cambio',
   openGraph: {
-    title: 'Portfólio de Pisos | Pisos Pró',
-    description: 'Explore our extensive portfolio of beautiful flooring installations and transformations.',
+    title: 'Portfólio | JR Câmbio Automático',
+    description: 'Explore nosso portfólio de trabalhos realizados em câmbios automáticos de todas as marcas.',
     type: 'website',
   },
 }

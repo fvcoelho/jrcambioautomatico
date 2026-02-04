@@ -42,10 +42,10 @@ export async function POST() {
       // Create default AI instructions if none exist
       aiInstruction = await prisma.aiInstructions.create({
         data: {
-          prompt: `# Assistente Virtual - Pisos-Pró
-          
-Você é um assistente virtual especializado em pisos e revestimentos.
-Ajude os clientes com informações sobre produtos e serviços.`,
+          prompt: `# Assistente Virtual - JR Câmbio Automático
+
+Você é um assistente virtual especializado em câmbio automático.
+Ajude os clientes com informações sobre diagnóstico, reparo e manutenção de câmbio automático.`,
           isActive: true
         }
       })
@@ -90,7 +90,7 @@ Ajude os clientes com informações sobre produtos e serviços.`,
     }
 
     // Create new instance
-    const instanceName = EvolutionApiService.generateInstanceName('pisospro', Date.now().toString())
+    const instanceName = EvolutionApiService.generateInstanceName('jrcambio', Date.now().toString())
     const webhookUrl = aiSetup.webhookUrl || EvolutionApiService.generateWebhookUrl(instanceName)
 
     console.log('🆕 Creating new Evolution API instance...')
@@ -102,7 +102,7 @@ Ajude os clientes com informações sobre produtos e serviços.`,
     // Create instance in Evolution API
     const createResult = await evolutionService.createInstance({
       instanceName,
-      token: 'pisospro-token',
+      token: 'jrcambio-token',
       qrcode: true,
       integration: 'WHATSAPP-BAILEYS',
       webhookUrl

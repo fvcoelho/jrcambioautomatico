@@ -5,28 +5,27 @@ import RootProvider from "@/components/RootProvider";
 import StructuredData from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pisospro.com.br'),
+  metadataBase: new URL('https://jrcambioautomatico.com.br'),
   title: {
-    default: "Pisos Pró - Instalação e Reforma de Pisos em São Paulo",
-    template: "%s | Pisos Pró"
+    default: "JR Câmbio Automático - Especialistas em Câmbio Automático em São Paulo",
+    template: "%s | JR Câmbio Automático"
   },
-  description: "Especialistas em instalação, reforma e manutenção de pisos de madeira, laminados, vinílicos e Swisskrono. Artesanato de qualidade com mais de 15 anos de experiência em São Paulo.",
+  description: "Especialistas em diagnóstico, reparo e manutenção de câmbio automático. Diagnóstico gratuito, peças originais e garantia de 6 meses. Mais de 15 anos de experiência em São Paulo.",
   keywords: [
-    "pisos são paulo",
-    "instalação de pisos",
-    "pisos de madeira",
-    "piso laminado",
-    "piso vinílico",
-    "swisskrono",
-    "reforma de pisos",
-    "pisos profissionais",
-    "instalação laminado são paulo",
-    "pisos comerciais",
-    "pisos residenciais"
+    "câmbio automático são paulo",
+    "conserto câmbio automático",
+    "retífica câmbio",
+    "troca óleo atf",
+    "diagnóstico câmbio",
+    "reparo transmissão",
+    "manutenção câmbio automático",
+    "câmbio cvt",
+    "câmbio dsg",
+    "oficina câmbio automático"
   ],
-  authors: [{ name: "Pisos Pró" }],
-  creator: "Pisos Pró",
-  publisher: "Pisos Pró",
+  authors: [{ name: "JR Câmbio Automático" }],
+  creator: "JR Câmbio Automático",
+  publisher: "JR Câmbio Automático",
   robots: {
     index: true,
     follow: true,
@@ -49,27 +48,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://pisospro.com.br',
-    siteName: 'Pisos Pró',
-    title: 'Pisos Pró - Instalação e Reforma de Pisos em São Paulo',
-    description: 'Especialistas em instalação, reforma e manutenção de pisos de madeira, laminados, vinílicos e Swisskrono. Mais de 15 anos de experiência.',
+    url: 'https://jrcambioautomatico.com.br',
+    siteName: 'JR Câmbio Automático',
+    title: 'JR Câmbio Automático - Especialistas em Câmbio Automático em São Paulo',
+    description: 'Especialistas em diagnóstico, reparo e manutenção de câmbio automático. Diagnóstico gratuito e garantia de 6 meses.',
     images: [
       {
         url: '/logo_full.svg',
         width: 1200,
         height: 630,
-        alt: 'Pisos Pró - Especialistas em Pisos',
+        alt: 'JR Câmbio Automático - Especialistas em Transmissão',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pisos Pró - Instalação e Reforma de Pisos em São Paulo',
-    description: 'Especialistas em instalação, reforma e manutenção de pisos de madeira, laminados, vinílicos e Swisskrono.',
+    title: 'JR Câmbio Automático - Especialistas em Câmbio Automático em São Paulo',
+    description: 'Especialistas em diagnóstico, reparo e manutenção de câmbio automático. Diagnóstico gratuito e garantia de 6 meses.',
     images: ['/logo_full.svg'],
   },
   alternates: {
-    canonical: 'https://pisospro.com.br',
+    canonical: 'https://jrcambioautomatico.com.br',
   },
   verification: {
     google: 'your-google-verification-code', // Add your Google Search Console verification code

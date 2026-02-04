@@ -13,15 +13,17 @@ interface ConditionalLayoutProps {
 export default function ConditionalLayout({ children }: ConditionalLayoutProps) {
   const pathname = usePathname()
   const isAdminPage = pathname.startsWith('/admin')
+  const isIntroPage = pathname.startsWith('/intro')
 
-  if (isAdminPage) {
-    // Admin pages without navbar/footer
+  if (isAdminPage || isIntroPage) {
+    // Admin and intro pages without navbar/footer
     return (
       <main className="min-h-screen bg-gray-50">
         {children}
       </main>
     )
   }
+
 
   // Regular pages with navbar/footer
   return (

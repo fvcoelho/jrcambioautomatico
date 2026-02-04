@@ -31,7 +31,7 @@ export default function PreloadScreen({ isLoading, onComplete }: PreloadScreenPr
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-green-900 via-green-800 to-green-700 transition-opacity duration-500 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-charcoal-950 via-steel-900 to-charcoal-900 transition-opacity duration-500 ${
         isAnimating ? 'opacity-0' : 'opacity-100'
       }`}
     >
@@ -44,7 +44,7 @@ export default function PreloadScreen({ isLoading, onComplete }: PreloadScreenPr
         {/* Loading Text */}
         <div className="text-white">
           <h2 className="font-cinzel text-2xl md:text-3xl mb-4 tracking-wider font-light">
-            Pisos Pró
+            JR Câmbio Automático
           </h2>
           <div className="flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>

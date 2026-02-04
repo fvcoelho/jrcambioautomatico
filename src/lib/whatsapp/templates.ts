@@ -16,11 +16,11 @@ export enum ChatState {
   FAQ = 'faq'
 }
 
-export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *Pisos Pró*!
+export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *JR Câmbio Automático*!
 
-Sou o assistente virtual e estou aqui para ajudar você com soluções profissionais em pisos. 
+Sou o assistente virtual e estou aqui para ajudar você com soluções em câmbio automático.
 
-Temos mais de 15 anos de experiência em instalação, reforma e manutenção de pisos de todos os tipos!
+Temos mais de 15 anos de experiência em diagnóstico, reparo e manutenção de transmissões automáticas!
 
 Como posso ajudá-lo hoje?`
 
@@ -37,21 +37,21 @@ export const MAIN_MENU_BUTTONS: WhatsAppInteractiveMessage = {
           type: 'reply',
           reply: {
             id: 'request_quote',
-            title: '📋 Solicitar Orçamento'
+            title: '🔧 Agendar Diagnóstico'
           }
         },
         {
           type: 'reply',
           reply: {
             id: 'view_services',
-            title: '🏠 Ver Serviços'
+            title: '🚗 Ver Serviços'
           }
         },
         {
           type: 'reply',
           reply: {
             id: 'view_portfolio',
-            title: '📸 Ver Portfólio'
+            title: '📸 Ver Trabalhos'
           }
         }
       ]
@@ -99,58 +99,48 @@ export const PROJECT_TYPE_MENU: WhatsAppInteractiveMessage = {
   interactive: {
     type: 'list',
     body: {
-      text: 'Perfeito! Vamos começar seu orçamento. 📋\n\nPrimeiro, qual tipo de projeto você tem em mente?'
+      text: 'Perfeito! Vamos agendar seu diagnóstico. 🔧\n\nPrimeiro, qual tipo de serviço você precisa?'
     },
     action: {
-      button: 'Selecionar Projeto',
+      button: 'Selecionar Serviço',
       sections: [
         {
-          title: 'Tipos de Piso',
+          title: 'Diagnóstico',
           rows: [
             {
-              id: 'madeira',
-              title: 'Madeira',
-              description: 'Instalação de pisos de madeira'
+              id: 'diagnostico',
+              title: 'Diagnóstico',
+              description: 'Diagnóstico computadorizado gratuito'
             },
             {
-              id: 'acabamento',
-              title: 'Acabamento',
-              description: 'Serviços de acabamento em pisos'
+              id: 'conserto',
+              title: 'Conserto',
+              description: 'Reparo do câmbio automático'
             },
             {
-              id: 'laminado',
-              title: 'Laminado',
-              description: 'Pisos laminados'
-            },
-            {
-              id: 'vinílico',
-              title: 'Vinílico/LVT',
-              description: 'Pisos vinílicos e LVT'
+              id: 'retifica',
+              title: 'Retífica',
+              description: 'Reconstrução completa do câmbio'
             }
           ]
         },
         {
-          title: 'Serviços',
+          title: 'Manutenção',
           rows: [
-            // {
-            //   id: 'carpet',
-            //   title: 'Carpete',
-            //   description: 'Instalação de carpetes'
-            // },
             {
-              id: 'reacabamentoing',
-              title: 'Restauração',
-              description: 'Restauração de pisos existentes'
+              id: 'troca-oleo',
+              title: 'Troca de Óleo ATF',
+              description: 'Substituição do fluido de transmissão'
             },
             {
-              id: 'reparo',
-              title: 'Reparo',
-              description: 'Reparos em pisos'
+              id: 'revisao',
+              title: 'Revisão',
+              description: 'Manutenção preventiva do câmbio'
             },
             {
               id: 'multiple',
-              title: 'Vários Serviços',
-              description: 'Combinação de serviços'
+              title: 'Outros',
+              description: 'Outros serviços ou dúvidas'
             }
           ]
         }
@@ -164,7 +154,7 @@ export const TIMELINE_MENU: WhatsAppInteractiveMessage = {
   interactive: {
     type: 'button',
     body: {
-      text: 'Ótimo! Agora me conte sobre o cronograma.\n\nQuando você gostaria de iniciar o projeto?'
+      text: 'Ótimo! Agora me conte sobre a urgência.\n\nQuando você gostaria de trazer o veículo?'
     },
     action: {
       buttons: [
@@ -179,14 +169,14 @@ export const TIMELINE_MENU: WhatsAppInteractiveMessage = {
           type: 'reply',
           reply: {
             id: '1-2weeks',
-            title: '📅 1-2 semanas'
+            title: '📅 Esta semana'
           }
         },
         {
           type: 'reply',
           reply: {
             id: '1month',
-            title: '🗓️ Em 1 mês'
+            title: '🗓️ Próxima semana'
           }
         }
       ]
@@ -199,7 +189,7 @@ export const TIMELINE_EXTENDED_MENU: WhatsAppInteractiveMessage = {
   interactive: {
     type: 'button',
     body: {
-      text: 'Outras opções de cronograma:'
+      text: 'Outras opções de agendamento:'
     },
     action: {
       buttons: [
@@ -207,14 +197,14 @@ export const TIMELINE_EXTENDED_MENU: WhatsAppInteractiveMessage = {
           type: 'reply',
           reply: {
             id: '2-3months',
-            title: '📊 2-3 meses'
+            title: '📊 Em 2 semanas'
           }
         },
         {
           type: 'reply',
           reply: {
             id: 'planning',
-            title: '💭 Apenas planejando'
+            title: '💭 Apenas consultando'
           }
         },
         {
@@ -234,38 +224,38 @@ export const BUDGET_MENU: WhatsAppInteractiveMessage = {
   interactive: {
     type: 'list',
     body: {
-      text: 'Perfeito! Para fornecer o melhor orçamento, qual seria a faixa de investimento que você tem em mente? 💰'
+      text: 'Perfeito! Para melhor atendê-lo, qual seria a faixa de investimento que você tem em mente? 💰\n\n(Lembrando que o diagnóstico é gratuito!)'
     },
     action: {
-      button: 'Selecionar Orçamento',
+      button: 'Selecionar Faixa',
       sections: [
         {
           title: 'Faixas de Orçamento',
           rows: [
             {
               id: 'under15k',
-              title: 'Até R$ 15.000',
-              description: 'Projetos menores'
+              title: 'Até R$ 2.000',
+              description: 'Manutenções simples'
             },
             {
               id: '15k-30k',
-              title: 'R$ 15.000 - R$ 30.000',
-              description: 'Projetos médios'
+              title: 'R$ 2.000 - R$ 5.000',
+              description: 'Reparos médios'
             },
             {
               id: '30k-60k',
-              title: 'R$ 30.000 - R$ 60.000',
-              description: 'Projetos grandes'
+              title: 'R$ 5.000 - R$ 10.000',
+              description: 'Reparos complexos'
             },
             {
               id: '60k-150k',
-              title: 'R$ 60.000 - R$ 150.000',
-              description: 'Projetos premium'
+              title: 'Acima de R$ 10.000',
+              description: 'Retífica completa'
             },
             {
               id: 'over150k',
-              title: 'Acima de R$ 150.000',
-              description: 'Projetos exclusivos'
+              title: 'Não sei informar',
+              description: 'Preciso do diagnóstico primeiro'
             }
           ]
         }
@@ -274,73 +264,71 @@ export const BUDGET_MENU: WhatsAppInteractiveMessage = {
   }
 }
 
-export const SERVICES_INFO = `🏠 *Nossos Serviços Especializados*
+export const SERVICES_INFO = `🔧 *Nossos Serviços Especializados*
 
-✨ *Instalação de Pisos*
-• Madeira maciça e engenheirada
-• Cerâmica e porcelanato
-• Laminados de alta qualidade
-• Vinílicos e LVT
-• Carpetes residenciais e comerciais
+🔍 *Diagnóstico*
+• Diagnóstico computadorizado GRATUITO
+• Teste de pressão hidráulica
+• Análise do fluido de transmissão
+• Relatório detalhado do problema
 
-🔧 *Restauração e Manutenção*
-• Restauração de pisos de madeira
-• Lixamento e envernizamento
-• Reparos e substituições
-• Limpeza profissional
+⚙️ *Reparos e Manutenção*
+• Conserto de câmbio automático
+• Retífica completa
+• Troca de óleo ATF
+• Revisão preventiva
+• Troca de solenoides e válvulas
 
-💎 *Diferenciais Pisos Pró*
+💎 *Diferenciais JR Câmbio*
 • +15 anos de experiência
-• Garantia em todos os serviços
-• Orçamento gratuito e sem compromisso
-• Materiais de primeira qualidade
+• Garantia de 6 meses
+• Peças originais
+• Diagnóstico gratuito
 • Equipe especializada
 
 📞 *Entre em contato:*
 • WhatsApp: (11) 94014-7157
-• Email: contato@pisospro.com.br`
+• Email: contato@jrcambioautomatico.com.br`
 
 export const FAQ_INFO = `❓ *Perguntas Frequentes*
 
-*🕐 Qual o prazo de execução?*
-Varia conforme o projeto, de 2-5 dias para ambientes pequenos até 2-3 semanas para projetos maiores.
+*🕐 Qual o prazo de reparo?*
+Depende do serviço. Troca de óleo: mesmo dia. Consertos: 2-5 dias. Retífica completa: 5-10 dias.
 
-*💰 Como funciona o orçamento?*
-Fazemos uma visita gratuita para medir e avaliar. O orçamento é detalhado e sem surpresas.
+*💰 O diagnóstico é pago?*
+Não! O diagnóstico computadorizado é totalmente GRATUITO e sem compromisso.
 
 *🛡️ Vocês oferecem garantia?*
-Sim! Garantia de 1 ano para instalação e até 5 anos para alguns materiais.
+Sim! Garantia de 6 meses em peças e mão de obra para todos os serviços.
 
-*🎨 Posso ver amostras dos materiais?*
-Claro! Levamos amostras na visita ou você pode visitar nossa loja.
+*🔧 Trabalham com todas as marcas?*
+Sim, atendemos câmbios automáticos de todas as marcas: Honda, Toyota, VW, GM, Ford, BMW, etc.
 
-*🏠 Atendem toda São Paulo?*
-Sim, atendemos toda a Grande São Paulo e região.
+*🚗 Preciso deixar o carro?*
+Para diagnóstico, leva cerca de 1-2 horas. Para reparos, o veículo fica conosco.
 
 *💳 Quais formas de pagamento?*
-Cartão, boleto, PIX. Parcelamos em até 12x sem juros.`
+Cartão, boleto, PIX. Parcelamos em até 12x.`
 
 export function getProjectTypeDescription(projectType: string): string {
   const descriptions: Record<string, string> = {
-    madeira: 'Instalação de Pisos de Madeira - Elegância e durabilidade para sua casa',
-    //tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
-    laminado: 'Piso Laminado - Praticidade e economia sem abrir mão do estilo',
-    vinílico: 'Vinílico e LVT - Tecnologia e conforto para ambientes modernos',
-    other: 'Outros Serviços - Soluções especializadas para suas necessidades',
-    reacabamentoing: 'Restauração de Pisos - Renovamos seus pisos como novos',
-    reparo: 'Reparo de Pisos - Soluções rápidas para pequenos problemas',
-    multiple: 'Vários Serviços - Soluções completas para seu projeto'
+    diagnostico: 'Diagnóstico Computadorizado - Identificamos o problema com precisão',
+    conserto: 'Conserto de Câmbio - Reparos especializados com garantia',
+    retifica: 'Retífica Completa - Reconstrução total do câmbio',
+    'troca-oleo': 'Troca de Óleo ATF - Fluido novo para melhor performance',
+    revisao: 'Revisão de Câmbio - Manutenção preventiva',
+    multiple: 'Outros Serviços - Atendimento personalizado'
   }
-  return descriptions[projectType] || 'Serviço de pisos profissional'
+  return descriptions[projectType] || 'Serviço especializado em câmbio automático'
 }
 
 export function getBudgetDescription(budget: string): string {
   const descriptions: Record<string, string> = {
-    'under15k': 'Até R$ 15.000',
-    '15k-30k': 'R$ 15.000 - R$ 30.000', 
-    '30k-60k': 'R$ 30.000 - R$ 60.000',
-    '60k-150k': 'R$ 60.000 - R$ 150.000',
-    'over150k': 'Acima de R$ 150.000'
+    'under15k': 'Até R$ 2.000',
+    '15k-30k': 'R$ 2.000 - R$ 5.000',
+    '30k-60k': 'R$ 5.000 - R$ 10.000',
+    '60k-150k': 'Acima de R$ 10.000',
+    'over150k': 'Não sei informar'
   }
   return descriptions[budget] || budget
 }
@@ -348,10 +336,10 @@ export function getBudgetDescription(budget: string): string {
 export function getTimelineDescription(timeline: string): string {
   const descriptions: Record<string, string> = {
     'asap': 'O mais rápido possível',
-    '1-2weeks': '1 a 2 semanas',
-    '1month': 'Em até 1 mês',
-    '2-3months': '2 a 3 meses',
-    'planning': 'Apenas planejando'
+    '1-2weeks': 'Esta semana',
+    '1month': 'Próxima semana',
+    '2-3months': 'Em 2 semanas',
+    'planning': 'Apenas consultando'
   }
   return descriptions[timeline] || timeline
 }

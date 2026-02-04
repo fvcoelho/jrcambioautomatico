@@ -37,8 +37,8 @@ export default function SpinningLogo({
       <div className={`relative ${sizeMap[size]} mx-auto ${showText ? 'mb-4' : ''}`}>
         <div className="absolute inset-0 animate-spin">
           <Image
-            src="/logo.svg"
-            alt="Pisos Pró"
+            src="/gear.svg"
+            alt="JR Câmbio Automático"
             width={128}
             height={128}
             className={`w-full h-full object-contain ${colorMap[color]}`}

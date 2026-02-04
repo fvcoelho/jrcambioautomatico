@@ -27,10 +27,10 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <div className="relative">
-                <Image 
-                  src="/logo_full.svg" 
-                  alt="Pisos Pró - Especialistas em Pisos de Madeira" 
-                  width={400} 
+                <Image
+                  src="/jrcambio.svg"
+                  alt="JR Câmbio Automático - Especialistas em Câmbio Automático"
+                  width={400}
                   height={200}
                   className={`h-16 w-auto transition-all duration-300 ${
                     scrolled ? '' : 'invert'
@@ -38,7 +38,7 @@ export default function Navbar() {
                   priority
                 />
                 {/* Logo glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-gold opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-lg blur-sm"></div>
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-lg blur-sm"></div>
               </div>
             </Link>
           </div>
@@ -61,9 +61,9 @@ export default function Navbar() {
               Sobre
             </NavLink>
             <Link 
-              href="https://wa.me/5511940147157?text=Olá! Gostaria de solicitar um orçamento para pisos de madeira." 
+              href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático." 
               data-track-id="nav-quote" 
-              className="ml-4 bg-gradient-gold text-wood-900 px-6 py-2.5 rounded-lg text-sm font-bold hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-gold-400/25 flex items-center gap-2"
+              className="ml-4 bg-gradient-accent text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-accent-400/25 flex items-center gap-2 glow-blue"
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => {
@@ -90,7 +90,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               data-track-id="mobile-menu-toggle"
               className={`transition-colors duration-300 focus:outline-none ${
-                scrolled ? 'text-wood-900 hover:text-wood-700' : 'text-white hover:text-gold-300'
+                scrolled ? 'text-steel-100 hover:text-white' : 'text-white hover:text-accent-300'
               }`}
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,11 +124,11 @@ export default function Navbar() {
                 <MobileNavLink href="/#about" data-track-id="mobile-nav-about" onClick={() => setIsOpen(false)}>
                   Sobre
                 </MobileNavLink>
-                <Link 
-                  href="/#contact" 
-                  data-track-id="mobile-nav-quote" 
+                <Link
+                  href="/#contact"
+                  data-track-id="mobile-nav-quote"
                   onClick={() => setIsOpen(false)}
-                  className="block bg-gradient-gold text-wood-900 px-4 py-3 rounded-lg text-base font-bold text-center hover:scale-105 transition-all duration-300 mt-4"
+                  className="block bg-gradient-accent text-white px-4 py-3 rounded-lg text-base font-bold text-center hover:scale-105 transition-all duration-300 mt-4"
                 >
                   Orçamento
                 </Link>
@@ -153,14 +153,14 @@ function NavLink({ href, children, scrolled, ...props }: {
       href={href} 
       {...props}
       className={`relative px-4 py-2 text-base font-medium transition-all duration-300 rounded-lg group ${
-        scrolled 
-          ? 'text-wood-900 hover:text-wood-700 hover:bg-wood-100' 
-          : 'text-white hover:text-gold-300'
+        scrolled
+          ? 'text-steel-100 hover:text-white hover:bg-steel-700'
+          : 'text-white hover:text-accent-300'
       }`}
     >
       {children}
       <div className={`absolute bottom-0 left-1/2 w-0 h-0.5 group-hover:w-3/4 transition-all duration-300 transform -translate-x-1/2 ${
-        scrolled ? 'bg-wood-700' : 'bg-gold-400'
+        scrolled ? 'bg-accent-400' : 'bg-accent-400'
       }`}></div>
     </Link>
   )
@@ -178,7 +178,7 @@ function MobileNavLink({ href, children, onClick, ...props }: {
       href={href} 
       onClick={onClick}
       {...props}
-      className="block text-wood-900 hover:text-wood-700 hover:bg-wood-100/50 px-3 py-2 text-lg font-medium rounded-lg transition-all duration-300"
+      className="block text-steel-100 hover:text-white hover:bg-steel-700/50 px-3 py-2 text-lg font-medium rounded-lg transition-all duration-300"
     >
       {children}
     </Link>

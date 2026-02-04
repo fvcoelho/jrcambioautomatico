@@ -48,7 +48,7 @@ function CategoryForm({ category, onSave, onCancel }: CategoryFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!name || !slug) {
       alert('Nome e slug são obrigatórios')
       return
@@ -63,41 +63,43 @@ function CategoryForm({ category, onSave, onCancel }: CategoryFormProps) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+    <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
+      <h3 className="text-lg font-semibold text-white mb-4">
         {category ? 'Editar Categoria' : 'Nova Categoria'}
       </h3>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-steel-300 mb-2">
             Nome *
           </label>
           <Input
             value={name}
             onChange={(e) => handleNameChange(e.target.value)}
-            placeholder="Ex: Pisos de Madeira"
+            placeholder="Ex: Reparo de Câmbio"
             required
+            className="bg-steel-700/50 border-steel-600 text-white placeholder:text-steel-400"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-steel-300 mb-2">
             Slug *
           </label>
           <Input
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
-            placeholder="Ex: pisos-de-madeira"
+            placeholder="Ex: reparo-de-cambio"
             required
+            className="bg-steel-700/50 border-steel-600 text-white placeholder:text-steel-400"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-steel-500 mt-1">
             URL amigável para a categoria (usado em links)
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-steel-300 mb-2">
             Descrição
           </label>
           <Textarea
@@ -105,25 +107,27 @@ function CategoryForm({ category, onSave, onCancel }: CategoryFormProps) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Descrição da categoria"
             rows={3}
+            className="bg-steel-700/50 border-steel-600 text-white placeholder:text-steel-400"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-steel-300 mb-2">
             URL da Imagem
           </label>
           <Input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             placeholder="https://exemplo.com/imagem.jpg"
+            className="bg-steel-700/50 border-steel-600 text-white placeholder:text-steel-400"
           />
         </div>
 
         <div className="flex gap-4">
-          <Button type="submit" className="flex-1">
+          <Button type="submit" className="flex-1 bg-accent-500 hover:bg-accent-600 text-white">
             {category ? 'Salvar Alterações' : 'Criar Categoria'}
           </Button>
-          <Button type="button" variant="outline" onClick={onCancel} className="flex-1">
+          <Button type="button" variant="outline" onClick={onCancel} className="flex-1 border-steel-600 text-steel-300 hover:bg-steel-700 hover:text-white">
             Cancelar
           </Button>
         </div>
@@ -205,7 +209,7 @@ export default function CategoryManagement() {
   }
 
   const handleDeleteCategory = async (id: number) => {
-    if (!confirm('Tem certeza que deseja remover esta categoria? Isso removerá todos os produtos associados.')) return
+    if (!confirm('Tem certeza que deseja remover esta categoria?')) return
 
     try {
       const response = await fetch(`/api/categories/${id}`, {
@@ -232,31 +236,37 @@ export default function CategoryManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
+      <div className="p-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center">Carregando...</div>
+          <div className="text-center text-steel-400">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-400 mx-auto mb-4"></div>
+            Carregando...
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Gerenciar Categorias</h1>
+          <h1 className="text-3xl font-bold text-white mb-4">Gerenciar Categorias</h1>
           <div className="flex justify-between items-center">
-            <p className="text-gray-600">
-              Gerencie as categorias de produtos do seu catálogo
+            <p className="text-steel-400">
+              Gerencie as categorias de serviços
             </p>
             <Button
               onClick={() => {
                 setShowForm(!showForm)
                 setEditingCategory(null)
               }}
-              className="whitespace-nowrap"
+              className="whitespace-nowrap bg-accent-500 hover:bg-accent-600 text-white"
             >
-              {showForm ? 'Fechar Formulário' : '+ Nova Categoria'}
+              <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              {showForm ? 'Fechar Formulário' : 'Nova Categoria'}
             </Button>
           </div>
         </div>
@@ -280,34 +290,38 @@ export default function CategoryManagement() {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-gray-900">
+            <h2 className="text-xl font-bold text-white">
               Categorias ({categories.length})
             </h2>
           </div>
 
           {categories.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
-              <div className="text-6xl mb-4">📁</div>
+            <div className="text-center py-12 text-steel-400">
+              <div className="w-16 h-16 mx-auto mb-4 bg-steel-700/50 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-steel-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                </svg>
+              </div>
               <p className="text-lg">Nenhuma categoria encontrada</p>
-              <p className="text-sm">Crie sua primeira categoria para organizar os produtos</p>
+              <p className="text-sm text-steel-500">Crie sua primeira categoria para organizar os serviços</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Nome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Slug</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Descrição</th>
-                    <th className="text-center py-3 px-4 font-semibold text-gray-900">Produtos</th>
-                    <th className="text-center py-3 px-4 font-semibold text-gray-900">Ações</th>
+                  <tr className="border-b border-steel-700">
+                    <th className="text-left py-3 px-4 font-semibold text-steel-300">Nome</th>
+                    <th className="text-left py-3 px-4 font-semibold text-steel-300">Slug</th>
+                    <th className="text-left py-3 px-4 font-semibold text-steel-300">Descrição</th>
+                    <th className="text-center py-3 px-4 font-semibold text-steel-300">Itens</th>
+                    <th className="text-center py-3 px-4 font-semibold text-steel-300">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {categories.map((category) => (
-                    <tr key={category.id} className="border-b hover:bg-gray-50">
+                    <tr key={category.id} className="border-b border-steel-700/50 hover:bg-steel-700/30">
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
                           {category.imageUrl && (
@@ -317,15 +331,15 @@ export default function CategoryManagement() {
                               className="w-10 h-10 rounded object-cover"
                             />
                           )}
-                          <span className="font-medium text-gray-900">{category.name}</span>
+                          <span className="font-medium text-white">{category.name}</span>
                         </div>
                       </td>
-                      <td className="py-3 px-4 text-gray-600">{category.slug}</td>
-                      <td className="py-3 px-4 text-gray-600">
+                      <td className="py-3 px-4 text-steel-400">{category.slug}</td>
+                      <td className="py-3 px-4 text-steel-400">
                         <span className="line-clamp-2">{category.description || '-'}</span>
                       </td>
                       <td className="py-3 px-4 text-center">
-                        <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                        <span className="inline-block bg-accent-500/20 text-accent-300 text-xs px-2 py-1 rounded-full">
                           {category._count?.products || 0}
                         </span>
                       </td>
@@ -335,6 +349,7 @@ export default function CategoryManagement() {
                             variant="outline"
                             size="sm"
                             onClick={() => handleEditCategory(category)}
+                            className="border-steel-600 text-steel-300 hover:bg-steel-700 hover:text-white"
                           >
                             Editar
                           </Button>
@@ -342,6 +357,7 @@ export default function CategoryManagement() {
                             variant="destructive"
                             size="sm"
                             onClick={() => handleDeleteCategory(category.id)}
+                            className="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border-0"
                           >
                             Remover
                           </Button>

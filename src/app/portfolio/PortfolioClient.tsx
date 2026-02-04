@@ -30,16 +30,16 @@ function useCarousel(totalImages: number) {
 
 // Gradient colors for categories (can be expanded)
 const categoryGradients = [
-  'from-wood-400 to-wood-600',
-  'from-gold-400 to-gold-600', 
+  'from-steel-400 to-steel-600',
+  'from-accent-400 to-accent-600', 
   'from-blue-400 to-blue-600',
-  'from-wood-300 to-wood-500',
+  'from-steel-300 to-steel-500',
   'from-neutral-300 to-neutral-500',
   'from-purple-400 to-purple-600',
   'from-red-400 to-red-600',
   'from-indigo-400 to-indigo-600',
   'from-teal-400 to-teal-600',
-  'from-orange-400 to-orange-600'
+  'from-cyan-400 to-cyan-600'
 ]
 
 interface Category {
@@ -202,12 +202,12 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
-      case 'madeira': return 'from-wood-400 to-wood-600'
-      case 'vinílico': return 'from-blue-400 to-blue-600'
-      case 'laminado': return 'from-wood-300 to-wood-500'
-      case 'acabamento': return 'from-gold-400 to-gold-600'
+      case 'diagnostico': return 'from-steel-400 to-steel-600'
+      case 'reparo': return 'from-zinc-400 to-zinc-600'
+      case 'retifica': return 'from-steel-300 to-steel-500'
+      case 'manutencao': return 'from-accent-400 to-accent-600'
       case 'outros': return 'from-neutral-300 to-neutral-500'
-      default: return 'from-green-400 to-green-600'
+      default: return 'from-steel-500 to-steel-700'
     }
   }
 
@@ -317,7 +317,7 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
           {project.title}
         </h3>
         <p className="text-green-600 font-semibold text-sm mb-3">{project.location || 'Localização não informada'}</p>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description || 'Projeto de pisos profissional.'}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description || 'Serviço especializado em câmbio automático.'}</p>
         
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
@@ -446,12 +446,12 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
   
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
-      case 'madeira': return 'from-wood-400 to-wood-600'
-      case 'vinílico': return 'from-blue-400 to-blue-600'
-      case 'laminado': return 'from-wood-300 to-wood-500'
-      case 'acabamento': return 'from-gold-400 to-gold-600'
+      case 'diagnostico': return 'from-steel-400 to-steel-600'
+      case 'reparo': return 'from-zinc-400 to-zinc-600'
+      case 'retifica': return 'from-steel-300 to-steel-500'
+      case 'manutencao': return 'from-accent-400 to-accent-600'
       case 'outros': return 'from-neutral-300 to-neutral-500'
-      default: return 'from-green-400 to-green-600'
+      default: return 'from-steel-500 to-steel-700'
     }
   }
 
@@ -606,7 +606,7 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
             <div>
               <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Detalhes do Projeto</h3>
               <p className="font-montserrat text-gray-600 mb-4 leading-relaxed">
-                {project.description || 'Projeto profissional de pisos executado com excelência e atenção aos detalhes.'}
+                {project.description || 'Serviço profissional de câmbio automático executado com excelência e garantia.'}
               </p>
               <div className="space-y-2">
                 <p className="text-green-600 font-semibold">📍 {project.location || 'Localização não informada'}</p>
@@ -655,7 +655,7 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
               href="/contact"
               className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg"
             >
-              Iniciar Projeto Semelhante
+              Agendar Diagnóstico
             </a>
             <button 
               onClick={onClose}
@@ -752,7 +752,7 @@ export default function PortfolioClient() {
         <div className="text-center">
           <SpinningLogo size="lg" color="green" className="mb-4" />
           <div className="font-montserrat text-2xl text-gray-700 mb-2">Carregando Portfólio</div>
-          <div className="font-montserrat text-gray-500">Preparando nossos melhores projetos...</div>
+          <div className="font-montserrat text-gray-500">Preparando nossos melhores trabalhos...</div>
         </div>
       </div>
     )
@@ -764,13 +764,13 @@ export default function PortfolioClient() {
       <section className="relative py-20 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-cinzel text-5xl md:text-6xl lg:text-7xl mb-6 tracking-wider font-light">
-            <span className="text-gradient-gold">
+            <span className="text-gradient-accent">
               Nosso Portfólio
             </span>
           </h1>
           <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
-            Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
-            Pisos Pró a escolha confiável para soluções em pisos premium
+            Explore nossos trabalhos recentes e veja a qualidade que fez da
+            JR Câmbio Automático a escolha confiável para reparo de transmissões
           </p>
         </div>
       </section>
@@ -846,7 +846,7 @@ export default function PortfolioClient() {
               <div className="font-montserrat text-gray-700 font-medium">Metros Quadrados</div>
             </div>
             <div className="text-center group">
-              <div className="text-5xl font-bold bg-gradient-to-r from-gold-500 to-gold-700 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-5xl font-bold bg-gradient-to-r from-accent-500 to-accent-700 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
                 98%
               </div>
               <div className="font-montserrat text-gray-700 font-medium">Satisfação do Cliente</div>
@@ -863,7 +863,7 @@ export default function PortfolioClient() {
         {/* CTA Section */}
         {/* <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
           <h2 className="font-cinzel text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient-gold">
+            <span className="text-gradient-accent">
               Pronto para Transformar seu Espaço?
             </span>
           </h2>

@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const ADMIN_ACCESS_KEY = 'pisospro_admin_2024'
-const STORAGE_KEY = 'pisospro_admin_access'
+const ADMIN_ACCESS_KEY = 'jrcambio_admin_2024'
+const STORAGE_KEY = 'jrcambio_admin_access'
 
 export default function AdminAuth({ children }: { children: React.ReactNode }) {
   const [hasAccess, setHasAccess] = useState(false)

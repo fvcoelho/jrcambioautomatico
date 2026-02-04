@@ -52,11 +52,15 @@ const Dialog: React.FC<DialogProps> = ({ open, onOpenChange, children }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div 
-        className="fixed inset-0 bg-black/80" 
+      <div
+        className="fixed inset-0 bg-black/80"
         onClick={() => onOpenChange?.(false)}
+        aria-hidden="true"
       />
-      <div className="relative z-50 flex w-full justify-center">
+      <div
+        className="relative z-50 flex w-full justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>
@@ -72,6 +76,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
         "max-h-[90vh] overflow-y-auto",
         className
       )}
+      onClick={(e) => e.stopPropagation()}
       {...props}
     >
       {children}
