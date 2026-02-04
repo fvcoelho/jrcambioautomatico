@@ -4,20 +4,26 @@ let sessionId: string | null = null
 // Check if current route should be tracked
 function shouldTrack(): boolean {
   if (typeof window === 'undefined') return false
-  
+
+  // Check user preference
+  const analyticsEnabled = localStorage.getItem('analytics_enabled')
+  if (analyticsEnabled === 'false') {
+    return false
+  }
+
   // Skip tracking for admin routes
   const pathname = window.location.pathname
   if (pathname.startsWith('/admin')) {
     return false
   }
-  
+
   return true
 }
 
 // Generate or retrieve session ID
 function getSessionId(): string {
   if (sessionId) return sessionId
-  
+
   // Check localStorage first
   if (typeof window !== 'undefined') {
     const stored = localStorage.getItem('analytics_session_id')
@@ -26,14 +32,14 @@ function getSessionId(): string {
       return sessionId
     }
   }
-  
+
   // Generate new session ID
   sessionId = generateId()
-  
+
   if (typeof window !== 'undefined') {
     localStorage.setItem('analytics_session_id', sessionId)
   }
-  
+
   return sessionId
 }
 
@@ -45,7 +51,7 @@ function generateId(): string {
 // Get basic session info
 function getSessionInfo() {
   if (typeof window === 'undefined') return {}
-  
+
   return {
     sessionId: getSessionId(),
     userAgent: navigator.userAgent,
@@ -63,10 +69,10 @@ function getSessionInfo() {
 // Track page view
 export async function trackPageView(page?: string, title?: string) {
   if (!shouldTrack()) return
-  
+
   const pageUrl = page || window.location.pathname
   const pageTitle = title || document.title
-  
+
   try {
     await fetch('/api/track/pageview', {
       method: 'POST',
@@ -87,24 +93,24 @@ export async function trackPageView(page?: string, title?: string) {
 // Track click event
 export async function trackClick(element: HTMLElement, customData?: any) {
   if (!shouldTrack()) return
-  
+
   // Extract element information
-  const elementId = element.id || 
-                   element.getAttribute('data-track-id') || 
-                   element.getAttribute('data-id') ||
-                   undefined
-  
-  const elementText = element.innerText?.trim() || 
-                     element.textContent?.trim() || 
-                     element.getAttribute('aria-label') ||
-                     element.getAttribute('title') ||
-                     undefined
-  
+  const elementId = element.id ||
+    element.getAttribute('data-track-id') ||
+    element.getAttribute('data-id') ||
+    undefined
+
+  const elementText = element.innerText?.trim() ||
+    element.textContent?.trim() ||
+    element.getAttribute('aria-label') ||
+    element.getAttribute('title') ||
+    undefined
+
   const elementType = element.tagName.toLowerCase()
-  
+
   // Skip if no meaningful data
   if (!elementText && !elementId) return
-  
+
   try {
     await fetch('/api/track/click', {
       method: 'POST',
@@ -128,10 +134,10 @@ export async function trackClick(element: HTMLElement, customData?: any) {
 // Setup global click listener
 export function setupGlobalTracking() {
   if (!shouldTrack()) return
-  
+
   // Track initial page view
   trackPageView()
-  
+
   // Track all clicks
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement
@@ -139,10 +145,10 @@ export function setupGlobalTracking() {
       trackClick(target)
     }
   }, { passive: true })
-  
+
   // Track page visibility changes (for time tracking)
   let pageStartTime = Date.now()
-  
+
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
       const timeSpent = Math.round((Date.now() - pageStartTime) / 1000)
@@ -152,7 +158,7 @@ export function setupGlobalTracking() {
       pageStartTime = Date.now()
     }
   })
-  
+
   // Track before page unload
   window.addEventListener('beforeunload', () => {
     const timeSpent = Math.round((Date.now() - pageStartTime) / 1000)
@@ -163,7 +169,7 @@ export function setupGlobalTracking() {
 // Update page view with time spent
 async function updatePageViewTime(timeSpent: number) {
   if (!shouldTrack() || timeSpent < 1) return // Ignore very short visits or admin routes
-  
+
   try {
     await fetch('/api/track/pageview', {
       method: 'PATCH',
@@ -185,23 +191,23 @@ async function updatePageViewTime(timeSpent: number) {
 export const analytics = {
   trackEvent: (eventName: string, data?: any) => {
     if (!shouldTrack()) return
-    
+
     const element = document.createElement('span')
     element.setAttribute('data-track-id', eventName)
     element.textContent = eventName
-    
+
     trackClick(element, data)
   },
-  
+
   identify: (userId: string, traits?: any) => {
     if (!shouldTrack()) return
-    
+
     localStorage.setItem('analytics_user_id', userId)
     if (traits) {
       localStorage.setItem('analytics_user_traits', JSON.stringify(traits))
     }
   },
-  
+
   getSessionId,
   trackPageView,
   trackClick

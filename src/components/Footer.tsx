@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import AnalyticsToggle from './AnalyticsToggle'
 
 export default function Footer() {
   return (
@@ -72,7 +73,7 @@ export default function Footer() {
               <li><FooterLink href="/services">Serviços</FooterLink></li>
               {/* <li><FooterLink href="/products">Produtos</FooterLink></li> */}
               <li><FooterLink href="/about">Sobre Nós</FooterLink></li>
-              <li><FooterLink href="/contact">Contato</FooterLink></li>
+              <li><FooterLink href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.">Contato</FooterLink></li>
             </ul>
           </div>
 
@@ -147,16 +148,11 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center lg:justify-end space-x-6">
+            <div className="flex flex-wrap justify-center lg:justify-end items-center gap-6">
+              <AnalyticsToggle />
               <Link href="/politica-privacidade" className="text-white/70 hover:text-white transition-colors text-sm">
                 Política de Privacidade
               </Link>
-              {/* <Link href="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
-                Termos de Serviço
-              </Link> */}
-              {/* <Link href="/sitemap" className="text-white/70 hover:text-white transition-colors text-sm">
-                Mapa do Site
-              </Link> */}
             </div>
           </div>
 
