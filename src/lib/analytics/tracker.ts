@@ -5,6 +5,11 @@ let sessionId: string | null = null
 function shouldTrack(): boolean {
   if (typeof window === 'undefined') return false
 
+  // Check global environment setting
+  if (process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === 'false') {
+    return false
+  }
+
   // Check user preference
   const analyticsEnabled = localStorage.getItem('analytics_enabled')
   if (analyticsEnabled === 'false') {
