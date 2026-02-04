@@ -18,11 +18,11 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-        ? 'glass-enhanced shadow-elegant'
-        : 'bg-transparent'
+      ? 'glass-enhanced shadow-elegant'
+      : 'bg-transparent'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20">
+        <div className="flex justify-between h-24">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <div className="relative">
@@ -31,8 +31,7 @@ export default function Navbar() {
                   alt="JR Câmbio Automático - Especialistas em Câmbio Automático"
                   width={400}
                   height={200}
-                  className={`h-16 w-auto transition-all duration-300 ${scrolled ? '' : 'invert'
-                    }`}
+                  className="h-20 w-auto transition-all duration-300"
                   priority
                 />
                 {/* Logo glow effect on hover */}
@@ -155,8 +154,8 @@ function NavLink({ href, children, scrolled, ...props }: {
       href={href}
       {...props}
       className={`relative px-4 py-2 text-base font-medium transition-all duration-300 rounded-lg group ${scrolled
-          ? 'text-steel-100 hover:text-white hover:bg-steel-700'
-          : 'text-white hover:text-accent-300'
+        ? 'text-steel-100 hover:text-white hover:bg-steel-700'
+        : 'text-white hover:text-accent-300'
         }`}
     >
       {children}
