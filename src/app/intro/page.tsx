@@ -10,10 +10,12 @@ export default function IntroPage() {
   const [isMuted, setIsMuted] = useState(false)
 
   const handleSkip = () => {
+    sessionStorage.setItem('hasSeenIntro', 'true')
     router.push('/')
   }
 
   const handleVideoEnd = () => {
+    sessionStorage.setItem('hasSeenIntro', 'true')
     router.push('/')
   }
 

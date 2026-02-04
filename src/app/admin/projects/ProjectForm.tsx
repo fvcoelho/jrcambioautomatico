@@ -55,36 +55,36 @@ export default function ProjectForm({
     description: initialData?.description || '',
     location: initialData?.location || '',
     category: initialData?.category || '',
-    completedAt: initialData?.completedAt 
-      ? new Date(initialData.completedAt).toISOString().split('T')[0] 
+    completedAt: initialData?.completedAt
+      ? new Date(initialData.completedAt).toISOString().split('T')[0]
       : '',
     isActive: initialData?.isActive ?? true
   })
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {}
-    
+
     if (!formData.title?.trim()) {
       newErrors.title = 'Título é obrigatório'
     }
-    
+
     if (formData.title && formData.title.trim().length < 3) {
       newErrors.title = 'Título deve ter pelo menos 3 caracteres'
     }
-    
+
     if (formData.description && formData.description.trim().length > 500) {
       newErrors.description = 'Descrição deve ter no máximo 500 caracteres'
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       return
     }
@@ -116,32 +116,33 @@ export default function ProjectForm({
   const isCreateMode = mode === 'create'
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <div className="flex items-center justify-between p-6 border-b">
+    <Card className="w-full max-w-2xl mx-auto bg-steel-900 border-steel-700">
+      <div className="flex items-center justify-between p-6 border-b border-steel-700">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${isCreateMode ? 'bg-blue-100' : 'bg-green-100'}`}>
+          <div className={`p-2 rounded-lg ${isCreateMode ? 'bg-blue-500/20' : 'bg-green-500/20'}`}>
             {isCreateMode ? (
-              <Plus className="h-5 w-5 text-blue-600" />
+              <Plus className="h-5 w-5 text-blue-400" />
             ) : (
-              <Edit className="h-5 w-5 text-green-600" />
+              <Edit className="h-5 w-5 text-green-400" />
             )}
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">
+            <h2 className="text-xl font-semibold text-white">
               {isCreateMode ? 'Criar Novo Projeto' : 'Editar Projeto'}
             </h2>
-            <p className="text-sm text-gray-500">
-              {isCreateMode 
-                ? 'Adicione um novo projeto ao portfólio' 
+            <p className="text-sm text-steel-400">
+              {isCreateMode
+                ? 'Adicione um novo projeto ao portfólio'
                 : 'Atualize as informações do projeto'}
             </p>
           </div>
         </div>
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={onCancel}
           disabled={loading}
+          className="text-steel-400 hover:text-white hover:bg-steel-800"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -151,13 +152,13 @@ export default function ProjectForm({
         {/* Project Info Section */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 mb-4">
-            <FileText className="h-4 w-4 text-gray-500" />
-            <h3 className="font-medium text-gray-900">Informações Básicas</h3>
+            <FileText className="h-4 w-4 text-steel-400" />
+            <h3 className="font-medium text-white">Informações Básicas</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <Label htmlFor="title" className="text-sm font-medium text-gray-700">
+              <Label htmlFor="title" className="text-sm font-medium text-steel-300">
                 Título do Projeto *
               </Label>
               <Input
@@ -165,16 +166,16 @@ export default function ProjectForm({
                 value={formData.title}
                 onChange={(e) => updateField('title', e.target.value)}
                 placeholder="Ex: Reparo de câmbio automático Honda Civic"
-                className={errors.title ? 'border-red-500' : ''}
+                className={`bg-steel-800 border-steel-700 text-white placeholder:text-steel-500 focus:border-accent-500 ${errors.title ? 'border-red-500' : ''}`}
                 disabled={loading}
               />
               {errors.title && (
-                <p className="mt-1 text-sm text-red-600">{errors.title}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.title}</p>
               )}
             </div>
 
             <div>
-              <Label htmlFor="location" className="text-sm font-medium text-gray-700 flex items-center gap-1">
+              <Label htmlFor="location" className="text-sm font-medium text-steel-300 flex items-center gap-1">
                 <MapPin className="h-3 w-3" />
                 Localização
               </Label>
@@ -183,12 +184,13 @@ export default function ProjectForm({
                 value={formData.location || ''}
                 onChange={(e) => updateField('location', e.target.value)}
                 placeholder="Ex: São Paulo, SP"
+                className="bg-steel-800 border-steel-700 text-white placeholder:text-steel-500 focus:border-accent-500"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <Label htmlFor="category" className="text-sm font-medium text-gray-700 flex items-center gap-1">
+              <Label htmlFor="category" className="text-sm font-medium text-steel-300 flex items-center gap-1">
                 <Tag className="h-3 w-3" />
                 Categoria
               </Label>
@@ -197,10 +199,11 @@ export default function ProjectForm({
                 value={formData.category || ''}
                 onChange={(e) => updateField('category', e.target.value)}
                 disabled={loading}
+                className="bg-steel-800 border-steel-700 text-white focus:border-accent-500"
               >
                 <option value="">Selecione uma categoria</option>
                 {categories.map((cat) => (
-                  <option key={cat.id} value={cat.slug}>
+                  <option key={cat.id} value={cat.slug} className="bg-steel-900">
                     {cat.name}
                   </option>
                 ))}
@@ -209,7 +212,7 @@ export default function ProjectForm({
           </div>
 
           <div>
-            <Label htmlFor="description" className="text-sm font-medium text-gray-700">
+            <Label htmlFor="description" className="text-sm font-medium text-steel-300">
               Descrição
             </Label>
             <Textarea
@@ -218,30 +221,30 @@ export default function ProjectForm({
               onChange={(e) => updateField('description', e.target.value)}
               placeholder="Descreva o projeto realizado, materiais utilizados, desafios superados..."
               rows={4}
-              className={errors.description ? 'border-red-500' : ''}
+              className={`bg-steel-800 border-steel-700 text-white placeholder:text-steel-500 focus:border-accent-500 ${errors.description ? 'border-red-500' : ''}`}
               disabled={loading}
             />
             {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
+              <p className="mt-1 text-sm text-red-400">{errors.description}</p>
             )}
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-steel-500">
               {formData.description?.length || 0}/500 caracteres
             </p>
           </div>
         </div>
 
-        <Separator />
+        <Separator className="bg-steel-700" />
 
         {/* Project Details Section */}
         <div className="space-y-4">
           {/* <div className="flex items-center gap-2 mb-4">
-            <CalendarDays className="h-4 w-4 text-gray-500" />
-            <h3 className="font-medium text-gray-900">Detalhes do Projeto</h3>
+            <CalendarDays className="h-4 w-4 text-steel-400" />
+            <h3 className="font-medium text-white">Detalhes do Projeto</h3>
           </div> */}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
             <div>
-              <Label htmlFor="completedAt" className="text-sm font-medium text-gray-700">
+              <Label htmlFor="completedAt" className="text-sm font-medium text-steel-300">
                 Data de Conclusão
               </Label>
               <Input
@@ -250,6 +253,7 @@ export default function ProjectForm({
                 value={formData.completedAt || ''}
                 onChange={(e) => updateField('completedAt', e.target.value)}
                 disabled={loading}
+                className="bg-steel-800 border-steel-700 text-white focus:border-accent-500"
               />
             </div>
 
@@ -276,7 +280,7 @@ export default function ProjectForm({
               <div>
                 <p className="font-medium">Sobre as imagens do projeto</p>
                 <p className="text-sm text-gray-600 mt-1">
-                  Após criar o projeto, você poderá adicionar e organizar as imagens 
+                  Após criar o projeto, você poderá adicionar e organizar as imagens
                   usando o botão &quot;Gerenciar Imagens&quot; na lista de projetos.
                 </p>
               </div>
@@ -288,21 +292,21 @@ export default function ProjectForm({
 
         {/* Form Actions */}
         <div className="flex items-center justify-end gap-3 pt-4">
-          <Button 
-            type="button" 
-            variant="outline" 
+          <Button
+            type="button"
+            variant="outline"
             onClick={onCancel}
             disabled={loading}
           >
             Cancelar
           </Button>
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             disabled={loading}
             className="min-w-[120px]"
           >
-            {loading 
-              ? (isCreateMode ? 'Criando...' : 'Salvando...') 
+            {loading
+              ? (isCreateMode ? 'Criando...' : 'Salvando...')
               : (isCreateMode ? 'Criar Projeto' : 'Salvar Alterações')
             }
           </Button>

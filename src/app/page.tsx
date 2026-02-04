@@ -164,7 +164,7 @@ export default function Home() {
   const sections = [
     { id: 'hero', component: Hero },
     { id: 'portfolio', component: PortfolioSection },
-    { id: 'services-overview', component: ServicesOverview },
+    { id: 'services', component: ServicesSection },
     { id: 'products-showcase', component: ProductsShowcase },
     { id: 'about', component: AboutSection },
     { id: 'map', component: MapSection },
@@ -200,7 +200,7 @@ export default function Home() {
         }
         setVisibleSections(newSections)
       }
-      
+
       // Scroll to section after a brief delay
       setTimeout(() => {
         const element = document.getElementById(sectionId)
@@ -255,14 +255,14 @@ export default function Home() {
           </section>
         )
       })}
-      
+
       {/* Loading indicator */}
       {isLoading && (
         <div className="flex justify-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-500"></div>
         </div>
       )}
-      
+
       {/* End of content message */}
       {/* {visibleSections.length === sections.length && (
         <div className="text-center py-12 text-steel-400">
@@ -295,12 +295,12 @@ function ServicesSection() {
                   Mais Popular
                 </div>
               )}
-              
+
               <div className={`h-24 bg-gradient-to-r ${service.gradient} relative overflow-hidden`}>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-              
+
               <div className="p-8 -mt-6 relative">
                 <div className="bg-steel-800 rounded-2xl p-6 shadow-lg mb-6">
                   <div className="mb-4">
@@ -308,9 +308,9 @@ function ServicesSection() {
                     <p className="text-accent-400 font-bold text-xl">{service.price}</p>
                   </div>
                 </div>
-                
+
                 <p className="font-montserrat text-steel-300 mb-8 leading-relaxed">{service.description}</p>
-                
+
                 <div className="mb-8">
                   <h4 className="font-cinzel text-lg font-bold text-white mb-4">O que está incluído:</h4>
                   <ul className="space-y-3">
@@ -322,8 +322,8 @@ function ServicesSection() {
                     ))}
                   </ul>
                 </div>
-                
-                <Link 
+
+                <Link
                   href="/contact"
                   className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 text-center font-montserrat shadow-lg group-hover:shadow-xl block"
                 >
@@ -359,13 +359,13 @@ function ProductsSection() {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-              
+
               <div className="p-8 -mt-8 relative">
                 <div className="bg-steel-800 rounded-2xl p-8 shadow-lg mb-8">
                   <h3 className="font-cinzel text-4xl font-bold text-white mb-4">{category.name}</h3>
                   <p className="font-montserrat text-steel-300 text-lg leading-relaxed">{category.description}</p>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {category.products.map((product, index) => (
                     <div key={index} className="bg-gradient-to-br from-steel-800 to-steel-900 rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 border border-steel-700 group">
@@ -381,7 +381,7 @@ function ProductsSection() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link 
+          <Link
             href="/products"
             className="inline-block bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
           >
@@ -410,7 +410,7 @@ function PortfolioSection() {
         const catResponse = await fetch('/api/categories')
         const catData = await catResponse.json()
         setCategories(catData.categories || [])
-        
+
         // Fetch 9 random projects
         const projResponse = await fetch('/api/projects?status=active&random=true&limit=9')
         const projData = await projResponse.json()
@@ -424,18 +424,18 @@ function PortfolioSection() {
   }, [])
 
   // Filter projects
-  const filteredProjects = selectedCategory === 'all' 
-    ? projects 
+  const filteredProjects = selectedCategory === 'all'
+    ? projects
     : projects.filter(project => {
-        const selectedCat = categories.find(cat => cat.slug === selectedCategory)
-        return project.category === selectedCategory || 
-               project.category === selectedCat?.name ||
-               project.category === selectedCat?.slug
-      })
+      const selectedCat = categories.find(cat => cat.slug === selectedCategory)
+      return project.category === selectedCategory ||
+        project.category === selectedCat?.name ||
+        project.category === selectedCat?.slug
+    })
 
   const categoryGradients = [
     'from-steel-400 to-steel-600',
-    'from-accent-400 to-accent-600', 
+    'from-accent-400 to-accent-600',
     'from-blue-400 to-blue-600',
     'from-steel-300 to-steel-500',
     'from-neutral-300 to-neutral-500'
@@ -523,12 +523,12 @@ function PortfolioSection() {
           {filteredProjects.slice(0, 9).map((project) => {
             const images = project.galleryImages?.filter((img: any) => img.isActive) || []
             const gradient = getCategoryGradient(project.category)
-            const category = categories.find(cat => 
+            const category = categories.find(cat =>
               cat.slug === project.category || cat.name === project.category
             )
-            
+
             return (
-              <div 
+              <div
                 key={project.id}
                 className="bg-steel-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
                 onClick={() => setSelectedProject(project)}
@@ -567,7 +567,7 @@ function PortfolioSection() {
                       </div>
                     </div>
                   )}
-                  
+
                   {/* Status Badge */}
                   <div className="absolute top-3 left-3">
                     <span className="bg-steel-8000 text-white px-2 py-1 rounded text-xs font-semibold">
@@ -575,13 +575,13 @@ function PortfolioSection() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <h3 className="font-cinzel text-xl font-bold text-white mb-3">{project.title}</h3>
                   {project.description && (
                     <p className="font-montserrat text-steel-300 text-sm mb-4 line-clamp-2">{project.description}</p>
                   )}
-                  
+
                   {/* Metadata */}
                   <div className="space-y-2 text-sm text-steel-400">
                     {project.location && (
@@ -593,7 +593,7 @@ function PortfolioSection() {
                         <span>{project.location}</span>
                       </div>
                     )}
-                    
+
                     {category && (
                       <div className="flex items-center gap-2">
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -602,7 +602,7 @@ function PortfolioSection() {
                         <span>{category?.name || project.category}</span>
                       </div>
                     )}
-                    
+
                     {project.completedAt && (
                       <div className="flex items-center gap-2">
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -652,7 +652,7 @@ function PortfolioSection() {
         </div> */}
 
         <div className="text-center">
-          <Link 
+          <Link
             href="/portfolio"
             className="inline-block bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 font-montserrat shadow-lg"
           >
@@ -662,9 +662,9 @@ function PortfolioSection() {
 
         {/* Project Detail Modal */}
         {selectedProject && (
-          <ProjectModal 
+          <ProjectModal
             project={selectedProject}
-            onClose={() => setSelectedProject(null)} 
+            onClose={() => setSelectedProject(null)}
           />
         )}
       </div>
@@ -677,7 +677,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
   const images = project.galleryImages?.filter((img: any) => img.isActive) || []
   const [currentIndex, setCurrentIndex] = useState(0)
   const modalVideoRef = useRef<HTMLVideoElement>(null)
-  
+
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
       case 'diagnostico': return 'from-steel-400 to-steel-600'
@@ -697,7 +697,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
       const video = modalVideoRef.current
       video.muted = true
       video.currentTime = 0
-      
+
       const playVideo = async () => {
         try {
           await video.play()
@@ -705,7 +705,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
           console.log('Video autoplay failed, will try on user interaction:', error)
         }
       }
-      
+
       if (video.readyState >= 3) {
         playVideo()
       } else {
@@ -735,14 +735,14 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
         <div className="p-8">
           <div className="flex justify-between items-start mb-6">
             <h2 className="font-cinzel text-3xl font-bold text-white">{project.title}</h2>
-            <button 
+            <button
               onClick={onClose}
               className="text-gray-400 hover:text-steel-300 text-3xl transition-colors p-2"
             >
               ✕
             </button>
           </div>
-          
+
           {/* Image Carousel */}
           <div className={`h-96 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
             {images.length > 0 ? (
@@ -766,7 +766,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                     className="w-full h-full object-cover rounded-2xl"
                   />
                 )}
-                
+
                 {images.length > 1 && (
                   <>
                     <button
@@ -775,7 +775,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                     >
                       ←
                     </button>
-                    
+
                     <button
                       className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all duration-300"
                       onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
@@ -787,9 +787,8 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                       {images.map((_: any, index: number) => (
                         <button
                           key={index}
-                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                            index === currentIndex ? 'bg-steel-800 w-8' : 'bg-steel-800/50'
-                          }`}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-steel-800 w-8' : 'bg-steel-800/50'
+                            }`}
                           onClick={() => setCurrentIndex(index)}
                         />
                       ))}
@@ -834,24 +833,24 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
               )}
             </div>
           </div>
-          
+
           <div className="flex gap-4">
-            <a 
+            <a
               href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Vi um trabalho no portfólio e gostaria de saber mais sobre o serviço: ${project.title}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg flex items-center justify-center gap-3"
             >
-              <svg 
-                className="w-6 h-6 fill-current" 
-                viewBox="0 0 24 24" 
+              <svg
+                className="w-6 h-6 fill-current"
+                viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
               </svg>
               Agendar Diagnóstico
             </a>
-            <button 
+            <button
               onClick={onClose}
               className="border-2 border-steel-600 text-steel-200 px-8 py-4 rounded-xl font-semibold hover:bg-steel-700 transition-colors font-montserrat"
             >
@@ -990,13 +989,13 @@ function ContactSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <Link 
+          <Link
             href="/contact"
             className="bg-gradient-to-r from-accent-400 to-accent-500 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-accent-300 hover:to-accent-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
           >
             Solicitar Orçamento Grátis
           </Link>
-          <Link 
+          <Link
             href="https://wa.me/5511940147157"
             target="_blank"
             rel="noopener noreferrer"
@@ -1004,7 +1003,7 @@ function ContactSection() {
           >
             WhatsApp
           </Link>
-          <a 
+          <a
             href="tel:+551131137934"
             className="bg-gradient-to-r from-steel-400 to-steel-600 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-wood-500 hover:to-wood-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
           >

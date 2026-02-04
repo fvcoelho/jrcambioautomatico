@@ -2,17 +2,18 @@ import { NextRequest, NextResponse } from 'next/server'
 import { put } from '@vercel/blob'
 import { prisma } from '@/lib/prisma'
 import { localStorageService } from '@/lib/upload/local-storage'
+import { supabase } from '@/lib/supabase'
 
 // Determine storage type from environment
-const STORAGE_TYPE = process.env.STORAGE_TYPE || 'vercel' // 'vercel' or 'local'
+const STORAGE_TYPE = process.env.STORAGE_TYPE || 'vercel' // 'vercel', 'local' or 'supabase'
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now()
-  
+
   try {
     // Enhanced logging for debugging
     console.log('🚀 Gallery upload started')
-    
+
     const formData = await request.formData()
     const file = formData.get('file') as File
     const title = formData.get('title') as string
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     // Validation with enhanced error details
     if (!file) {
       console.log('❌ No file provided')
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: 'No file provided',
         details: 'File field is required in form data'
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     if (!title) {
       console.log('❌ No title provided')
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: 'Title is required',
         details: 'Title field is required for gallery images'
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     if (!projectIdStr) {
       console.log('❌ No projectId provided')
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: 'Project is required',
         details: 'Project selection is required'
@@ -61,7 +62,7 @@ export async function POST(request: NextRequest) {
     const projectId = parseInt(projectIdStr)
     if (isNaN(projectId)) {
       console.log('❌ Invalid projectId provided')
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: 'Invalid project ID',
         details: 'Project ID must be a valid number'
@@ -75,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     if (!project) {
       console.log('❌ Project not found or inactive:', projectId)
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: 'Project not found',
         details: 'The selected project does not exist or is inactive'
@@ -85,10 +86,10 @@ export async function POST(request: NextRequest) {
     // Validate file type (images and videos)
     const isImage = file.type.startsWith('image/')
     const isVideo = file.type.startsWith('video/')
-    
+
     if (!isImage && !isVideo) {
       console.log('❌ Invalid file type:', file.type)
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: 'Only image and video files are allowed',
         details: `Received file type: ${file.type}. Allowed types: image/*, video/*`
@@ -102,7 +103,7 @@ export async function POST(request: NextRequest) {
     if (file.size > maxSize) {
       const maxSizeMB = isVideo ? 20 : 10
       console.log('❌ File too large:', `${(file.size / 1024 / 1024).toFixed(2)}MB`)
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: false,
         error: `File size must be less than ${maxSizeMB}MB for ${fileType}s`,
         details: `File size: ${(file.size / 1024 / 1024).toFixed(2)}MB. Max allowed: ${maxSizeMB}MB for ${fileType}s`
@@ -128,14 +129,56 @@ export async function POST(request: NextRequest) {
         pathname: blob.pathname,
         uploadTime: `${Date.now() - startTime}ms`
       })
+    } else if (STORAGE_TYPE === 'supabase') {
+      console.log('📤 Uploading to Supabase Storage...')
+
+      // Check for placeholder credentials
+      if (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY === 'your-anon-key-here') {
+        const msg = 'Supabase Anon Key is still set to placeholder value.'
+        console.error('❌ ' + msg)
+        return NextResponse.json({
+          success: false,
+          error: 'Configuration Error',
+          details: 'Please update NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env file with your actual Supabase key.',
+          debug: { storageType: STORAGE_TYPE }
+        }, { status: 500 })
+      }
+
+      const filename = `gallery/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`
+
+      const { data, error } = await supabase.storage
+        .from('gallery')
+        .upload(filename, file, {
+          cacheControl: '3600',
+          upsert: false,
+          contentType: file.type
+        })
+
+      if (error) throw error
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('gallery')
+        .getPublicUrl(filename)
+
+      blob = {
+        url: publicUrl,
+        pathname: filename,
+        downloadUrl: publicUrl
+      }
+
+      console.log('✅ File uploaded to Supabase:', {
+        url: blob.url,
+        pathname: blob.pathname,
+        uploadTime: `${Date.now() - startTime}ms`
+      })
     } else {
       // Check if Vercel Blob is configured
       if (!process.env.BLOB_READ_WRITE_TOKEN) {
         console.log('❌ Blob storage not configured')
         return NextResponse.json({
           success: false,
-          error: 'Blob storage not configured. Please set BLOB_READ_WRITE_TOKEN environment variable or use STORAGE_TYPE=local.',
-          details: 'Check your .env file for BLOB_READ_WRITE_TOKEN configuration or set STORAGE_TYPE=local'
+          error: 'Blob storage not configured. Please set BLOB_READ_WRITE_TOKEN environment variable or use STORAGE_TYPE=local or STORAGE_TYPE=supabase.',
+          details: 'Check your .env file configuration'
         }, { status: 500 })
       }
 
@@ -237,7 +280,7 @@ export async function POST(request: NextRequest) {
     const uploadTime = Date.now() - startTime
     console.error('❌ Gallery upload failed:', error)
     console.error('Upload duration before error:', `${uploadTime}ms`)
-    
+
     // Enhanced error debugging like test-simple-upload
     if (error.response) {
       console.error('HTTP Error Details:', {
@@ -255,7 +298,7 @@ export async function POST(request: NextRequest) {
         stack: error.stack?.split('\n')[0]
       })
     }
-    
+
     // Provide more specific error messages
     if (error instanceof Error) {
       if (error.message.includes('401') || error.message.includes('Unauthorized')) {
@@ -271,7 +314,7 @@ export async function POST(request: NextRequest) {
           }
         }, { status: 401 })
       }
-      
+
       if (error.message.includes('413') || error.message.includes('too large')) {
         console.log('📏 File size issue detected')
         return NextResponse.json({
@@ -292,7 +335,7 @@ export async function POST(request: NextRequest) {
         }, { status: 503 })
       }
     }
-    
+
     return NextResponse.json({
       success: false,
       error: 'Failed to upload image',
