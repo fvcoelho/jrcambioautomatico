@@ -242,7 +242,7 @@ export default function AboutPage() {
               câmbios automáticos de todas as marcas e modelos.
             </p>
             <a
-              href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+              href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-accent-400 to-accent-500 text-white px-8 py-4 rounded-xl font-montserrat font-semibold hover:from-accent-300 hover:to-accent-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-flex items-center justify-center gap-2"

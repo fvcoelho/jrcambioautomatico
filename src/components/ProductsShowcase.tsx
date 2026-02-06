@@ -120,7 +120,7 @@ export default function ProductsShowcase() {
                 </div>
 
                 <Link
-                  href="https://wa.me/5511940147157?text=Olá! Gostaria de saber mais sobre as peças e fluidos para câmbio automático."
+                  href="https://wa.me/5511971829629?text=Olá! Gostaria de saber mais sobre as peças e fluidos para câmbio automático."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block text-center bg-gradient-to-r from-accent-500 to-accent-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-accent-600 hover:to-accent-700 transition-all duration-300 font-montserrat shadow-lg group-hover:shadow-xl flex items-center justify-center gap-2"

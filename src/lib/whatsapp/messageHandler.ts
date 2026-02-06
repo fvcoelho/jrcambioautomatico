@@ -364,7 +364,7 @@ async function handleHumanHandoff(phoneNumber: string, conversationId: string) {
 Em alguns minutos um de nossos especialistas entrará em contato com você.
 
 📞 *Você também pode nos ligar diretamente:*
-*(11) 94014-7157*
+*(11) 97182-9629*
 
 📧 *Ou enviar um email:*
 *contato@jrcambioautomatico.com.br*

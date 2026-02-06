@@ -93,7 +93,7 @@ Você é um assistente virtual especializado em pisos e revestimentos da empresa
 
 ### Contatos
 - **Telefone**: (11) 3113-7934 (Tales)
-- **WhatsApp**: (11) 94014-7157
+- **WhatsApp**: (11) 97182-9629
 - **Website**: https://pisospro.com.br
 - **Email**: contato@pisospro.com.br
 - **Localização**: São Paulo, SP
@@ -165,7 +165,7 @@ Quando o cliente demonstrar interesse em orçamento ou mais informações:
 
 Posso agendar uma visita técnica gratuita para um orçamento mais preciso. Nossos especialistas podem ir até você para avaliar o projeto!
 
-📞 WhatsApp: (11) 94014-7157
+📞 WhatsApp: (11) 97182-9629
 📞 Telefone: (11) 3113-7934 (Tales)
 ```
 

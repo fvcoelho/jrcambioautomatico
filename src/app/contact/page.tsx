@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contato JR Câmbio Automático - Agende seu Diagnóstico Gratuito',
-  description: 'Entre em contato com a JR Câmbio Automático para agendar um diagnóstico gratuito. Ligue (11) 94014-7157 ou preencha nosso formulário. Resposta rápida e atendimento especializado.',
+  description: 'Entre em contato com a JR Câmbio Automático para agendar um diagnóstico gratuito. Ligue (11) 97182-9629 ou preencha nosso formulário. Resposta rápida e atendimento especializado.',
   keywords: 'contato jr cambio, diagnostico gratuito, orcamento cambio automatico, agendar reparo cambio, whatsapp cambio',
   openGraph: {
     title: 'Contato JR Câmbio Automático - Diagnóstico Gratuito',
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 const contactInfo = [
   {
     type: 'WhatsApp',
-    value: '(11) 94014-7157',
+    value: '(11) 97182-9629',
     description: 'Atendimento rápido via WhatsApp',
     icon: '📱',
-    href: 'https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.'
+    href: 'https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.'
   },
   {
     type: 'E-mail',
@@ -112,7 +112,7 @@ export default function ContactPage() {
                 com precisão usando equipamentos de última geração.
               </p>
               <a
-                href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico gratuito."
+                href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico gratuito."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-accent-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-accent-700 transition-colors inline-block"

@@ -73,7 +73,7 @@ export default function Footer() {
               <li><FooterLink href="/services">Serviços</FooterLink></li>
               {/* <li><FooterLink href="/products">Produtos</FooterLink></li> */}
               <li><FooterLink href="/about">Sobre Nós</FooterLink></li>
-              <li><FooterLink href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.">Contato</FooterLink></li>
+              <li><FooterLink href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.">Contato</FooterLink></li>
             </ul>
           </div>
 
@@ -87,13 +87,13 @@ export default function Footer() {
                 </div>
                 <div>
                   <a
-                    href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+                    href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
                     target="_blank"
                     rel="noopener noreferrer"
                     data-track-id="footer-whatsapp-link"
                     className="text-accent-400 hover:text-accent-300 font-semibold transition-colors block"
                   >
-                    (11) 94014-7157
+                    (11) 97182-9629
                   </a>
                   <span className="text-white/70 text-sm">WhatsApp</span>
                 </div>

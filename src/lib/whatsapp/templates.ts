@@ -287,7 +287,7 @@ export const SERVICES_INFO = `🔧 *Nossos Serviços Especializados*
 • Equipe especializada
 
 📞 *Entre em contato:*
-• WhatsApp: (11) 94014-7157
+• WhatsApp: (11) 97182-9629
 • Email: contato@jrcambioautomatico.com.br`
 
 export const FAQ_INFO = `❓ *Perguntas Frequentes*

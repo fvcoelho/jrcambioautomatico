@@ -11,7 +11,7 @@ JR Câmbio Automático is a Next.js 15 business website for an automatic transmi
 - **Domain:** jrcambioautomatico.com.br
 - **Industry:** Automatic transmission repair and maintenance
 - **Location:** São Paulo, SP
-- **Phone:** (11) 94014-7157
+- **Phone:** (11) 97182-9629
 
 ## Services Offered
 1. **Diagnóstico Computadorizado** - Computer diagnostics with modern equipment

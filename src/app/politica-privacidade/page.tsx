@@ -141,7 +141,7 @@ export default function PoliticaPrivacidade() {
             </p>
             <div className="bg-gray-100 p-4 rounded text-gray-600">
               <p><strong>JR Câmbio Automático</strong></p>
-              <p>WhatsApp: (11) 99999-9999</p>
+              <p>WhatsApp: (11) 97182-9629</p>
               <p>E-mail: contato@jrcambioautomatico.com.br</p>
               <p>Horário de atendimento: Segunda a Sexta, 8h às 18h</p>
             </div>

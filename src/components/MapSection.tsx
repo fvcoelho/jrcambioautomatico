@@ -8,8 +8,8 @@ const businessInfo = {
   neighborhood: 'Instituto de Previdência',
   city: 'São Paulo - SP',
   zipCode: '05533-000',
-  phone: '(11) 94014-7157',
-  whatsapp: '5511940147157',
+  phone: '(11) 97182-9629',
+  whatsapp: '5511971829629',
   hours: {
     weekdays: 'Seg-Sex: 8h às 18h',
     saturday: 'Sáb: 9h às 16h',

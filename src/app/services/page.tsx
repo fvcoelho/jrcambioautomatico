@@ -129,7 +129,7 @@ export default function ServicesPage() {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
-                    href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço: ${service.title}`)}`}
+                    href={`https://wa.me/5511971829629?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço: ${service.title}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg group-hover:shadow-xl flex items-center justify-center gap-3"

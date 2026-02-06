@@ -324,7 +324,7 @@ function ServicesSection() {
                 </div>
 
                 <Link
-                  href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+                  href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 text-center font-montserrat shadow-lg group-hover:shadow-xl block flex items-center justify-center gap-2"
@@ -796,7 +796,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
 
           <div className="flex gap-4">
             <a
-              href={`https://wa.me/5511940147157?text=${encodeURIComponent(`Olá! Vi um trabalho no portfólio e gostaria de saber mais sobre o serviço: ${project.title}`)}`}
+              href={`https://wa.me/5511971829629?text=${encodeURIComponent(`Olá! Vi um trabalho no portfólio e gostaria de saber mais sobre o serviço: ${project.title}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg flex items-center justify-center gap-3"
@@ -934,7 +934,7 @@ function ContactSection() {
                 <div className="w-8 h-8 bg-steel-800/20 rounded-full" />
               </div>
               <h3 className="font-cinzel text-xl font-bold mb-2">WhatsApp</h3>
-              <p className="font-montserrat text-white/90">(11) 94014-7157</p>
+              <p className="font-montserrat text-white/90">(11) 97182-9629</p>
             </div>
           </div>
           <div className="text-center">
@@ -950,7 +950,7 @@ function ContactSection() {
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Link
-            href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+            href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-accent-400 to-accent-500 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-accent-300 hover:to-accent-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg flex items-center justify-center gap-2"
@@ -961,7 +961,7 @@ function ContactSection() {
             Solicitar Orçamento Grátis
           </Link>
           <Link
-            href="https://wa.me/5511940147157"
+            href="https://wa.me/5511971829629"
             target="_blank"
             rel="noopener noreferrer"
             className="border-2 border-white text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:bg-steel-800 hover:text-green-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg flex items-center justify-center gap-2"

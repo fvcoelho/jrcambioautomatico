@@ -660,7 +660,7 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
 
           <div className="flex gap-4">
             <a
-              href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+              href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg flex items-center justify-center gap-2"

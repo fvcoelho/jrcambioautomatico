@@ -8,7 +8,7 @@ export default function StructuredData() {
     "name": "JR Câmbio Automático",
     "description": "Especialistas em diagnóstico, reparo e manutenção de câmbio automático. Diagnóstico gratuito, peças originais e garantia de 6 meses em São Paulo.",
     "url": "https://jrcambioautomatico.com.br",
-    "telephone": "+55-11-94014-7157",
+    "telephone": "+55-11-97182-9629",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",

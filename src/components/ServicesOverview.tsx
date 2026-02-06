@@ -130,7 +130,7 @@ export default function ServicesOverview() {
                 Ver Todos os Serviços
               </Link>
               <Link 
-                href="https://wa.me/5511940147157?text=Olá! Gostaria de uma solução personalizada para meu câmbio automático."
+                href="https://wa.me/5511971829629?text=Olá! Gostaria de uma solução personalizada para meu câmbio automático."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-enhanced text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 border-2 border-white/20 flex items-center justify-center gap-2"

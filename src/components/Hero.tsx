@@ -98,7 +98,7 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link
-                href="https://wa.me/5511940147157?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+                href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative px-12 py-4 overflow-hidden bg-accent-500 hover:bg-accent-600 transition-all duration-300 rounded glow-blue flex items-center justify-center gap-2"
