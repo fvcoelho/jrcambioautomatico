@@ -157,6 +157,11 @@ function EditImageForm({ image, categories, projects, onSave, onCancel }: EditIm
                   src={image.imageUrl}
                   alt={image.title}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.src = '/logo.svg'
+                    target.classList.add('bg-steel-800', 'p-6')
+                  }}
                 />
               )}
             </div>
@@ -381,6 +386,11 @@ export default function GalleryManagement() {
                         src={image.imageUrl}
                         alt={image.title}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          target.src = '/logo.svg'
+                          target.classList.add('bg-steel-800', 'p-6')
+                        }}
                       />
                     )}
                     {/* File type indicator */}

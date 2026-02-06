@@ -6,7 +6,7 @@ function shouldTrack(): boolean {
   if (typeof window === 'undefined') return false
 
   // Check global environment setting
-  if (process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === 'false') {
+  if (process.env.NEXT_PUBLIC_ANALYTICS_ENABLED !== 'true') {
     return false
   }
 
@@ -84,6 +84,7 @@ export async function trackPageView(page?: string, title?: string) {
       headers: {
         'Content-Type': 'application/json',
       },
+      keepalive: true,
       body: JSON.stringify({
         ...getSessionInfo(),
         page: pageUrl,
@@ -122,6 +123,7 @@ export async function trackClick(element: HTMLElement, customData?: any) {
       headers: {
         'Content-Type': 'application/json',
       },
+      keepalive: true,
       body: JSON.stringify({
         ...getSessionInfo(),
         page: window.location.pathname,
@@ -181,6 +183,7 @@ async function updatePageViewTime(timeSpent: number) {
       headers: {
         'Content-Type': 'application/json',
       },
+      keepalive: true,
       body: JSON.stringify({
         sessionId: getSessionId(),
         page: window.location.pathname,

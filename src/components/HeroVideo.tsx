@@ -104,7 +104,7 @@ export default function HeroVideo({ src, className = '', onVideoReady }: HeroVid
       {!canPlay && (
         <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-green-800 to-green-700 flex items-center justify-center">
           <div className="text-white text-center">
-            <SpinningLogo size="sm" color="white" showText text="Carregando vídeo..." />
+            {/* <SpinningLogo size="sm" color="white" showText text="Carregando vídeo..." /> */}
           </div>
         </div>
       )}

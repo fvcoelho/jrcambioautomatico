@@ -22,7 +22,7 @@ export default function Navbar() {
       : 'bg-transparent'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-24">
+        <div className="flex justify-between h-32 transition-all duration-300">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <div className="relative">
@@ -31,7 +31,7 @@ export default function Navbar() {
                   alt="JR Câmbio Automático - Especialistas em Câmbio Automático"
                   width={400}
                   height={200}
-                  className="h-20 w-auto transition-all duration-300"
+                  className="h-28 w-auto transition-all duration-300"
                   priority
                 />
                 {/* Logo glow effect on hover */}

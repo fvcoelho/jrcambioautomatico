@@ -30,7 +30,7 @@ function RootProviderInner({ children }: RootProviderProps) {
 
   return (
     <>
-      <PreloadScreen isLoading={isLoading} />
+      {/* <PreloadScreen isLoading={isLoading} /> */}
       <AnalyticsProvider>
         <ConditionalLayout>
           {children}

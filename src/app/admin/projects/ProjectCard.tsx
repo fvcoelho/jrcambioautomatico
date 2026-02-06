@@ -4,14 +4,14 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  Calendar, 
-  MapPin, 
-  Tag, 
-  Image as ImageIcon, 
-  Video, 
-  Edit, 
-  Trash2, 
+import {
+  Calendar,
+  MapPin,
+  Tag,
+  Image as ImageIcon,
+  Video,
+  Edit,
+  Trash2,
   Eye,
   EyeOff,
   MoreHorizontal
@@ -71,8 +71,8 @@ export default function ProjectCard({
   const hasImages = totalImages > 0
   const primaryImage = activeImages[0] || null
   const fallbackImage = project.imageUrls[0] || null
-  
-  const category = categories.find(cat => 
+
+  const category = categories.find(cat =>
     cat.slug === project.category || cat.name === project.category
   )
 
@@ -87,11 +87,10 @@ export default function ProjectCard({
   }
 
   return (
-    <Card className={`overflow-hidden transition-all duration-200 hover:shadow-lg ${
-      !project.isActive 
-        ? 'opacity-70 border-gray-200 bg-gray-50' 
+    <Card className={`overflow-hidden transition-all duration-200 hover:shadow-lg ${!project.isActive
+        ? 'opacity-70 border-gray-200 bg-gray-50'
         : 'border-gray-300 hover:border-gray-400'
-    }`}>
+      }`}>
       {/* Project Image */}
       <div className="relative aspect-video bg-gray-100">
         {hasImages ? (
@@ -108,7 +107,8 @@ export default function ProjectCard({
                   className="w-full h-full object-cover"
                   loading="lazy"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none'
+                    (e.target as HTMLImageElement).src = '/logo.svg'
+                      ; (e.target as HTMLImageElement).classList.add('p-4', 'bg-gray-100')
                   }}
                 />
               )
@@ -119,25 +119,26 @@ export default function ProjectCard({
                 className="w-full h-full object-cover"
                 loading="lazy"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none'
+                  (e.target as HTMLImageElement).src = '/logo.svg'
+                    ; (e.target as HTMLImageElement).classList.add('p-4', 'bg-gray-100')
                 }}
               />
             ) : null}
-            
+
             {/* Image Counter */}
             {totalImages > 1 && (
               <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs font-medium">
                 +{totalImages - 1} imagens
               </div>
             )}
-            
+
             {/* Status Indicator */}
             <div className="absolute top-2 left-2">
               <Badge variant={project.isActive ? 'success' : 'destructive'}>
                 {project.isActive ? 'Ativo' : 'Inativo'}
               </Badge>
             </div>
-            
+
             {/* Inactive overlay */}
             {!project.isActive && (
               <div className="absolute inset-0 bg-gray-900/20 flex items-center justify-center">
@@ -153,14 +154,14 @@ export default function ProjectCard({
               <ImageIcon className="h-12 w-12 text-gray-400 mx-auto mb-2" />
               <p className="text-sm text-gray-500">Sem imagens</p>
             </div>
-            
+
             {/* Status Indicator for no images */}
             <div className="absolute top-2 left-2">
               <Badge variant={project.isActive ? 'success' : 'destructive'}>
                 {project.isActive ? 'Ativo' : 'Inativo'}
               </Badge>
             </div>
-            
+
             {/* Inactive overlay for no images */}
             {!project.isActive && (
               <div className="absolute inset-0 bg-gray-900/20 flex items-center justify-center">
@@ -197,14 +198,14 @@ export default function ProjectCard({
               <span>{project.location}</span>
             </div>
           )}
-          
+
           {category && (
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Tag className="h-3 w-3" />
               <span>{category.name}</span>
             </div>
           )}
-          
+
           {project.completedAt && (
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Calendar className="h-3 w-3" />
@@ -242,7 +243,7 @@ export default function ProjectCard({
             <ImageIcon className="h-4 w-4 mr-2" />
             Imagens
           </Button>
-          
+
           <Button
             variant="outline"
             size="sm"
@@ -250,7 +251,7 @@ export default function ProjectCard({
           >
             <Edit className="h-4 w-4" />
           </Button>
-          
+
           {onToggleActive && (
             <Button
               variant="ghost"
@@ -259,13 +260,13 @@ export default function ProjectCard({
               title={project.isActive ? 'Desativar projeto' : 'Ativar projeto'}
               className={project.isActive ? 'text-green-600 hover:text-green-700 hover:bg-green-50' : 'text-gray-400 hover:text-green-600 hover:bg-green-50'}
             >
-              {project.isActive ? 
-                <Eye className="h-4 w-4" /> : 
+              {project.isActive ?
+                <Eye className="h-4 w-4" /> :
                 <EyeOff className="h-4 w-4" />
               }
             </Button>
           )}
-          
+
           <Button
             variant="ghost"
             size="sm"

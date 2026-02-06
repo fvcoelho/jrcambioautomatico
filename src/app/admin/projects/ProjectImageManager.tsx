@@ -475,7 +475,9 @@ export default function ProjectImageManager({
                           className="w-full h-full object-cover"
                           loading="lazy"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/placeholder.png'
+                            const target = e.target as HTMLImageElement
+                            target.src = '/logo.svg'
+                            target.classList.add('bg-gray-100', 'p-2')
                           }}
                         />
                       )}

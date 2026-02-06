@@ -107,7 +107,6 @@ The application includes comprehensive user activity tracking:
 - **Admin Route Exclusion**: Analytics tracking is disabled for all `/admin` routes
 
 ### Gallery & File Management
-Complete migration from Cloudinary to Vercel Blob storage:
 - **Upload Service**: `/src/lib/api/blob-upload.ts` - Comprehensive upload service with progress tracking
 - **Gallery API**: `/src/app/api/gallery/upload/route.ts` - Enhanced with real-time logging and debugging
 - **Admin Management**: `/src/app/admin/gallery/` - Full CRUD operations for gallery images

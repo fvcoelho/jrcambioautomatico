@@ -38,7 +38,7 @@ export default function PreloadScreen({ isLoading, onComplete }: PreloadScreenPr
       <div className="text-center">
         {/* Spinning Logo */}
         <div className="mb-8">
-          <SpinningLogo size="xl" color="white" />
+          {/* <SpinningLogo size="xl" color="white" /> */}
         </div>
 
         {/* Loading Text */}

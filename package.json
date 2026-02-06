@@ -25,7 +25,6 @@
     "autoprefixer": "^10.4.21",
     "axios": "^1.11.0",
     "bull": "^4.16.5",
-    "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.539.0",
     "next": "15.5.7",

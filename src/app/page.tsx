@@ -501,6 +501,11 @@ function PortfolioSection() {
                           src={images[0]?.imageUrl}
                           alt={project.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = '/logo.svg'
+                            target.classList.add('bg-steel-800', 'p-6')
+                          }}
                         />
                       )}
                       {images.length > 1 && (
@@ -714,6 +719,11 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                     src={images[currentIndex]?.imageUrl}
                     alt={project.title}
                     className="w-full h-full object-cover rounded-2xl"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = '/logo.svg'
+                      target.classList.add('bg-steel-800', 'p-6')
+                    }}
                   />
                 )}
 

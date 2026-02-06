@@ -20,7 +20,7 @@ DATABASE_URL="postgresql://neondb_owner:npg_z47KvsMGJaib@ep-rough-cherry-acc3git
 NEXT_PUBLIC_WHATSAPP_NUMBER="5511940147157"
 
 # Analytics Configuration
-NEXT_PUBLIC_ANALYTICS_ENABLED="true"
+NEXT_PUBLIC_ANALYTICS_ENABLED="false"
 
 # Security Headers
 NEXT_PUBLIC_CSP_ENABLED="true"
@@ -54,10 +54,6 @@ NEXT_PUBLIC_COMPANY_PHONE="(11) 94014-7157"
 NEXT_PUBLIC_COMPANY_EMAIL="contato@pisospro.com.br"
 NEXT_PUBLIC_COMPANY_ADDRESS="São Paulo, SP"
 
-# Cloudinary Setup for Gallery Upload
-CLOUDINARY_CLOUD_NAME=dlayq4t4o
-CLOUDINARY_API_KEY=265148356775211
-CLOUDINARY_API_SECRET=Z8ll-msH_Xo1bziUBlZpjAHZOpw
 
 
 # ============================================================================

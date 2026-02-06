@@ -255,6 +255,10 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
                 src={images[carousel.currentIndex]?.imageUrl}
                 alt={images[carousel.currentIndex]?.title || project.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/jrcambio.svg'
+                    ; (e.target as HTMLImageElement).classList.add('bg-steel-800', 'p-4')
+                }}
               />
             )}
 
@@ -511,6 +515,10 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
                     src={images[carousel.currentIndex]?.imageUrl}
                     alt={images[carousel.currentIndex]?.title || project.title}
                     className="w-full h-full object-cover rounded-2xl"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/jrcambio.svg'
+                        ; (e.target as HTMLImageElement).classList.add('bg-steel-800', 'p-8')
+                    }}
                   />
                 )}
 
@@ -592,6 +600,9 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
                       src={image.imageUrl}
                       alt={image.title}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/logo.svg'
+                      }}
                     />
                   )}
                 </button>
@@ -785,8 +796,8 @@ export default function PortfolioClient() {
           <button
             onClick={() => setSelectedCategory('all')}
             className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${selectedCategory === 'all'
-                ? `bg-gradient-to-r from-green-400 to-green-600 text-white shadow-lg`
-                : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
+              ? `bg-gradient-to-r from-green-400 to-green-600 text-white shadow-lg`
+              : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
               }`}
           >
             <span className="relative z-10">Todos os Projetos</span>
@@ -803,8 +814,8 @@ export default function PortfolioClient() {
                 key={category.id}
                 onClick={() => setSelectedCategory(category.slug)}
                 className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${selectedCategory === category.slug
-                    ? `bg-gradient-to-r ${gradient} text-white shadow-lg`
-                    : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
+                  ? `bg-gradient-to-r ${gradient} text-white shadow-lg`
+                  : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
                   }`}
               >
                 <span className="relative z-10">{category.name}</span>
