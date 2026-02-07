@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function WhatsAppButton() {
   const phoneNumber = '5511971829629' // Format: country code + area code + number (no spaces)
-  const message = 'Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.'
+  const message = 'Olá! Gostaria de agendar uma avaliação para meu câmbio automático.'
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -28,7 +28,8 @@ export default function WhatsAppButton() {
       className={`fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
         isVisible ? 'animate-fade-pulse' : 'opacity-0'
       }`}
-      aria-label="Falar no WhatsApp"
+      aria-label="Iniciar conversa no WhatsApp"
+      title="Iniciar conversa no WhatsApp"
     >
         <svg 
           width="48" 

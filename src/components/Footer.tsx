@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import AnalyticsToggle from './AnalyticsToggle'
 
 export default function Footer() {
   return (
@@ -16,9 +15,9 @@ export default function Footer() {
               <div className="w-20 h-1 bg-gradient-accent rounded-full mb-4"></div>
             </div>
             <p className="text-white/80 mb-6 leading-relaxed text-lg">
-              Especialistas em câmbio automático com mais de 15 anos de experiência.
-              Diagnóstico, manutenção e reparo com qualidade e garantia
-              em toda região metropolitana de São Paulo.
+              Oficina de câmbio automático com mais de 15 anos de experiência.
+              Diagnóstico, manutenção de câmbio automático e reparos com padrão técnico
+              e garantia para toda a região metropolitana de São Paulo.
             </p>
 
             {/* Trust indicators */}
@@ -73,7 +72,7 @@ export default function Footer() {
               <li><FooterLink href="/services">Serviços</FooterLink></li>
               {/* <li><FooterLink href="/products">Produtos</FooterLink></li> */}
               <li><FooterLink href="/about">Sobre Nós</FooterLink></li>
-              <li><FooterLink href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.">Contato</FooterLink></li>
+              <li><FooterLink href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar uma avaliação para meu câmbio automático." title="Iniciar conversa no WhatsApp">Contato</FooterLink></li>
             </ul>
           </div>
 
@@ -83,25 +82,30 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <div className="bg-gradient-accent p-2 rounded-lg mt-1">
-                  <span className="text-charcoal-900">📞</span>
+                  <svg className="w-4 h-4 text-charcoal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
                 </div>
                 <div>
                   <a
-                    href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático."
+                    href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar uma avaliação para meu câmbio automático."
                     target="_blank"
                     rel="noopener noreferrer"
                     data-track-id="footer-whatsapp-link"
                     className="text-accent-400 hover:text-accent-300 font-semibold transition-colors block"
+                    title="Iniciar conversa no WhatsApp"
                   >
                     (11) 97182-9629
                   </a>
-                  <span className="text-white/70 text-sm">WhatsApp</span>
+                  <span className="text-white/70 text-sm">Atendimento via WhatsApp</span>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
                 <div className="bg-gradient-accent p-2 rounded-lg mt-1">
-                  <span className="text-charcoal-900">✉️</span>
+                  <svg className="w-4 h-4 text-charcoal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8m-18 8h18a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                  </svg>
                 </div>
                 <div>
                   <a
@@ -115,7 +119,10 @@ export default function Footer() {
 
               <div className="flex items-start space-x-3">
                 <div className="bg-gradient-accent p-2 rounded-lg mt-1">
-                  <span className="text-charcoal-900">📍</span>
+                  <svg className="w-4 h-4 text-charcoal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
                 </div>
                 <div className="text-white/80">
                   <p>São Paulo, SP</p>
@@ -125,7 +132,9 @@ export default function Footer() {
 
               <div className="flex items-start space-x-3">
                 <div className="bg-gradient-accent p-2 rounded-lg mt-1">
-                  <span className="text-charcoal-900">🕒</span>
+                  <svg className="w-4 h-4 text-charcoal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
                 <div className="text-white/80 text-sm">
                   <p>Seg-Sex: 8h às 18h</p>
@@ -144,12 +153,11 @@ export default function Footer() {
                 © {new Date().getFullYear()} JR Câmbio Automático. Todos os direitos reservados.
               </p>
               <p className="text-white/50 text-sm mt-1">
-                Especialistas em câmbio automático
+                Oficina de câmbio automático em São Paulo
               </p>
             </div>
 
             <div className="flex flex-wrap justify-center lg:justify-end items-center gap-6">
-              <AnalyticsToggle />
               <Link href="/politica-privacidade" className="text-white/70 hover:text-white transition-colors text-sm">
                 Política de Privacidade
               </Link>
@@ -193,10 +201,11 @@ export default function Footer() {
 }
 
 // Helper component for footer links
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+function FooterLink({ href, children, ...props }: { href: string; children: React.ReactNode; [key: string]: any }) {
   return (
     <Link
       href={href}
+      {...props}
       className="text-white/70 hover:text-accent-400 transition-all duration-300 hover:translate-x-1 inline-block"
     >
       {children}

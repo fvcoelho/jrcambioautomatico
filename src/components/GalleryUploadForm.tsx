@@ -132,12 +132,12 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-gray-900">Adicionar Mídia à Galeria</h2>
+    <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
+      <h2 className="text-2xl font-bold mb-6 text-white">Adicionar Mídia à Galeria</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="file-input" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="file-input" className="block text-sm font-medium text-steel-300 mb-2">
             Imagem ou Vídeo *
           </label>
           <Input
@@ -146,9 +146,9 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
             accept="image/*,video/*"
             onChange={handleFileChange}
             required
-            className="cursor-pointer"
+            className="cursor-pointer bg-steel-700/50 border-steel-600 text-white file:text-steel-200 file:bg-steel-700/60 file:border-0 file:rounded-md file:px-3 file:py-1.5"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-steel-500 mt-1">
             Formatos suportados: Imagens (JPG, PNG, GIF, WebP) e Vídeos (MP4, WebM, MOV)
           </p>
           {previewUrl && (
@@ -157,7 +157,7 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
                 <video
                   src={previewUrl}
                   controls
-                  className="w-full max-w-md h-48 object-cover rounded-lg border"
+                  className="w-full max-w-md h-48 object-cover rounded-lg border border-steel-700"
                 >
                   Seu navegador não suporta o elemento de vídeo.
                 </video>
@@ -165,10 +165,10 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
                 <img
                   src={previewUrl}
                   alt="Preview"
-                  className="w-full max-w-md h-48 object-cover rounded-lg border"
+                  className="w-full max-w-md h-48 object-cover rounded-lg border border-steel-700"
                 />
               )}
-              <div className="mt-2 text-sm text-gray-600">
+              <div className="mt-2 text-sm text-steel-300">
                 <strong>Tipo:</strong> {fileType === 'video' ? 'Vídeo' : 'Imagem'}
                 {formData.file && (
                   <>
@@ -182,7 +182,7 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
         </div>
 
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="title" className="block text-sm font-medium text-steel-300 mb-2">
             Título *
           </label>
           <Input
@@ -190,36 +190,39 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
             type="text"
             value={formData.title}
             onChange={(e) => handleInputChange('title', e.target.value)}
-            placeholder="Ex: Reforma de Cozinha Moderna"
+            placeholder="Ex: Reparação de câmbio automático"
             required
+            className="bg-steel-700/50 border-steel-600 text-white placeholder:text-steel-400"
           />
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="description" className="block text-sm font-medium text-steel-300 mb-2">
             Descrição
           </label>
           <Textarea
             id="description"
             value={formData.description}
             onChange={(e) => handleInputChange('description', e.target.value)}
-            placeholder="Descreva os detalhes do projeto..."
+            placeholder="Descreva os detalhes do serviço..."
             rows={3}
+            className="bg-steel-700/50 border-steel-600 text-white placeholder:text-steel-400"
           />
         </div>
 
         <div>
-          <label htmlFor="project" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="project" className="block text-sm font-medium text-steel-300 mb-2">
             Projeto *
           </label>
           {loadingProjects ? (
-            <div className="text-sm text-gray-500">Carregando projetos...</div>
+            <div className="text-sm text-steel-500">Carregando projetos...</div>
           ) : (
             <Select
               id="project"
               value={formData.projectId}
               onChange={(e) => handleInputChange('projectId', e.target.value)}
               required
+              className="bg-steel-700/50 border-steel-600 text-white"
             >
               <option value="">Selecione um projeto</option>
               {projects.map((project) => (
@@ -235,7 +238,7 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
           <Button
             type="submit"
             disabled={isUploading}
-            className="flex-1"
+            className="flex-1 bg-accent-500 hover:bg-accent-600 text-white"
           >
             {isUploading ? 'Enviando...' : 'Enviar Mídia'}
           </Button>
@@ -257,6 +260,7 @@ export default function GalleryUploadForm({ onUploadSuccess }: GalleryUploadForm
                 fileInput.value = ''
               }
             }}
+            className="border-steel-600 text-steel-300 hover:bg-steel-700 hover:text-white"
           >
             Limpar
           </Button>

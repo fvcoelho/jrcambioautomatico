@@ -3,37 +3,37 @@
 const features = [
   {
     title: '15+ Anos de Experiência',
-    description: 'Décadas de expertise em diagnóstico e reparo de câmbios automáticos de todas as marcas e modelos.',
+    description: 'Experiência comprovada em diagnóstico e reparo de câmbios automáticos de diversas marcas e modelos.',
     stats: '15+ Anos',
     color: 'accent'
   },
   {
     title: '1000+ Câmbios Reparados',
-    description: 'Milhares de transmissões reparadas com sucesso, devolvendo a confiança aos nossos clientes.',
+    description: 'Transmissões recuperadas com padrão técnico e foco em durabilidade.',
     stats: '1000+ Reparos',
     color: 'steel'
   },
   {
     title: 'Peças Originais',
-    description: 'Trabalhamos exclusivamente com peças originais e de alta qualidade para garantir durabilidade.',
+    description: 'Aplicamos peças de procedência e controle de qualidade em cada serviço.',
     stats: 'Peças OEM',
     color: 'accent'
   },
   {
-    title: 'Diagnóstico Gratuito',
-    description: 'Avaliação gratuita do seu câmbio com equipamentos de última geração, sem compromisso.',
+    title: 'Avaliação Técnica',
+    description: 'Avaliação criteriosa do câmbio com equipamentos modernos e laudo claro.',
     stats: 'Grátis',
     color: 'steel'
   },
   {
     title: '6 Meses de Garantia',
-    description: 'Todos os nossos serviços incluem garantia de 6 meses para sua total tranquilidade.',
+    description: 'Garantia em nossos serviços para sua tranquilidade e segurança.',
     stats: '6 Meses',
     color: 'accent'
   },
   {
     title: 'Atendimento Especializado',
-    description: 'Equipe técnica qualificada para orientar você desde o diagnóstico até a entrega do veículo.',
+    description: 'Equipe técnica para orientar você do diagnóstico à entrega do veículo.',
     stats: 'Suporte Total',
     color: 'steel'
   }
@@ -56,8 +56,8 @@ export default function WhyChooseUs() {
             <span className="block text-gradient-accent mt-2">JR Câmbio Automático?</span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Combinamos experiência técnica com equipamentos modernos para entregar
-            serviços de qualidade que prolongam a vida útil do seu câmbio.
+            Combinamos experiência, processo técnico e transparência para uma manutenção
+            de câmbio automático segura e eficiente.
           </p>
         </div>
         
@@ -101,11 +101,10 @@ export default function WhyChooseUs() {
         <div className="mt-20 text-center">
           <div className="glass-enhanced p-12 rounded-3xl max-w-4xl mx-auto">
             <h3 className="text-3xl font-bold text-white mb-6">
-              Problemas com seu Câmbio Automático?
+              Sua transmissão merece um diagnóstico preciso
             </h3>
             <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Junte-se a milhares de clientes satisfeitos que confiaram na JR Câmbio Automático
-              para resolver seus problemas de transmissão.
+              Atendimento consultivo, explicação clara e decisões baseadas em dados técnicos.
             </p>
             
             {/* Trust indicators */}
@@ -126,7 +125,7 @@ export default function WhyChooseUs() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gradient-accent text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity duration-300 shadow-elegant">
-                Agendar Diagnóstico Grátis
+                Agendar Avaliação
               </button>
               <button className="glass-enhanced text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-colors duration-300 border-2 border-white/20">
                 Falar com Especialista

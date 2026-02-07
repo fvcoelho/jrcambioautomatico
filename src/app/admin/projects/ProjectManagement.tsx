@@ -394,6 +394,38 @@ export default function ProjectManagement() {
           </div>
         </div>
 
+        <Dialog open={formMode !== 'hidden'} onOpenChange={(open) => !open && handleFormCancel()}>
+          <DialogContent className="max-w-4xl p-0 bg-steel-900 border-steel-700 rounded-2xl shadow-2xl">
+            <ProjectForm
+              mode={formMode === 'create' ? 'create' : 'edit'}
+              initialData={editingProject ? {
+                title: editingProject.title,
+                description: editingProject.description,
+                location: editingProject.location,
+                category: editingProject.category,
+                completedAt: editingProject.completedAt,
+                isActive: editingProject.isActive
+              } : undefined}
+              categories={categories}
+              onSubmit={handleFormSubmit}
+              onCancel={handleFormCancel}
+              loading={formLoading}
+            />
+          </DialogContent>
+        </Dialog>
+
+        {managingImagesProject && (
+          <div className="mb-8 bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
+            <ProjectImageManager
+              projectId={managingImagesProject.id}
+              projectTitle={managingImagesProject.title}
+              images={managingImagesProject.galleryImages || []}
+              onUpdate={fetchProjects}
+              onClose={handleImageManagerClose}
+            />
+          </div>
+        )}
+
         {/* Results */}
         {projects.length === 0 ? (
           <div className="bg-steel-800/50 backdrop-blur-sm p-12 rounded-xl border border-steel-700">
@@ -457,49 +489,6 @@ export default function ProjectManagement() {
             )}
           </div>
         )}
-
-        {/* Form Dialog */}
-        <Dialog open={formMode !== 'hidden'} onOpenChange={(open) => !open && handleFormCancel()}>
-          <DialogContent className="max-w-4xl p-0">
-            <div className="max-h-[85vh] overflow-y-auto">
-              <ProjectForm
-                mode={formMode === 'create' ? 'create' : 'edit'}
-                initialData={editingProject ? {
-                  title: editingProject.title,
-                  description: editingProject.description,
-                  location: editingProject.location,
-                  category: editingProject.category,
-                  completedAt: editingProject.completedAt,
-                  isActive: editingProject.isActive
-                } : undefined}
-                categories={categories}
-                onSubmit={handleFormSubmit}
-                onCancel={handleFormCancel}
-                loading={formLoading}
-              />
-            </div>
-          </DialogContent>
-        </Dialog>
-
-        {/* Image Manager Dialog */}
-        <Dialog 
-          open={!!managingImagesProject} 
-          onOpenChange={(open) => !open && handleImageManagerClose()}
-        >
-          <DialogContent className="max-w-7xl p-0">
-            <div className="max-h-[90vh] overflow-y-auto p-6">
-              {managingImagesProject && (
-                <ProjectImageManager
-                  projectId={managingImagesProject.id}
-                  projectTitle={managingImagesProject.title}
-                  images={managingImagesProject.galleryImages || []}
-                  onUpdate={fetchProjects}
-                  onClose={handleImageManagerClose}
-                />
-              )}
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
   )

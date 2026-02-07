@@ -5,42 +5,42 @@ import Link from 'next/link'
 const services = [
   {
     title: 'Diagnóstico Computadorizado',
-    description: 'Identificamos o problema com precisão usando equipamentos de última geração para análise completa do câmbio.',
+    description: 'Avaliação técnica com leitura eletrônica e testes de funcionamento para identificar a causa raiz com precisão.',
     href: '/services/diagnostico',
     gradient: 'from-zinc-300 to-zinc-500',
     featured: true
   },
   {
     title: 'Conserto de Câmbio',
-    description: 'Reparos especializados com peças originais e garantia. Solucionamos todos os tipos de problemas.',
+    description: 'Reparos especializados com peças de procedência e garantia. Correções completas para transmissões AT, CVT e DSG.',
     href: '/services/conserto',
     gradient: 'from-steel-400 to-steel-600',
     featured: true
   },
   {
     title: 'Retífica Completa',
-    description: 'Reconstrução total do câmbio automático com qualidade de fábrica e garantia estendida.',
+    description: 'Reconstrução completa com padrão técnico e tolerâncias de fábrica, acompanhada de garantia.',
     href: '/services/retifica',
     gradient: 'from-accent-400 to-accent-600',
     featured: false
   },
   {
     title: 'Troca de Óleo ATF',
-    description: 'Substituição de fluido de transmissão para melhor performance e maior vida útil do câmbio.',
+    description: 'Troca correta do fluido com especificação adequada para proteger o conjunto e preservar a performance.',
     href: '/services/troca-oleo',
     gradient: 'from-slate-400 to-slate-600',
     featured: false
   },
   {
     title: 'Revisão de Câmbio',
-    description: 'Manutenção preventiva completa para estender a vida útil da transmissão automática.',
+    description: 'Inspeção completa e ajustes essenciais para prolongar a vida útil do câmbio automático.',
     href: '/services/revisao',
     gradient: 'from-steel-300 to-steel-500',
     featured: false
   },
   {
     title: 'Manutenção Preventiva',
-    description: 'Inspeções periódicas para identificar e prevenir problemas antes que se tornem graves.',
+    description: 'Plano de manutenção de câmbio automático para evitar falhas e reduzir custos futuros.',
     href: '/services/manutencao',
     gradient: 'from-neutral-400 to-neutral-600',
     featured: false
@@ -62,12 +62,12 @@ export default function ServicesOverview() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Soluções Completas em
+            Serviços de Oficina de
             <span className="block text-gradient-accent mt-2">Câmbio Automático</span>
           </h2>
           <p className="text-xl text-steel-300 max-w-3xl mx-auto leading-relaxed">
-            Do diagnóstico à retífica completa, oferecemos expertise especializada
-            para manter seu câmbio automático funcionando perfeitamente.
+            Da manutenção de câmbio automático ao reparo especializado, entregamos
+            uma jornada técnica completa para desempenho, segurança e durabilidade.
           </p>
         </div>
 

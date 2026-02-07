@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Serviços de Câmbio Automático - Diagnóstico, Reparo e Manutenção | JR Câmbio',
-  description: 'Serviços especializados em câmbio automático: diagnóstico computadorizado, conserto, retífica completa, troca de óleo ATF e manutenção preventiva. 15+ anos de experiência.',
-  keywords: 'cambio automatico, conserto cambio, retifica cambio, troca oleo atf, diagnostico cambio, manutencao preventiva, reparo transmissao',
+  title: 'Serviços de Câmbio Automático | Manutenção, Reparo e Retífica | JR Câmbio',
+  description: 'Oficina de câmbio automático em São Paulo: manutenção de câmbio automático, diagnóstico técnico, conserto, retífica e troca de ATF. 15+ anos de experiência.',
+  keywords: 'oficina de cambio automatico, manutencao de cambio automatico, conserto cambio, retifica cambio, troca oleo atf, diagnostico cambio, reparo transmissao',
   openGraph: {
     title: 'Serviços de Câmbio Automático | JR Câmbio Automático',
-    description: 'Diagnóstico gratuito, reparo especializado e manutenção de câmbios automáticos de todas as marcas.',
+    description: 'Avaliação técnica, reparo especializado e manutenção de câmbios automáticos de todas as marcas.',
     type: 'website',
   },
 }
@@ -16,17 +16,17 @@ const services = [
   {
     id: 'diagnostico',
     title: 'Diagnóstico Computadorizado',
-    description: 'Identificamos o problema com precisão usando equipamentos de última geração. Análise completa do sistema de transmissão para identificar falhas.',
+    description: 'Avaliação técnica com leitura eletrônica e testes de funcionamento para identificar falhas com precisão.',
     features: ['Scanner Automotivo Profissional', 'Teste de Pressão Hidráulica', 'Análise de Fluido de Transmissão', 'Relatório Detalhado'],
-    price: 'Gratuito',
+    price: 'Sob avaliação',
     gradient: 'from-blue-400 to-blue-600',
     popular: true
   },
   {
     id: 'conserto',
     title: 'Conserto de Câmbio',
-    description: 'Reparos especializados em câmbios automáticos de todas as marcas e modelos. Solucionamos problemas como patinação, trancos e falhas de engate.',
-    features: ['Peças Originais e de Qualidade', 'Garantia de 6 Meses', 'Todas as Marcas e Modelos', 'Mão de Obra Especializada'],
+    description: 'Reparos especializados em câmbios automáticos de diversas marcas e modelos. Correções para patinação, trancos e falhas de engate.',
+    features: ['Peças de Procedência', 'Garantia de 6 Meses', 'Diversas Marcas e Modelos', 'Mão de Obra Especializada'],
     price: 'Sob consulta',
     gradient: 'from-steel-400 to-steel-600',
     popular: true
@@ -34,7 +34,7 @@ const services = [
   {
     id: 'retifica',
     title: 'Retífica Completa',
-    description: 'Reconstrução total do câmbio automático com qualidade de fábrica. Ideal para transmissões com desgaste avançado ou múltiplos problemas.',
+    description: 'Reconstrução total do câmbio automático com padrão técnico. Indicada para transmissões com desgaste avançado.',
     features: ['Desmontagem e Inspeção Completa', 'Troca de Todos os Componentes Desgastados', 'Teste de Bancada', 'Garantia Estendida'],
     price: 'Sob consulta',
     gradient: 'from-accent-400 to-accent-600',
@@ -43,7 +43,7 @@ const services = [
   {
     id: 'troca-oleo',
     title: 'Troca de Óleo ATF',
-    description: 'Substituição do fluido de transmissão automática (ATF) para garantir melhor performance, trocas suaves e maior vida útil do câmbio.',
+    description: 'Substituição do fluido ATF com especificação correta para preservar desempenho e durabilidade.',
     features: ['Óleo ATF Original ou Equivalente', 'Filtro de Transmissão Novo', 'Limpeza do Sistema', 'Performance Otimizada'],
     price: 'A partir de R$ 350',
     gradient: 'from-steel-500 to-steel-700',
@@ -52,7 +52,7 @@ const services = [
   {
     id: 'revisao',
     title: 'Revisão de Câmbio',
-    description: 'Manutenção preventiva completa para estender a vida útil da transmissão automática e evitar problemas futuros.',
+    description: 'Manutenção preventiva para estender a vida útil da transmissão automática e evitar falhas.',
     features: ['Inspeção Visual Completa', 'Verificação de Vazamentos', 'Ajustes Necessários', 'Teste de Funcionamento'],
     price: 'A partir de R$ 200',
     gradient: 'from-steel-300 to-steel-500',
@@ -61,7 +61,7 @@ const services = [
   {
     id: 'manutencao',
     title: 'Manutenção Preventiva',
-    description: 'Inspeções periódicas para identificar e prevenir problemas antes que se tornem graves. Recomendado a cada 40.000 km.',
+    description: 'Inspeções periódicas para identificar e prevenir problemas antes que se tornem críticos.',
     features: ['Checklist Completo', 'Identificação de Desgastes', 'Prevenção de Problemas', 'Orientação ao Cliente'],
     price: 'Sob consulta',
     gradient: 'from-neutral-400 to-neutral-600',
@@ -82,7 +82,7 @@ export default function ServicesPage() {
           </h1>
           <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
             Serviços especializados em câmbio automático com mais de 15 anos de experiência.
-            Diagnóstico gratuito, peças originais e garantia de 6 meses.
+            Avaliação técnica, peças de procedência e garantia de 6 meses.
           </p>
         </div>
       </section>
@@ -116,7 +116,7 @@ export default function ServicesPage() {
                 <p className="font-montserrat text-steel-300 mb-8 leading-relaxed">{service.description}</p>
 
                 <div className="mb-8">
-                  <h4 className="font-cinzel text-lg font-bold text-white mb-4">O que está incluído:</h4>
+                  <h4 className="font-cinzel text-lg font-bold text-white mb-4">O que entregamos:</h4>
                   <ul className="space-y-3">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-steel-300 font-montserrat">
@@ -133,6 +133,7 @@ export default function ServicesPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg group-hover:shadow-xl flex items-center justify-center gap-3"
+                    title="Iniciar conversa no WhatsApp"
                   >
                     <svg
                       className="w-6 h-6 fill-current"

@@ -10,9 +10,9 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. Introdução</h2>
             <p className="text-gray-600 leading-relaxed">
-              A JR Câmbio Automático está comprometida em proteger a privacidade e segurança dos dados pessoais de nossos clientes. 
-              Esta Política de Privacidade descreve como coletamos, usamos, compartilhamos e protegemos suas informações 
-              quando você utiliza nossos serviços, incluindo nosso site e integração com WhatsApp Business.
+              A JR Câmbio Automático está comprometida em proteger a privacidade e a segurança dos dados pessoais de nossos clientes.
+              Esta Política de Privacidade descreve como coletamos, usamos, compartilhamos e protegemos suas informações
+              quando você utiliza nossos serviços, incluindo o site e a integração com WhatsApp Business.
             </p>
           </section>
 
@@ -26,7 +26,7 @@ export default function PoliticaPrivacidade() {
                   <li>Número de telefone (WhatsApp)</li>
                   <li>Endereço de e-mail</li>
                   <li>Endereço para prestação de serviços</li>
-                  <li>Informações sobre seu veículo e problema no câmbio</li>
+                  <li>Informações sobre seu veículo e o problema relatado no câmbio</li>
                 </ul>
               </div>
               
@@ -48,7 +48,7 @@ export default function PoliticaPrivacidade() {
             <p className="text-gray-600 mb-3">Utilizamos suas informações pessoais para:</p>
             <ul className="list-disc list-inside text-gray-600 space-y-1 ml-4">
               <li>Fornecer orçamentos e informações sobre nossos serviços</li>
-              <li>Comunicar-nos com você via WhatsApp sobre seu projeto</li>
+              <li>Comunicar-nos com você via WhatsApp sobre seu atendimento</li>
               <li>Agendar visitas técnicas e execução de serviços</li>
               <li>Melhorar nossos produtos e serviços</li>
               <li>Cumprir obrigações legais e regulamentares</li>
@@ -59,7 +59,7 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">4. Integração com WhatsApp Business</h2>
             <p className="text-gray-600 leading-relaxed mb-3">
-              Utilizamos o WhatsApp Business API da Meta para facilitar a comunicação com nossos clientes. 
+              Utilizamos a API do WhatsApp Business (Meta) para facilitar a comunicação com nossos clientes.
               Ao interagir conosco via WhatsApp, você concorda que:
             </p>
             <ul className="list-disc list-inside text-gray-600 space-y-1 ml-4">
@@ -86,8 +86,8 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">6. Segurança dos Dados</h2>
             <p className="text-gray-600 leading-relaxed">
-              Implementamos medidas técnicas e organizacionais apropriadas para proteger suas informações pessoais 
-              contra acesso não autorizado, perda, destruição ou alteração. Isso inclui criptografia de dados, 
+              Implementamos medidas técnicas e organizacionais apropriadas para proteger suas informações pessoais
+              contra acesso não autorizado, perda, destruição ou alteração. Isso inclui criptografia de dados,
               controles de acesso e monitoramento regular de nossos sistemas.
             </p>
           </section>
@@ -108,8 +108,8 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">8. Retenção de Dados</h2>
             <p className="text-gray-600 leading-relaxed">
-              Mantemos suas informações pessoais apenas pelo tempo necessário para cumprir as finalidades 
-              para as quais foram coletadas, incluindo requisitos legais, contábeis ou de relatórios. 
+              Mantemos suas informações pessoais apenas pelo tempo necessário para cumprir as finalidades
+              para as quais foram coletadas, incluindo requisitos legais, contábeis ou de relatórios.
               Conversas do WhatsApp são mantidas por até 2 anos, salvo necessidade legal de maior período.
             </p>
           </section>
@@ -117,8 +117,8 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">9. Cookies e Tecnologias Similares</h2>
             <p className="text-gray-600 leading-relaxed">
-              Nosso site utiliza cookies e tecnologias similares para melhorar sua experiência de navegação, 
-              analisar o tráfego do site e personalizar conteúdo. Você pode gerenciar suas preferências de 
+              Nosso site utiliza cookies e tecnologias similares para melhorar sua experiência de navegação,
+              analisar o tráfego do site e personalizar conteúdo. Você pode gerenciar suas preferências de
               cookies através das configurações do seu navegador.
             </p>
           </section>
@@ -126,9 +126,9 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">10. Alterações nesta Política</h2>
             <p className="text-gray-600 leading-relaxed">
-              Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos você sobre 
-              mudanças significativas publicando a nova política em nosso site e, quando apropriado, 
-              enviando uma notificação via WhatsApp. A data da última atualização será sempre indicada 
+              Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos você sobre
+              mudanças significativas publicando a nova política em nosso site e, quando apropriado,
+              enviando uma notificação via WhatsApp. A data da última atualização será sempre indicada
               no final deste documento.
             </p>
           </section>
@@ -136,7 +136,7 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">11. Contato</h2>
             <p className="text-gray-600 leading-relaxed mb-3">
-              Se você tiver dúvidas sobre esta Política de Privacidade ou sobre como tratamos seus dados pessoais, 
+              Se você tiver dúvidas sobre esta Política de Privacidade ou sobre como tratamos seus dados pessoais,
               entre em contato conosco:
             </p>
             <div className="bg-gray-100 p-4 rounded text-gray-600">

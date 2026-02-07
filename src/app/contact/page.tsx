@@ -3,12 +3,12 @@ import MapSection from '@/components/MapSection'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contato JR Câmbio Automático - Agende seu Diagnóstico Gratuito',
-  description: 'Entre em contato com a JR Câmbio Automático para agendar um diagnóstico gratuito. Ligue (11) 97182-9629 ou preencha nosso formulário. Resposta rápida e atendimento especializado.',
-  keywords: 'contato jr cambio, diagnostico gratuito, orcamento cambio automatico, agendar reparo cambio, whatsapp cambio',
+  title: 'Contato JR Câmbio Automático - Agende sua Avaliação',
+  description: 'Entre em contato com a JR Câmbio Automático para agendar uma avaliação técnica. Ligue (11) 97182-9629 ou preencha nosso formulário. Resposta rápida e atendimento especializado.',
+  keywords: 'contato jr cambio, avaliacao cambio automatico, oficina cambio automatico, manutencao cambio automatico, whatsapp cambio',
   openGraph: {
-    title: 'Contato JR Câmbio Automático - Diagnóstico Gratuito',
-    description: 'Agende seu diagnóstico gratuito hoje mesmo. Atendimento especializado e peças originais.',
+    title: 'Contato JR Câmbio Automático - Avaliação Técnica',
+    description: 'Agende sua avaliação técnica hoje mesmo. Atendimento especializado e peças de procedência.',
     type: 'website',
   },
 }
@@ -17,29 +17,29 @@ const contactInfo = [
   {
     type: 'WhatsApp',
     value: '(11) 97182-9629',
-    description: 'Atendimento rápido via WhatsApp',
-    icon: '📱',
-    href: 'https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico para meu câmbio automático.'
+    description: 'Atendimento consultivo via WhatsApp',
+    icon: '•',
+    href: 'https://wa.me/5511971829629?text=Olá! Gostaria de agendar uma avaliação para meu câmbio automático.'
   },
   {
     type: 'E-mail',
     value: 'contato@jrcambioautomatico.com.br',
     description: 'Envie suas dúvidas a qualquer momento',
-    icon: '✉️',
+    icon: '•',
     href: 'mailto:contato@jrcambioautomatico.com.br'
   },
   {
     type: 'Endereço',
     value: 'Av. Eliseu de Almeida, 325\nInstituto de Previdência\nSão Paulo - SP, 05533-000',
     description: 'Atendemos toda RMSP',
-    icon: '📍',
+    icon: '•',
     href: 'https://www.google.com/maps/search/?api=1&query=Av.+Eliseu+de+Almeida,+325+-+Instituto+de+Previdencia,+Sao+Paulo+-+SP,+05533-000'
   },
   {
     type: 'Horário',
     value: 'Seg-Sex: 8h às 18h\nSáb: 9h às 14h\nDom: Fechado',
     description: 'Horário de funcionamento',
-    icon: '🕒',
+    icon: '•',
     href: null
   }
 ]
@@ -57,11 +57,11 @@ export default function ContactPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Agende seu Diagnóstico Gratuito
+            Agende sua Avaliação Técnica
           </h1>
           <p className="text-xl text-steel-300 max-w-3xl mx-auto">
-            Problemas com seu câmbio automático? Entre em contato hoje mesmo para um diagnóstico
-            gratuito e sem compromisso. Nossa equipe especializada está pronta para ajudar.
+            Problemas com seu câmbio automático? Entre em contato para uma avaliação técnica
+            clara e sem compromisso. Nossa equipe especializada está pronta para ajudar.
           </p>
         </div>
 
@@ -90,6 +90,7 @@ export default function ContactPage() {
                           href={info.href}
                           target={info.type === 'WhatsApp' ? '_blank' : undefined}
                           rel={info.type === 'WhatsApp' ? 'noopener noreferrer' : undefined}
+                          title={info.type === 'WhatsApp' ? 'Iniciar conversa no WhatsApp' : undefined}
                           className="text-accent-400 hover:text-steel-200 transition-colors whitespace-pre-line"
                         >
                           {info.value}
@@ -106,18 +107,19 @@ export default function ContactPage() {
 
             {/* Emergency Service */}
             <div className="bg-accent-900/30 border border-accent-700 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-accent-300 mb-3">🔧 Diagnóstico Gratuito</h3>
+              <h3 className="text-lg font-bold text-accent-300 mb-3">Avaliação Técnica</h3>
               <p className="text-accent-400 mb-4">
-                Traga seu veículo para uma avaliação completa sem custo. Identificamos o problema
-                com precisão usando equipamentos de última geração.
+                Traga seu veículo para uma avaliação completa. Identificamos o problema
+                com precisão usando equipamentos modernos.
               </p>
               <a
-                href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar um diagnóstico gratuito."
+                href="https://wa.me/5511971829629?text=Olá! Gostaria de agendar uma avaliação técnica."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-accent-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-accent-700 transition-colors inline-block"
+                title="Iniciar conversa no WhatsApp"
               >
-                Agendar Diagnóstico
+                Agendar Avaliação
               </a>
             </div>
 
@@ -140,7 +142,7 @@ export default function ContactPage() {
 
             {/* Guarantee */}
             <div className="bg-steel-700/50 border border-steel-600 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-steel-200 mb-3">🛡️ Garantia de 6 Meses</h3>
+              <h3 className="text-lg font-bold text-steel-200 mb-3">Garantia de 6 Meses</h3>
               <p className="text-steel-300 mb-4">
                 Todos os nossos serviços incluem garantia de 6 meses em peças e mão de obra.
               </p>
@@ -160,24 +162,24 @@ export default function ContactPage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-5xl mb-4">⚡</div>
+              <div className="text-5xl mb-4">•</div>
               <h3 className="text-xl font-semibold text-white mb-3">Resposta Rápida</h3>
               <p className="text-steel-300">
-                Respondemos a todas as consultas em até 24 horas e agendamos seu diagnóstico com agilidade.
+                Respondemos a todas as consultas em até 24 horas e agendamos sua avaliação com agilidade.
               </p>
             </div>
             <div className="text-center">
-              <div className="text-5xl mb-4">🔧</div>
+              <div className="text-5xl mb-4">•</div>
               <h3 className="text-xl font-semibold text-white mb-3">Diagnóstico Preciso</h3>
               <p className="text-steel-300">
-                Equipamentos de última geração para identificar o problema com precisão antes de qualquer reparo.
+                Equipamentos modernos para identificar o problema com precisão antes de qualquer reparo.
               </p>
             </div>
             <div className="text-center">
-              <div className="text-5xl mb-4">🛡️</div>
+              <div className="text-5xl mb-4">•</div>
               <h3 className="text-xl font-semibold text-white mb-3">Garantia Total</h3>
               <p className="text-steel-300">
-                6 meses de garantia em todos os serviços, peças originais e satisfação garantida.
+                6 meses de garantia em todos os serviços, peças de procedência e suporte pós-serviço.
               </p>
             </div>
           </div>

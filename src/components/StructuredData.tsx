@@ -6,7 +6,7 @@ export default function StructuredData() {
     "@type": "LocalBusiness",
     "@id": "https://jrcambioautomatico.com.br",
     "name": "JR Câmbio Automático",
-    "description": "Especialistas em diagnóstico, reparo e manutenção de câmbio automático. Diagnóstico gratuito, peças originais e garantia de 6 meses em São Paulo.",
+    "description": "Oficina de câmbio automático em São Paulo com diagnóstico preciso, manutenção de câmbio automático, reparo e garantia.",
     "url": "https://jrcambioautomatico.com.br",
     "telephone": "+55-11-97182-9629",
     "priceRange": "$$",
@@ -64,7 +64,7 @@ export default function StructuredData() {
       {
         "@type": "Service",
         "name": "Diagnóstico Computadorizado",
-        "description": "Identificamos o problema com precisão usando equipamentos de última geração",
+        "description": "Avaliação técnica com leitura eletrônica e testes para identificar a causa raiz",
         "provider": {
           "@type": "LocalBusiness",
           "name": "JR Câmbio Automático"
@@ -75,7 +75,7 @@ export default function StructuredData() {
       {
         "@type": "Service",
         "name": "Conserto de Câmbio Automático",
-        "description": "Reparos especializados com peças originais e garantia de 6 meses",
+        "description": "Reparos especializados com peças de procedência e garantia",
         "provider": {
           "@type": "LocalBusiness",
           "name": "JR Câmbio Automático"
@@ -86,7 +86,7 @@ export default function StructuredData() {
       {
         "@type": "Service",
         "name": "Retífica de Câmbio",
-        "description": "Reconstrução total do câmbio automático com qualidade de fábrica",
+        "description": "Retífica com padrão técnico e tolerâncias de fábrica",
         "provider": {
           "@type": "LocalBusiness",
           "name": "JR Câmbio Automático"
@@ -97,7 +97,7 @@ export default function StructuredData() {
       {
         "@type": "Service",
         "name": "Troca de Óleo ATF",
-        "description": "Substituição de fluido de transmissão para melhor performance",
+        "description": "Troca de fluido ATF com especificação correta para cada transmissão",
         "provider": {
           "@type": "LocalBusiness",
           "name": "JR Câmbio Automático"
@@ -108,7 +108,7 @@ export default function StructuredData() {
       {
         "@type": "Service",
         "name": "Manutenção Preventiva",
-        "description": "Inspeções periódicas para identificar e prevenir problemas futuros",
+        "description": "Manutenção preventiva para reduzir falhas e prolongar a vida útil",
         "provider": {
           "@type": "LocalBusiness",
           "name": "JR Câmbio Automático"

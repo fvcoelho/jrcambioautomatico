@@ -87,17 +87,17 @@ export default function ProjectCard({
   }
 
   return (
-    <Card className={`overflow-hidden transition-all duration-200 hover:shadow-lg ${!project.isActive
-        ? 'opacity-70 border-gray-200 bg-gray-50'
-        : 'border-gray-300 hover:border-gray-400'
+    <Card className={`overflow-hidden transition-all duration-200 hover:shadow-xl bg-steel-800/50 backdrop-blur-sm border ${!project.isActive
+        ? 'opacity-70 border-steel-700'
+        : 'border-steel-700 hover:border-accent-500/40'
       }`}>
       {/* Project Image */}
-      <div className="relative aspect-video bg-gray-100">
+      <div className="relative aspect-video bg-steel-900">
         {hasImages ? (
           <div className="relative w-full h-full">
             {primaryImage ? (
               primaryImage.fileType === 'video' ? (
-                <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-steel-600 to-steel-900 flex items-center justify-center">
                   <Video className="h-12 w-12 text-white" />
                 </div>
               ) : (
@@ -108,7 +108,7 @@ export default function ProjectCard({
                   loading="lazy"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/logo.svg'
-                      ; (e.target as HTMLImageElement).classList.add('p-4', 'bg-gray-100')
+                      ; (e.target as HTMLImageElement).classList.add('p-4', 'bg-steel-900')
                   }}
                 />
               )
@@ -120,7 +120,7 @@ export default function ProjectCard({
                 loading="lazy"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = '/logo.svg'
-                    ; (e.target as HTMLImageElement).classList.add('p-4', 'bg-gray-100')
+                    ; (e.target as HTMLImageElement).classList.add('p-4', 'bg-steel-900')
                 }}
               />
             ) : null}
@@ -141,7 +141,7 @@ export default function ProjectCard({
 
             {/* Inactive overlay */}
             {!project.isActive && (
-              <div className="absolute inset-0 bg-gray-900/20 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <div className="bg-white/90 px-3 py-1 rounded-full text-sm font-medium text-gray-700">
                   Projeto Desativado
                 </div>
@@ -149,10 +149,10 @@ export default function ProjectCard({
             )}
           </div>
         ) : (
-          <div className="relative w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+          <div className="relative w-full h-full bg-gradient-to-br from-steel-800 to-steel-900 flex items-center justify-center">
             <div className="text-center">
-              <ImageIcon className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-              <p className="text-sm text-gray-500">Sem imagens</p>
+              <ImageIcon className="h-12 w-12 text-steel-500 mx-auto mb-2" />
+              <p className="text-sm text-steel-400">Sem imagens</p>
             </div>
 
             {/* Status Indicator for no images */}
@@ -164,7 +164,7 @@ export default function ProjectCard({
 
             {/* Inactive overlay for no images */}
             {!project.isActive && (
-              <div className="absolute inset-0 bg-gray-900/20 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <div className="bg-white/90 px-3 py-1 rounded-full text-sm font-medium text-gray-700">
                   Projeto Desativado
                 </div>
@@ -179,11 +179,11 @@ export default function ProjectCard({
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-gray-900 text-lg leading-tight line-clamp-2">
+            <h3 className="font-semibold text-white text-lg leading-tight line-clamp-2">
               {project.title}
             </h3>
             {project.description && (
-              <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+              <p className="text-sm text-steel-300 mt-1 line-clamp-2">
                 {project.description}
               </p>
             )}
@@ -193,21 +193,21 @@ export default function ProjectCard({
         {/* Metadata */}
         <div className="space-y-2 mb-4">
           {project.location && (
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+            <div className="flex items-center gap-2 text-sm text-steel-400">
               <MapPin className="h-3 w-3" />
               <span>{project.location}</span>
             </div>
           )}
 
           {category && (
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+            <div className="flex items-center gap-2 text-sm text-steel-400">
               <Tag className="h-3 w-3" />
               <span>{category.name}</span>
             </div>
           )}
 
           {project.completedAt && (
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+            <div className="flex items-center gap-2 text-sm text-steel-400">
               <Calendar className="h-3 w-3" />
               <span>Concluído em {formatDate(project.completedAt)}</span>
             </div>
@@ -216,16 +216,16 @@ export default function ProjectCard({
 
         {/* Gallery Info */}
         {totalImages > 0 && (
-          <div className="flex items-center gap-4 text-xs text-gray-500 mb-4 py-2 border-t border-gray-100">
+          <div className="flex items-center gap-4 text-xs text-steel-400 mb-4 py-2 border-t border-steel-700">
             {activeImages.length > 0 && (
               <span className="flex items-center gap-1">
-                <ImageIcon className="h-3 w-3 text-green-600" />
+                <ImageIcon className="h-3 w-3 text-accent-400" />
                 {activeImages.length} na galeria
               </span>
             )}
             {project.imageUrls.length > 0 && (
               <span className="flex items-center gap-1">
-                <MoreHorizontal className="h-3 w-3 text-orange-600" />
+                <MoreHorizontal className="h-3 w-3 text-amber-400" />
                 {project.imageUrls.length} URL{project.imageUrls.length !== 1 ? 's' : ''}
               </span>
             )}
@@ -238,7 +238,7 @@ export default function ProjectCard({
             variant="outline"
             size="sm"
             onClick={() => onManageImages(project)}
-            className="flex-1"
+            className="flex-1 border-steel-600 text-steel-200 hover:bg-steel-700 hover:text-white"
           >
             <ImageIcon className="h-4 w-4 mr-2" />
             Imagens
@@ -248,6 +248,7 @@ export default function ProjectCard({
             variant="outline"
             size="sm"
             onClick={() => onEdit(project)}
+            className="border-steel-600 text-steel-200 hover:bg-steel-700 hover:text-white"
           >
             <Edit className="h-4 w-4" />
           </Button>
@@ -258,7 +259,7 @@ export default function ProjectCard({
               size="sm"
               onClick={() => onToggleActive(project.id, !project.isActive)}
               title={project.isActive ? 'Desativar projeto' : 'Ativar projeto'}
-              className={project.isActive ? 'text-green-600 hover:text-green-700 hover:bg-green-50' : 'text-gray-400 hover:text-green-600 hover:bg-green-50'}
+              className={project.isActive ? 'text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10' : 'text-steel-400 hover:text-emerald-300 hover:bg-emerald-500/10'}
             >
               {project.isActive ?
                 <Eye className="h-4 w-4" /> :
@@ -271,14 +272,14 @@ export default function ProjectCard({
             variant="ghost"
             size="sm"
             onClick={handleDelete}
-            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
           >
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Footer */}
-        <div className="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-400">
+        <div className="mt-3 pt-3 border-t border-steel-700 text-xs text-steel-500">
           Criado em {formatDate(project.createdAt)}
         </div>
       </div>
