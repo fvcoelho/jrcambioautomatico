@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 
 const STORAGE_KEY = 'jrcambio_admin_access'
-const ACCESS_VALUE = 'jrcambio_admin_2024'
+const ACCESS_VALUE = 'junior_admin_2026'
 
 export default function AdminAccessPage() {
   const params = useParams<{ uniqueId: string }>()

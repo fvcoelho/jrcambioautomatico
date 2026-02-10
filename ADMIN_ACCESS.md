@@ -11,7 +11,7 @@ The admin panel is protected by a simple localStorage check. To gain access:
 3. Run this command:
 
 ```javascript
-localStorage.setItem('jrcambio_admin_access', 'jrcambio_admin_2024')
+localStorage.setItem('jrcambio_admin_access', 'junior_admin_2026')
 ```
 
 4. Refresh the page or navigate to `/admin`
@@ -21,14 +21,14 @@ localStorage.setItem('jrcambio_admin_access', 'jrcambio_admin_2024')
 The access key is stored in `/src/components/AdminAuth.tsx`:
 
 ```typescript
-const ADMIN_ACCESS_KEY = 'jrcambio_admin_2024'
+const ADMIN_ACCESS_KEY = 'junior_admin_2026'
 const STORAGE_KEY = 'jrcambio_admin_access'
 ```
 
 ### How It Works
 
 - The `AdminAuth` component checks localStorage for the key `jrcambio_admin_access`
-- If the value matches `jrcambio_admin_2024`, access is granted
+- If the value matches `junior_admin_2026`, access is granted
 - If not, the user is redirected to the home page
 - The check happens on every page under `/admin/*`
 
