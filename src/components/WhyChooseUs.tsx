@@ -26,9 +26,9 @@ const features = [
     color: 'steel'
   },
   {
-    title: '6 Meses de Garantia',
+    title: '2 Meses de Garantia',
     description: 'Garantia em nossos serviços para sua tranquilidade e segurança.',
-    stats: '6 Meses',
+    stats: '2 Meses',
     color: 'accent'
   },
   {

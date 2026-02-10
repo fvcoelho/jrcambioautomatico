@@ -17,7 +17,7 @@ const services = [
     title: 'Diagnóstico Computadorizado',
     description: 'Identificamos o problema com precisão usando equipamentos de última geração para análise completa do câmbio.',
     features: ['Scanner Automotivo', 'Teste de Pressão', 'Análise de Fluido', 'Relatório Detalhado'],
-    price: 'Gratuito',
+    price: 'Sob consulta',
     gradient: 'from-blue-400 to-blue-600',
     popular: true
   },
@@ -25,7 +25,7 @@ const services = [
     id: 'conserto',
     title: 'Conserto de Câmbio',
     description: 'Reparos especializados com peças originais e garantia. Solucionamos todos os tipos de problemas.',
-    features: ['Peças Originais', 'Garantia de 6 Meses', 'Todas as Marcas', 'Mão de Obra Especializada'],
+    features: ['Peças Originais', 'Garantia de 2 Meses', 'Todas as Marcas', 'Mão de Obra Especializada'],
     price: 'Sob consulta',
     gradient: 'from-steel-400 to-steel-600',
     popular: true
@@ -44,7 +44,7 @@ const services = [
     title: 'Troca de Óleo ATF',
     description: 'Substituição de fluido de transmissão para melhor performance e maior vida útil do câmbio.',
     features: ['Óleo Original', 'Filtro Novo', 'Limpeza do Sistema', 'Performance Otimizada'],
-    price: 'A partir de R$ 350',
+    price: 'Sob consulta',
     gradient: 'from-steel-500 to-steel-700',
     popular: false
   },
@@ -53,7 +53,7 @@ const services = [
     title: 'Revisão de Câmbio',
     description: 'Manutenção preventiva completa para estender a vida útil da transmissão automática.',
     features: ['Inspeção Completa', 'Ajustes Necessários', 'Verificação de Vazamentos', 'Teste de Funcionamento'],
-    price: 'A partir de R$ 200',
+    price: 'Sob consulta',
     gradient: 'from-steel-300 to-steel-500',
     popular: false
   }
@@ -140,7 +140,7 @@ const stats = [
   { number: '15+', label: 'Anos de Experiência' },
   { number: '1000+', label: 'Câmbios Reparados' },
   { number: '98%', label: 'Satisfação do Cliente' },
-  { number: '6', label: 'Meses de Garantia' }
+  { number: '2', label: 'Meses de Garantia' }
 ]
 
 export default function Home() {
@@ -878,7 +878,7 @@ function AboutSection() {
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 bg-steel-800 rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                    <span>Garantia de 6 meses em todos os serviços</span>
+                    <span>Garantia de 2 meses em todos os serviços</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 bg-steel-800 rounded-full mr-3 mt-2 flex-shrink-0"></div>

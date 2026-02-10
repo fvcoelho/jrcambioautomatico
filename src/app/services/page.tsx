@@ -26,7 +26,7 @@ const services = [
     id: 'conserto',
     title: 'Conserto de Câmbio',
     description: 'Reparos especializados em câmbios automáticos de diversas marcas e modelos. Correções para patinação, trancos e falhas de engate.',
-    features: ['Peças de Procedência', 'Garantia de 6 Meses', 'Diversas Marcas e Modelos', 'Mão de Obra Especializada'],
+    features: ['Peças de Procedência', 'Garantia de 2 Meses', 'Diversas Marcas e Modelos', 'Mão de Obra Especializada'],
     price: 'Sob consulta',
     gradient: 'from-steel-400 to-steel-600',
     popular: true
@@ -45,7 +45,7 @@ const services = [
     title: 'Troca de Óleo ATF',
     description: 'Substituição do fluido ATF com especificação correta para preservar desempenho e durabilidade.',
     features: ['Óleo ATF Original ou Equivalente', 'Filtro de Transmissão Novo', 'Limpeza do Sistema', 'Performance Otimizada'],
-    price: 'A partir de R$ 350',
+    price: 'Sob consulta',
     gradient: 'from-steel-500 to-steel-700',
     popular: false
   },
@@ -54,7 +54,7 @@ const services = [
     title: 'Revisão de Câmbio',
     description: 'Manutenção preventiva para estender a vida útil da transmissão automática e evitar falhas.',
     features: ['Inspeção Visual Completa', 'Verificação de Vazamentos', 'Ajustes Necessários', 'Teste de Funcionamento'],
-    price: 'A partir de R$ 200',
+    price: 'Sob consulta',
     gradient: 'from-steel-300 to-steel-500',
     popular: false
   },
@@ -82,7 +82,7 @@ export default function ServicesPage() {
           </h1>
           <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
             Serviços especializados em câmbio automático com mais de 15 anos de experiência.
-            Avaliação técnica, peças de procedência e garantia de 6 meses.
+            Avaliação técnica, peças de procedência e garantia de 2 meses.
           </p>
         </div>
       </section>

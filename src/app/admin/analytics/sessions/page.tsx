@@ -2,7 +2,25 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import SpinningLogo from '@/components/SpinningLogo'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import {
+  Users,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  RefreshCw,
+  ExternalLink,
+  MapPin,
+  Laptop,
+  Clock
+} from 'lucide-react'
+
+import {
+  AdminPageWrapper,
+  AdminHeader,
+  AdminCard
+} from '@/components/admin'
 
 interface SessionSummary {
   id: string
@@ -69,175 +87,173 @@ export default function SessionsListPage() {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center">
-          <SpinningLogo size="lg" color="blue" showText text="Carregando sessões..." className="text-gray-600" />
+      <AdminPageWrapper>
+        <div className="flex items-center justify-center py-12">
+          <RefreshCw className="h-8 w-8 animate-spin text-accent-400" />
+          <span className="ml-3 text-lg text-steel-400">Carregando sessões...</span>
         </div>
-      </div>
+      </AdminPageWrapper>
     )
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <Link 
-              href="/admin/analytics"
-              className="text-blue-600 hover:text-blue-800 mb-4 inline-block"
-            >
-              ← Voltar para Analytics
-            </Link>
-            <h1 className="text-3xl font-bold text-gray-900">Todas as Sessões</h1>
-            <p className="text-gray-600">Lista completa de sessões de usuários</p>
-          </div>
-        </div>
-        
-        {/* Controls */}
-        <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow mb-4">
-          <div>
-            <label className="text-sm font-medium text-gray-700 mr-2">Limite:</label>
-            <select 
-              value={limit} 
+    <AdminPageWrapper>
+      <AdminHeader
+        title="Todas as Sessões"
+        description="Lista completa de sessões de usuários e atividade"
+        actions={
+          <Link href="/admin/analytics">
+            <Button variant="outline" className="border-steel-700 text-steel-300 hover:bg-steel-800">
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Voltar
+            </Button>
+          </Link>
+        }
+      />
+
+      {/* Controls */}
+      <AdminCard className="mb-8 p-4">
+        <div className="flex flex-wrap items-center gap-6">
+          <div className="flex items-center gap-3">
+            <label className="text-sm font-medium text-steel-400">Limite:</label>
+            <select
+              value={limit}
               onChange={(e) => {
                 setLimit(Number(e.target.value))
-                setPage(1) // Reset to first page when limit changes
+                setPage(1)
               }}
-              className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+              className="bg-steel-800 border border-steel-700 text-white rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-accent-500"
             >
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-              <option value={150}>150</option>
-              <option value={200}>200</option>
+              <option value={50}>50 por página</option>
+              <option value={100}>100 por página</option>
             </select>
           </div>
-          
-          <div>
-            <label className="text-sm font-medium text-gray-700 mr-2">Ordenar por:</label>
-            <select 
-              value={orderBy} 
+
+          <div className="flex items-center gap-3">
+            <label className="text-sm font-medium text-steel-400">Ordenar por:</label>
+            <select
+              value={orderBy}
               onChange={(e) => {
                 setOrderBy(e.target.value)
-                setPage(1) // Reset to first page when order changes
+                setPage(1)
               }}
-              className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+              className="bg-steel-800 border border-steel-700 text-white rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-accent-500"
             >
               <option value="createdAt">Data de Criação</option>
               <option value="updatedAt">Última Atividade</option>
-              <option value="country">País</option>
-              <option value="city">Cidade</option>
             </select>
           </div>
-          
-          <div>
-            <label className="text-sm font-medium text-gray-700 mr-2">Direção:</label>
-            <select 
-              value={orderDirection} 
-              onChange={(e) => {
-                setOrderDirection(e.target.value as 'asc' | 'desc')
-                setPage(1) // Reset to first page when direction changes
-              }}
-              className="border border-gray-300 rounded-md px-3 py-1 text-sm"
-            >
-              <option value="desc">Decrescente</option>
-              <option value="asc">Crescente</option>
-            </select>
-          </div>
+
+          <Button onClick={fetchSessions} variant="ghost" className="text-steel-400 hover:text-white ml-auto">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Recarregar
+          </Button>
         </div>
-      </div>
+      </AdminCard>
 
       {/* Sessions Table */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Sessão
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Dispositivo
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Localização
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Atividade
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Duração
-              </th>
-              <th className="relative px-6 py-3">
-                <span className="sr-only">Ações</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {sessions.map((session) => (
-              <tr key={session.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{session.sessionId.slice(0, 8)}...</div>
-                  <div className="text-sm text-gray-500">{formatTime(session.createdAt)}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{session.device || 'Unknown'}</div>
-                  <div className="text-sm text-gray-500">{session.browser} • {session.os}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    {session.city || session.country || 'Unknown'}
-                  </div>
-                  <div className="text-sm text-gray-500">{session.ipAddress}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{session._count.pageViews} páginas</div>
-                  <div className="text-sm text-gray-500">{session._count.activities} cliques</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {formatDuration(session.createdAt, session.updatedAt)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <Link
-                    href={`/admin/analytics/session/${session.sessionId}`}
-                    className="text-blue-600 hover:text-blue-900"
-                  >
-                    Ver detalhes
-                  </Link>
-                </td>
+      <AdminCard>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-steel-700">
+                <th className="text-left py-3 px-4 text-steel-400 font-medium text-sm">Sessão / ID</th>
+                <th className="text-left py-3 px-4 text-steel-400 font-medium text-sm">Dispositivo</th>
+                <th className="text-left py-3 px-4 text-steel-400 font-medium text-sm">Localização</th>
+                <th className="text-center py-3 px-4 text-steel-400 font-medium text-sm">Atividade</th>
+                <th className="text-right py-3 px-4 text-steel-400 font-medium text-sm">Duração</th>
+                <th className="text-center py-3 px-4 text-steel-400 font-medium text-sm">Ações</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="divide-y divide-steel-800">
+              {sessions.map((session) => (
+                <tr key={session.id} className="hover:bg-steel-800/30 transition-colors group">
+                  <td className="py-4 px-4">
+                    <div className="flex flex-col">
+                      <span className="text-white font-medium font-mono text-xs">
+                        {session.sessionId.slice(0, 12)}...
+                      </span>
+                      <span className="text-xs text-steel-500">{formatTime(session.createdAt)}</span>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4">
+                    <div className="flex items-start gap-2">
+                      <Laptop className="h-4 w-4 text-steel-500 mt-0.5" />
+                      <div className="flex flex-col">
+                        <span className="text-sm text-steel-200">{session.device || 'Desktop'}</span>
+                        <span className="text-xs text-steel-500">{session.browser} • {session.os}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4">
+                    <div className="flex items-start gap-2">
+                      <MapPin className="h-4 w-4 text-steel-500 mt-0.5" />
+                      <div className="flex flex-col">
+                        <span className="text-sm text-steel-200">
+                          {session.city || session.country || 'Desconhecido'}
+                        </span>
+                        <span className="text-xs text-steel-500 font-mono">{session.ipAddress}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <Badge variant="outline" className="bg-accent-500/10 border-accent-500/20 text-accent-400 font-normal">
+                        {session._count.pageViews} páginas
+                      </Badge>
+                      <Badge variant="outline" className="bg-emerald-500/10 border-emerald-500/20 text-emerald-400 font-normal">
+                        {session._count.activities} cliques
+                      </Badge>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4 text-right">
+                    <div className="flex items-center justify-end gap-1.5 text-steel-400">
+                      <Clock className="h-3 w-3" />
+                      <span className="text-sm">{formatDuration(session.createdAt, session.updatedAt)}</span>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    <Link href={`/admin/analytics/session/${session.sessionId}`}>
+                      <Button size="sm" variant="ghost" className="text-accent-400 hover:text-accent-300 hover:bg-accent-500/10 h-8">
+                        <ExternalLink className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AdminCard>
 
       {/* Pagination */}
-      <div className="mt-6 flex items-center justify-between">
-        <button
-          onClick={() => setPage(page - 1)}
-          disabled={page === 1}
-          className={`px-4 py-2 border border-gray-300 rounded-md text-sm font-medium ${
-            page === 1
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-white text-gray-700 hover:bg-gray-50'
-          }`}
-        >
-          Anterior
-        </button>
-        <span className="text-sm text-gray-700">
-          Página {page}
-        </span>
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={!hasMore}
-          className={`px-4 py-2 border border-gray-300 rounded-md text-sm font-medium ${
-            !hasMore
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-white text-gray-700 hover:bg-gray-50'
-          }`}
-        >
-          Próxima
-        </button>
+      <div className="mt-8 flex items-center justify-between">
+        <div className="text-sm text-steel-500">
+          Mostrando página <span className="text-steel-300 font-medium">{page}</span>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+            className="border-steel-700 text-steel-400 hover:bg-steel-800 disabled:opacity-30"
+          >
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            Anterior
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage(page + 1)}
+            disabled={!hasMore}
+            className="border-steel-700 text-steel-400 hover:bg-steel-800 disabled:opacity-30"
+          >
+            Próxima
+            <ChevronRight className="h-4 w-4 ml-1" />
+          </Button>
+        </div>
       </div>
-    </div>
+    </AdminPageWrapper>
   )
 }

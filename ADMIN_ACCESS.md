@@ -11,7 +11,7 @@ The admin panel is protected by a simple localStorage check. To gain access:
 3. Run this command:
 
 ```javascript
-localStorage.setItem('pisospro_admin_access', 'pisospro_admin_2024')
+localStorage.setItem('jrcambio_admin_access', 'jrcambio_admin_2024')
 ```
 
 4. Refresh the page or navigate to `/admin`
@@ -21,14 +21,14 @@ localStorage.setItem('pisospro_admin_access', 'pisospro_admin_2024')
 The access key is stored in `/src/components/AdminAuth.tsx`:
 
 ```typescript
-const ADMIN_ACCESS_KEY = 'pisospro_admin_2024'
-const STORAGE_KEY = 'pisospro_admin_access'
+const ADMIN_ACCESS_KEY = 'jrcambio_admin_2024'
+const STORAGE_KEY = 'jrcambio_admin_access'
 ```
 
 ### How It Works
 
-- The `AdminAuth` component checks localStorage for the key `pisospro_admin_access`
-- If the value matches `pisospro_admin_2024`, access is granted
+- The `AdminAuth` component checks localStorage for the key `jrcambio_admin_access`
+- If the value matches `jrcambio_admin_2024`, access is granted
 - If not, the user is redirected to the home page
 - The check happens on every page under `/admin/*`
 
@@ -37,7 +37,7 @@ const STORAGE_KEY = 'pisospro_admin_access'
 To remove access, run in browser console:
 
 ```javascript
-localStorage.removeItem('pisospro_admin_access')
+localStorage.removeItem('jrcambio_admin_access')
 ```
 
 ### Changing the Access Key

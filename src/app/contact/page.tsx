@@ -142,9 +142,9 @@ export default function ContactPage() {
 
             {/* Guarantee */}
             <div className="bg-steel-700/50 border border-steel-600 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-steel-200 mb-3">Garantia de 6 Meses</h3>
+              <h3 className="text-lg font-bold text-steel-200 mb-3">Garantia de 2 Meses</h3>
               <p className="text-steel-300 mb-4">
-                Todos os nossos serviços incluem garantia de 6 meses em peças e mão de obra.
+                Todos os nossos serviços incluem garantia de 2 meses em peças e mão de obra.
               </p>
               <ul className="text-sm text-accent-400 space-y-1">
                 <li>• Peças originais e de qualidade</li>
@@ -179,7 +179,7 @@ export default function ContactPage() {
               <div className="text-5xl mb-4">•</div>
               <h3 className="text-xl font-semibold text-white mb-3">Garantia Total</h3>
               <p className="text-steel-300">
-                6 meses de garantia em todos os serviços, peças de procedência e suporte pós-serviço.
+                2 meses de garantia em todos os serviços, peças de procedência e suporte pós-serviço.
               </p>
             </div>
           </div>

@@ -39,7 +39,7 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex space-x-4">
               <a
-                href={process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/jrcambioautomatico"}
+                href={process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/profile.php?id=100063594938515"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600/20 transition-all duration-300 hover:scale-110"

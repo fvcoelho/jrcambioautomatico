@@ -50,7 +50,7 @@ const stats = [
   { number: '15+', label: 'Anos de Experiência' },
   { number: '1000+', label: 'Câmbios Reparados' },
   { number: '98%', label: 'Satisfação do Cliente' },
-  { number: '6', label: 'Meses de Garantia' }
+  { number: '2', label: 'Meses de Garantia' }
 ]
 
 export default function AboutPage() {
@@ -102,7 +102,7 @@ export default function AboutPage() {
                 <div className="bg-gradient-to-br from-accent-400 to-accent-600 rounded-2xl p-8 shadow-lg">
                   <h3 className="font-cinzel text-2xl font-bold text-white mb-4">Qualidade Garantida</h3>
                   <p className="font-montserrat text-white/90 leading-relaxed">
-                    Todos os nossos serviços incluem garantia de 6 meses, peças de procedência e
+                    Todos os nossos serviços incluem garantia de 2 meses, peças de procedência e
                     avaliação técnica completa.
                   </p>
                 </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
                 <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 mb-3 mx-auto w-16 h-16 flex items-center justify-center">
                   <div className="w-8 h-8 bg-steel-800/20 rounded-full" />
                 </div>
-                <p className="font-montserrat font-semibold">6 Meses de Garantia</p>
+                <p className="font-montserrat font-semibold">2 Meses de Garantia</p>
               </div>
               <div>
                 <div className="bg-gradient-to-br from-neutral-400 to-neutral-600 rounded-xl p-4 mb-3 mx-auto w-16 h-16 flex items-center justify-center">

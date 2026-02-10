@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: "JR Câmbio Automático - Especialistas em Câmbio Automático em São Paulo",
     template: "%s | JR Câmbio Automático"
   },
-  description: "Oficina de câmbio automático em São Paulo com diagnóstico técnico, reparo e manutenção de câmbio automático. Peças de procedência e garantia de 6 meses. Mais de 15 anos de experiência.",
+  description: "Oficina de câmbio automático em São Paulo com diagnóstico técnico, reparo e manutenção de câmbio automático. Peças de procedência e garantia de 2 meses. Mais de 15 anos de experiência.",
   keywords: [
     "câmbio automático são paulo",
     "conserto câmbio automático",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     url: 'https://jrcambioautomatico.com.br',
     siteName: 'JR Câmbio Automático',
     title: 'JR Câmbio Automático - Especialistas em Câmbio Automático em São Paulo',
-    description: 'Oficina de câmbio automático em São Paulo com diagnóstico técnico, reparo e manutenção de câmbio automático. Garantia de 6 meses.',
+    description: 'Oficina de câmbio automático em São Paulo com diagnóstico técnico, reparo e manutenção de câmbio automático. Garantia de 2 meses.',
     images: [
       {
         url: '/logo_full.svg',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'JR Câmbio Automático - Especialistas em Câmbio Automático em São Paulo',
-    description: 'Oficina de câmbio automático em São Paulo com diagnóstico técnico, reparo e manutenção de câmbio automático. Garantia de 6 meses.',
+    description: 'Oficina de câmbio automático em São Paulo com diagnóstico técnico, reparo e manutenção de câmbio automático. Garantia de 2 meses.',
     images: ['/logo_full.svg'],
   },
   alternates: {

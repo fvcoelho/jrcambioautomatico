@@ -6,6 +6,20 @@ import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import {
+  AdminPageWrapper,
+  AdminHeader,
+  AdminCard
+} from '@/components/admin'
+import {
+  Camera,
+  Plus,
+  X,
+  Film,
+  Image as ImageIcon,
+  Edit2,
+  Trash2
+} from 'lucide-react'
 
 interface Project {
   id: number
@@ -74,9 +88,7 @@ function EditImageForm({ image, categories, projects, onSave, onCancel }: EditIm
   }
 
   return (
-    <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
-      <h3 className="text-lg font-semibold text-white mb-4">Editar Imagem</h3>
-
+    <AdminCard title="Editar Imagem">
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
@@ -186,7 +198,7 @@ function EditImageForm({ image, categories, projects, onSave, onCancel }: EditIm
           Cancelar
         </Button>
       </div>
-    </div>
+    </AdminCard>
   )
 }
 
@@ -289,165 +301,149 @@ export default function GalleryManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center text-steel-400">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-400 mx-auto mb-4"></div>
-            Carregando...
-          </div>
+      <AdminPageWrapper>
+        <div className="text-center text-steel-400 py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-400 mx-auto mb-4"></div>
+          Carregando...
         </div>
-      </div>
+      </AdminPageWrapper>
     )
   }
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-4">Gerenciar Galeria</h1>
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <div className="flex gap-4 items-center">
-              <Select
-                value={selectedProject}
-                onChange={(e) => setSelectedProject(e.target.value)}
-                className="w-64 bg-steel-800/50 border-steel-600 text-white"
-              >
-                <option value="all">Todos os Projetos</option>
-                {projects.map((project) => (
-                  <option key={project.id} value={project.id.toString()}>
-                    {project.title}
-                  </option>
-                ))}
-              </Select>
-            </div>
+    <AdminPageWrapper>
+      <AdminHeader
+        title="Gerenciar Galeria"
+        description="Adicione e gerencie imagens e vídeos dos serviços"
+        actions={
+          <>
+            <Select
+              value={selectedProject}
+              onChange={(e) => setSelectedProject(e.target.value)}
+              className="w-64 bg-steel-800/50 border-steel-600 text-white"
+            >
+              <option value="all">Todos os Projetos</option>
+              {projects.map((project) => (
+                <option key={project.id} value={project.id.toString()}>
+                  {project.title}
+                </option>
+              ))}
+            </Select>
             <Button
               onClick={() => setShowUploadForm(!showUploadForm)}
               className="whitespace-nowrap bg-accent-500 hover:bg-accent-600 text-white"
             >
-              <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              {showUploadForm ? 'Fechar Formulário' : 'Adicionar Mídia à Galeria'}
+              {showUploadForm ? <X className="w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
+              {showUploadForm ? 'Fechar Formulário' : 'Adicionar Mídia'}
             </Button>
-          </div>
+          </>
+        }
+      />
+
+      {showUploadForm && (
+        <div className="mb-8">
+          <GalleryUploadForm onUploadSuccess={handleUploadSuccess} />
         </div>
+      )}
 
-        {showUploadForm && (
-          <div className="mb-8">
-            <GalleryUploadForm onUploadSuccess={handleUploadSuccess} />
-          </div>
-        )}
+      {editingImage && (
+        <div className="mb-8">
+          <EditImageForm
+            image={editingImage}
+            categories={categories}
+            projects={projects}
+            onSave={handleUpdateImage}
+            onCancel={() => setEditingImage(null)}
+          />
+        </div>
+      )}
 
-        {editingImage && (
-          <div className="mb-8">
-            <EditImageForm
-              image={editingImage}
-              categories={categories}
-              projects={projects}
-              onSave={handleUpdateImage}
-              onCancel={() => setEditingImage(null)}
-            />
-          </div>
-        )}
-
-        <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-white">
-              Mídia ({images.length})
-            </h2>
-          </div>
-
-          {images.length === 0 ? (
-            <div className="text-center py-12 text-steel-400">
-              <div className="w-16 h-16 mx-auto mb-4 bg-steel-700/50 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-steel-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <p className="text-lg">Nenhuma mídia encontrada</p>
-              <p className="text-sm text-steel-500">Adicione algumas imagens ou vídeos à galeria para começar</p>
+      <AdminCard title={`Mídia (${images.length})`}>
+        {images.length === 0 ? (
+          <div className="text-center py-12 text-steel-400">
+            <div className="w-16 h-16 mx-auto mb-4 bg-steel-700/50 rounded-full flex items-center justify-center">
+              <Camera className="w-8 h-8 text-steel-500" />
             </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {images.map((image) => (
-                <div key={image.id} className="border border-steel-700 rounded-xl overflow-hidden bg-steel-800/30">
-                  <div className="aspect-video relative">
+            <p className="text-lg">Nenhuma mídia encontrada</p>
+            <p className="text-sm text-steel-500">Adicione algumas imagens ou vídeos à galeria para começar</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {images.map((image) => (
+              <div key={image.id} className="border border-steel-700 rounded-xl overflow-hidden bg-steel-800/30">
+                <div className="aspect-video relative">
+                  {image.fileType === 'video' ? (
+                    <video
+                      src={image.imageUrl}
+                      className="w-full h-full object-cover"
+                      controls
+                      preload="metadata"
+                    >
+                      Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                  ) : (
+                    <img
+                      src={image.imageUrl}
+                      alt={image.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = '/logo.svg'
+                        target.classList.add('bg-steel-800', 'p-6')
+                      }}
+                    />
+                  )}
+                  {/* File type indicator */}
+                  <div className="absolute top-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
                     {image.fileType === 'video' ? (
-                      <video
-                        src={image.imageUrl}
-                        className="w-full h-full object-cover"
-                        controls
-                        preload="metadata"
-                      >
-                        Seu navegador não suporta o elemento de vídeo.
-                      </video>
+                      <Film className="w-4 h-4" />
                     ) : (
-                      <img
-                        src={image.imageUrl}
-                        alt={image.title}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.src = '/logo.svg'
-                          target.classList.add('bg-steel-800', 'p-6')
-                        }}
-                      />
+                      <ImageIcon className="w-4 h-4" />
                     )}
-                    {/* File type indicator */}
-                    <div className="absolute top-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
-                      {image.fileType === 'video' ? (
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                      ) : (
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-white mb-1">{image.title}</h3>
-                    {image.description && (
-                      <p className="text-sm text-steel-400 mb-3 line-clamp-2">
-                        {image.description}
-                      </p>
-                    )}
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {image.project && (
-                        <span className="inline-block bg-accent-500/20 text-accent-300 text-xs px-2 py-1 rounded-full">
-                          {image.project.title}
-                        </span>
-                      )}
-                      <span className="inline-block bg-steel-700/50 text-steel-300 text-xs px-2 py-1 rounded-full">
-                        {image.fileType === 'video' ? 'Vídeo' : 'Imagem'}
-                      </span>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEditImage(image)}
-                        className="flex-1 border-steel-600 text-steel-300 hover:bg-steel-700 hover:text-white"
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => handleDeleteImage(image.id)}
-                        className="flex-1 bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border-0"
-                      >
-                        Remover
-                      </Button>
-                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-white mb-1 line-clamp-1">{image.title}</h3>
+                  {image.description && (
+                    <p className="text-sm text-steel-400 mb-3 line-clamp-2">
+                      {image.description}
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {image.project && (
+                      <span className="inline-block bg-accent-500/20 text-accent-300 text-xs px-2 py-1 rounded-full">
+                        {image.project.title}
+                      </span>
+                    )}
+                    <span className="inline-block bg-steel-700/50 text-steel-300 text-xs px-2 py-1 rounded-full">
+                      {image.fileType === 'video' ? 'Vídeo' : 'Imagem'}
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={() => handleEditImage(image)}
+                      className="flex-1 bg-accent-500 hover:bg-accent-600 text-white border-0"
+                    >
+                      <Edit2 className="w-3 h-3 mr-1" />
+                      Editar
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleDeleteImage(image.id)}
+                      className="flex-1 bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border-0"
+                    >
+                      <Trash2 className="w-3 h-3 mr-1" />
+                      Remover
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </AdminCard>
+    </AdminPageWrapper>
   )
 }

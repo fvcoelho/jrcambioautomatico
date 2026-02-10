@@ -4,6 +4,19 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import {
+  AdminPageWrapper,
+  AdminHeader,
+  AdminCard
+} from '@/components/admin'
+import {
+  Plus,
+  FolderOpen,
+  Edit2,
+  Trash2,
+  X,
+  RefreshCw
+} from 'lucide-react'
 
 interface Category {
   id: number
@@ -14,7 +27,7 @@ interface Category {
   createdAt: string
   updatedAt: string
   _count?: {
-    products: number
+    projects: number
   }
 }
 
@@ -63,11 +76,7 @@ function CategoryForm({ category, onSave, onCancel }: CategoryFormProps) {
   }
 
   return (
-    <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
-      <h3 className="text-lg font-semibold text-white mb-4">
-        {category ? 'Editar Categoria' : 'Nova Categoria'}
-      </h3>
-
+    <AdminCard title={category ? 'Editar Categoria' : 'Nova Categoria'}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-steel-300 mb-2">
@@ -132,7 +141,7 @@ function CategoryForm({ category, onSave, onCancel }: CategoryFormProps) {
           </Button>
         </div>
       </form>
-    </div>
+    </AdminCard>
   )
 }
 
@@ -236,141 +245,126 @@ export default function CategoryManagement() {
 
   if (loading) {
     return (
-      <div className="p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center text-steel-400">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-400 mx-auto mb-4"></div>
-            Carregando...
-          </div>
+      <AdminPageWrapper>
+        <div className="text-center text-steel-400 py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-400 mx-auto mb-4"></div>
+          Carregando...
         </div>
-      </div>
+      </AdminPageWrapper>
     )
   }
 
   return (
-    <div className="p-8">
-      <div className="max-w-7xl mx-auto">
+    <AdminPageWrapper>
+      <AdminHeader
+        title="Gerenciar Categorias"
+        description="Gerencie as categorias de serviços para organizar o portfólio"
+        actions={
+          <Button
+            onClick={() => {
+              setShowForm(!showForm)
+              setEditingCategory(null)
+            }}
+            className="whitespace-nowrap bg-accent-500 hover:bg-accent-600 text-white"
+          >
+            {showForm ? <X className="w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
+            {showForm ? 'Fechar Formulário' : 'Nova Categoria'}
+          </Button>
+        }
+      />
+
+      {showForm && (
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-4">Gerenciar Categorias</h1>
-          <div className="flex justify-between items-center">
-            <p className="text-steel-400">
-              Gerencie as categorias de serviços
-            </p>
-            <Button
-              onClick={() => {
-                setShowForm(!showForm)
-                setEditingCategory(null)
-              }}
-              className="whitespace-nowrap bg-accent-500 hover:bg-accent-600 text-white"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              {showForm ? 'Fechar Formulário' : 'Nova Categoria'}
-            </Button>
-          </div>
+          <CategoryForm
+            onSave={handleCreateCategory}
+            onCancel={() => setShowForm(false)}
+          />
         </div>
+      )}
 
-        {showForm && (
-          <div className="mb-8">
-            <CategoryForm
-              onSave={handleCreateCategory}
-              onCancel={() => setShowForm(false)}
-            />
-          </div>
-        )}
+      {editingCategory && (
+        <div className="mb-8">
+          <CategoryForm
+            category={editingCategory}
+            onSave={handleUpdateCategory}
+            onCancel={() => setEditingCategory(null)}
+          />
+        </div>
+      )}
 
-        {editingCategory && (
-          <div className="mb-8">
-            <CategoryForm
-              category={editingCategory}
-              onSave={handleUpdateCategory}
-              onCancel={() => setEditingCategory(null)}
-            />
-          </div>
-        )}
-
-        <div className="bg-steel-800/50 backdrop-blur-sm rounded-xl border border-steel-700 p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-white">
-              Categorias ({categories.length})
-            </h2>
-          </div>
-
-          {categories.length === 0 ? (
-            <div className="text-center py-12 text-steel-400">
-              <div className="w-16 h-16 mx-auto mb-4 bg-steel-700/50 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-steel-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                </svg>
-              </div>
-              <p className="text-lg">Nenhuma categoria encontrada</p>
-              <p className="text-sm text-steel-500">Crie sua primeira categoria para organizar os serviços</p>
+      <AdminCard title={`Categorias (${categories.length})`}>
+        {categories.length === 0 ? (
+          <div className="text-center py-12 text-steel-400">
+            <div className="w-16 h-16 mx-auto mb-4 bg-steel-700/50 rounded-full flex items-center justify-center">
+              <FolderOpen className="w-8 h-8 text-steel-500" />
             </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-steel-700">
-                    <th className="text-left py-3 px-4 font-semibold text-steel-300">Nome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-steel-300">Slug</th>
-                    <th className="text-left py-3 px-4 font-semibold text-steel-300">Descrição</th>
-                    <th className="text-center py-3 px-4 font-semibold text-steel-300">Itens</th>
-                    <th className="text-center py-3 px-4 font-semibold text-steel-300">Ações</th>
+            <p className="text-lg">Nenhuma categoria encontrada</p>
+            <p className="text-sm text-steel-500">Crie sua primeira categoria para organizar os serviços</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-steel-700">
+                  <th className="text-left py-3 px-4 font-semibold text-steel-300">Nome</th>
+                  <th className="text-left py-3 px-4 font-semibold text-steel-300">Slug</th>
+                  <th className="text-left py-3 px-4 font-semibold text-steel-300">Descrição</th>
+                  <th className="text-center py-3 px-4 font-semibold text-steel-300">Itens</th>
+                  <th className="text-center py-3 px-4 font-semibold text-steel-300">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {categories.map((category) => (
+                  <tr key={category.id} className="border-b border-steel-700/50 hover:bg-steel-700/30 transition-colors">
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-3">
+                        {category.imageUrl && (
+                          <img
+                            src={category.imageUrl}
+                            alt={category.name}
+                            className="w-10 h-10 rounded object-cover"
+                          />
+                        )}
+                        <span className="font-medium text-white">{category.name}</span>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-steel-400">{category.slug}</td>
+                    <td className="py-3 px-4 text-steel-400">
+                      <span className="line-clamp-2">{category.description || '-'}</span>
+                    </td>
+                    <td className="py-3 px-4 text-center">
+                      <span className="inline-block bg-accent-500/20 text-accent-300 text-xs px-2 py-1 rounded-full">
+                        {category._count?.projects || 0}
+                      </span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <div className="flex gap-2 justify-center">
+                        <Button
+                          size="sm"
+                          onClick={() => handleEditCategory(category)}
+                          className="bg-accent-500 hover:bg-accent-600 text-white border-0"
+                        >
+                          <Edit2 className="w-3 h-3 mr-1" />
+                          Editar
+                        </Button>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => handleDeleteCategory(category.id)}
+                          className="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border-0"
+                        >
+                          <Trash2 className="w-3 h-3 mr-1" />
+                          Remover
+                        </Button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {categories.map((category) => (
-                    <tr key={category.id} className="border-b border-steel-700/50 hover:bg-steel-700/30">
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-3">
-                          {category.imageUrl && (
-                            <img
-                              src={category.imageUrl}
-                              alt={category.name}
-                              className="w-10 h-10 rounded object-cover"
-                            />
-                          )}
-                          <span className="font-medium text-white">{category.name}</span>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 text-steel-400">{category.slug}</td>
-                      <td className="py-3 px-4 text-steel-400">
-                        <span className="line-clamp-2">{category.description || '-'}</span>
-                      </td>
-                      <td className="py-3 px-4 text-center">
-                        <span className="inline-block bg-accent-500/20 text-accent-300 text-xs px-2 py-1 rounded-full">
-                          {category._count?.products || 0}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="flex gap-2 justify-center">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleEditCategory(category)}
-                            className="border-steel-600 text-steel-300 hover:bg-steel-700 hover:text-white"
-                          >
-                            Editar
-                          </Button>
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => handleDeleteCategory(category.id)}
-                            className="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border-0"
-                          >
-                            Remover
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </AdminCard>
+    </AdminPageWrapper>
   )
 }

@@ -281,7 +281,7 @@ export const SERVICES_INFO = `🔧 *Nossos Serviços Especializados*
 
 💎 *Diferenciais JR Câmbio*
 • +15 anos de experiência
-• Garantia de 6 meses
+• Garantia de 2 meses
 • Peças originais
 • Diagnóstico gratuito
 • Equipe especializada
@@ -299,7 +299,7 @@ Depende do serviço. Troca de óleo: mesmo dia. Consertos: 2-5 dias. Retífica c
 Não! O diagnóstico computadorizado é totalmente GRATUITO e sem compromisso.
 
 *🛡️ Vocês oferecem garantia?*
-Sim! Garantia de 6 meses em peças e mão de obra para todos os serviços.
+Sim! Garantia de 2 meses em peças e mão de obra para todos os serviços.
 
 *🔧 Trabalham com todas as marcas?*
 Sim, atendemos câmbios automáticos de todas as marcas: Honda, Toyota, VW, GM, Ford, BMW, etc.
